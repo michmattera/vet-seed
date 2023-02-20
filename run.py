@@ -25,9 +25,10 @@ def introduction():
     define goal of program
     Create function for introduction of topic
     """
+    
+    print("Welcome to VetSeed, program to authomate data for all vets.")
+    print("Answer the next questions to calcolate dog's per day calories")
     while True:
-        print("Welcome to VetSeed, program to authomate data for all vets.")
-        print("Answer the next questions to calcolate dog's per day calories")
         print("Please insert first name of dog")
         print("Example: Bob\n")
 
@@ -36,11 +37,12 @@ def introduction():
         saved_name = data_name
 
         if validate_info(saved_name):
+            print(f"Thank you")
             print(f"Name of dog provided is {saved_name}")
+            print(f"Saving name ...")
             break
 
     return saved_name
-
 
 
 def validate_info(values):
@@ -56,11 +58,24 @@ def validate_info(values):
             )
             return False
 
+        elif not values:
+            raise ValueError(
+                f"Field cannot be left blank"
+            )
+            return False
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
 
+    except error as e :
+        print(f"Field cannot be left blank")
+        return False
     return True
 
 
-introduction()
+def main():
+    introduction()
+    
+
+
+main()
