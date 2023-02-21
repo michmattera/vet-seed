@@ -155,11 +155,25 @@ def validate_bcs(saved_bcs):
 
     return True
 
+def calcolate_target_weight(new_bcs, new_weight):
+    """
+    Get bcs and weight from dogs_weight and dogs_bcs
+    Use correct formula to calcolate correct weight
+    Let the user know if dog is under-over or correct weight
+    """
+    target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
+    print(target_weight)
+
 
 def main():
     introduction()
     dogs_weight()
     dogs_bcs()
+    #new_weight = dogs_weight()
+    #new_bcs = dogs_bcs()
+    #calcolate_target_weight(new_bcs, new_weight)
+    print(saved_weight)
+    print(saved_bcs)
 
 
 main()
