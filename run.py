@@ -66,16 +66,16 @@ def validate_weight(saved_weight):
     give error if invalid error
     """
     try:
+        if not saved_weight:
+            raise ValueError(
+                f"Field cannot be left blank"
+            )
+            return False
+
         [int(value) for value in saved_weight]
         if int(saved_weight) < 0 or int(saved_weight) > 100:
             raise ValueError(
                 f"Please insert value between 0 and 100"
-            )
-            return False
-
-        if not saved_weight:
-            raise ValueError(
-                f"Field cannot be left blank"
             )
             return False
 
@@ -116,7 +116,6 @@ def validate_info(values):
 def main():
     introduction()
     dogs_weight()
-    
+
 
 main()
-
