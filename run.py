@@ -19,13 +19,10 @@ print(SHEET.cell(1,1).value)
 def introduction():
     """
     define goal of program
-    Create function for introduction of topic
     """
     #profile = SHEET.worksheet('profile')
     #data = profile.get_all_values()
     # print(data)
-    print("Welcome to VetSeed, program to authomate data for all vets.")
-    print("Answer the next questions to calcolate dog's per day calories\n")
     while True:
         print("Please insert first name of dog")
         print("Example: Bob\n")
@@ -39,6 +36,41 @@ def introduction():
             break
 
     return saved_name
+
+def just_info():
+    """
+    give user choice
+    Create function for introduction of topic
+    choose between get just general information or go and calcolate dog's per day calories\n
+    """
+    print("Welcome to VetSeed, program to authomate data for all vets.")
+    while True:
+        print("Please choose what would you like to know")
+        print("Do you want to?\n")
+        choice = input("A) Get general info.\n B) Calcolate calories. [A/B]?:")
+        if choice == "A" or "a":
+            print("General info loading...")
+            general_info()
+        elif choice == "B" or "b":
+            print("Please answer the following questions.")
+        elif choice == "Q":
+            print("Done!")
+        break
+
+def general_info():
+    """
+    List general info and give another choice to user
+    Let user choose if he wants to calcolate calories
+    Or is done and do not need anything else
+    """
+    print("Example instrucion here...")
+    choice_two = input("A) Calcolate calories .\n B) End program. [A/B]?:")
+    if choice_two == "A" or "a":
+        print("Please answer following questions:")
+        introduction()
+    elif choice_two == "B" or "b":
+        print("Thank you come back soon.")
+
 
 
 def dogs_weight():
@@ -166,6 +198,8 @@ def calcolate_target_weight(new_bcs, new_weight):
 
 
 def main():
+    just_info()
+    general_info()
     introduction()
     dogs_weight()
     dogs_bcs()
