@@ -53,7 +53,7 @@ def dogs_weight():
         saved_weight = data_weight
 
         if validate_weight(saved_weight):
-            print(f"Weight of dog provided is {saved_weight}")
+            print(f"Weight of dog provided is {saved_weight}\n")
             break
     return saved_weight
 
@@ -63,7 +63,7 @@ def validate_weight(saved_weight):
     Validate weight
     check if value was between 0 and 100
     check if values was not a letter
-    give error if invalid error
+    give error if invalid value or empty
     """
     try:
         if not saved_weight:
@@ -73,7 +73,7 @@ def validate_weight(saved_weight):
             return False
 
         [int(value) for value in saved_weight]
-        if int(saved_weight) < 0 or int(saved_weight) > 100:
+        if int(saved_weight) <= 0 or int(saved_weight) > 100:
             raise ValueError(
                 f"Please insert value between 0 and 100"
             )
@@ -104,8 +104,51 @@ def validate_info(values):
                 f"Field cannot be left blank"
             )
             return False
-            
-            
+
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
+def dogs_bcs():
+    """
+    Ask user to insert bcs of dog
+    Check that right input was provided
+    Useing validate_bcs to validate info from user
+    """
+    print("Please provide bcs of dog")
+    print("Bcs should be a value between 1 and 9")
+    while True:
+        data_bcs = input("Bcs of dog:")
+        saved_bcs = data_bcs
+
+        if validate_bcs(saved_bcs):
+            print(f"Bcs of dog provided is {saved_bcs}")
+            break
+    return saved_bcs
+
+
+def validate_bcs(saved_bcs):
+    """
+    Function to get body score condition of dog
+    Correct value should be from 1 to 9
+    Give error to user for invalid value
+    """
+    try:
+        if not saved_bcs:
+            raise ValueError(
+                f"Field cannot be left blank"
+            )
+            return False
+
+        [int(value) for value in saved_bcs]
+        if int(saved_bcs) <= 0 or int(saved_bcs) >= 10:
+            raise ValueError(
+                f"Please insert value between 1 and 9"
+            )
+            return False
+
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -116,6 +159,7 @@ def validate_info(values):
 def main():
     introduction()
     dogs_weight()
+    dogs_bcs()
 
 
 main()
