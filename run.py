@@ -32,6 +32,8 @@ def just_info():
             print("General info loading.")
         elif choice == "B" or "b":
             print("Please answer the following questions.")
+        else:
+            print('ERROR, Please choose one of the above')
         break
 
 
@@ -51,12 +53,6 @@ def general_info():
             print("Please answer following questions:")
         elif choice_two == "B" or "b":
             print("Thank you come back soon.")
-            return False
-        elif input == "":
-            raise ValueError(
-                f"Field cannot be left blank"
-            )
-            return False
         break
 
 
@@ -208,14 +204,14 @@ def validate_bcs(saved_bcs):
     return True
 
 
-def calcolate_target_weight():
+def calcolate_target_weight(info_dog):
     """
     Get bcs and weight from dogs_weight and dogs_bcs
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
     """
-    #target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
-    #print(info)
+    target_weight = int(info[1]) * [100 % (100 + (int(info[2]) - 5) * 10)]
+    print(target_weight)
 
 
 def update_worksheet(info_dog, SHEET):
@@ -223,7 +219,6 @@ def update_worksheet(info_dog, SHEET):
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
-    
     worksheet_to_update = SHEET
     worksheet_to_update.append_row(info_dog)
     print(info_dog)
@@ -233,14 +228,19 @@ info = []
 
 
 def main():
+    """
+    main function
+    calling all other function here for better structure
+    """
     just_info()
     general_info()
     dogs_name()
     dogs_weight()
     dogs_bcs()
-    calcolate_target_weight()
+
     info_dog = info
     update_worksheet(info_dog, SHEET)
+    calcolate_target_weight(info_dog)
 
     
 main()
