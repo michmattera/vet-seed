@@ -1,31 +1,33 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# **Vet Seed**
 
-Welcome michmattera,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+![vet Seed Mockup Images](/assets/images/read-me-images/)
 
-## Reminders
+[View the live project here](https://michmattera.github.io/)
+     
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## **Table of contents**
+***
+1. [Introduction](#introduction)
+2. [UX](#ux)
+    1. [Ideal User Demographic](#ideal-user-demographic)
+    2. [User Goals](#user-goals) 
+3. [Development Planes](#development-planes)
+4. [Features](#features)  
+    1. [General Features](#general-features)
+    2. [Future features](#future-features)
+5. [Design](#design)
+    1. [ Color Palette](#color-palette)
+6. [Issues and Bugs](#issues-and-bugs)
+7. [Technology Used](#technology-used)
+    1. [Languages Used](#languages-used)
+    2. [External Programs-Website Used](#external-programs-website-used)
+8. [Testing](#testing)
+9. [Deployment](#deployment)
+10. [Credits](#credits)
+    1. [Code](#code)
+11. [Acknowledgements](#acknowledgements)
 
-## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+## **Introduction**
+This is a back-end program to facilitate the job of veterinarians to calcolate and save data of subjects( in this case dogs) , calcolate if the dog is underweight, overweight or in ideal weight, in addition calcolate as well calories per day that dog should take based on weight and life stage.
