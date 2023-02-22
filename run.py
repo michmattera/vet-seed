@@ -32,8 +32,6 @@ def just_info():
             print("General info loading.")
         elif choice == "B" or "b":
             print("Please answer the following questions.")
-        elif choice == "Q":
-            print("Done!")
         break
 
 
@@ -53,6 +51,11 @@ def general_info():
             print("Please answer following questions:")
         elif choice_two == "B" or "b":
             print("Thank you come back soon.")
+            return False
+        elif input == "":
+            raise ValueError(
+                f"Field cannot be left blank"
+            )
             return False
         break
 
@@ -201,6 +204,14 @@ def calcolate_target_weight():
     """
     #target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
     #print(testt)
+
+
+def update_worksheet():
+    """
+    Receives a list of integers to be inserted into a worksheet
+    Update the relevant worksheet with the data provided
+    """
+    
 
 
 def main():
