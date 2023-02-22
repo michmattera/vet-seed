@@ -13,7 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed').sheet1
 
-print(SHEET.cell(1,1).value)
+
 
 def just_info():
     """
@@ -60,11 +60,13 @@ def general_info():
         break
 
 
-def introduction():
+def dogs_name():
     """
     define goal of program
+    ask user to insert name of dog
+    validate info and input from user
+    append saved value to global variable
     """
-    #profile = SHEET.worksheet('profile')
     #data = profile.get_all_values()
     # print(data)
     while True:
@@ -77,6 +79,8 @@ def introduction():
         if validate_info(saved_name):
             print(f"Thank you")
             print(f"Name of dog provided is {saved_name}\n")
+            info.append(saved_name)
+            print(info)
             break
     return saved_name
 
@@ -85,6 +89,8 @@ def dogs_weight():
     """
     Ask user to insert weight of dog
     Check that right input was provided
+    validate info and input from user
+    append saved value to global variable
     """
     print("Please provide weight of dog")
     print("Please provide exact weight from 0 to 100 kg")
@@ -94,6 +100,8 @@ def dogs_weight():
 
         if validate_weight(saved_weight):
             print(f"Weight of dog provided is {saved_weight}\n")
+            info.append(saved_weight)
+            print(info)
             break
     return saved_weight
 
@@ -157,6 +165,8 @@ def dogs_bcs():
     Ask user to insert bcs of dog
     Check that right input was provided
     Useing validate_bcs to validate info from user
+    validate info and input from user
+    append saved value to global variable
     """
     print("Please provide bcs of dog")
     print("Bcs should be a value between 1 and 9")
@@ -166,6 +176,7 @@ def dogs_bcs():
 
         if validate_bcs(saved_bcs):
             print(f"Bcs of dog provided is {saved_bcs}")
+            info.append(saved_bcs)
             break
     return saved_bcs
 
@@ -196,6 +207,7 @@ def validate_bcs(saved_bcs):
 
     return True
 
+
 def calcolate_target_weight():
     """
     Get bcs and weight from dogs_weight and dogs_bcs
@@ -203,24 +215,32 @@ def calcolate_target_weight():
     Let the user know if dog is under-over or correct weight
     """
     #target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
-    #print(testt)
+    #print(info)
 
 
-def update_worksheet():
+def update_worksheet(info_dog, SHEET):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
     
+    worksheet_to_update = SHEET
+    worksheet_to_update.append_row(info_dog)
+    print(info_dog)
+    
+
+info = []
 
 
 def main():
     just_info()
     general_info()
-    introduction()
+    dogs_name()
     dogs_weight()
     dogs_bcs()
     calcolate_target_weight()
+    info_dog = info
+    update_worksheet(info_dog, SHEET)
 
-
+    
 main()
