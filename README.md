@@ -67,4 +67,31 @@ Developer divided user goals for the following categories:
 - Update existing information of dog with new weight and progress
 - Read general info again if forget something
 
+## Development Planes
+
+Project purpose:
+
+To build a command-line application that allows users to manage a common dataset about a particular domain.
+
+Vet application was chosen by the developer for the personal interest of the developer in dogs , and to try and create something useful for an every day task to address specific target audiance. 
+
+Development planes were made in the following order:
+- Strategy
+- Scope
+- Structure
+- Skeleton
+
+### Strategy
+
+Used to determine developer goals and user needs.
+
+#### Developer Goals
+
+Developer goals were the following:
+- Create an application that could pass throught validators without error
+- Address an every-day need and try to simplify using language learned
+- Present the application in a clean and easy to understand manner
+- Try to give even if simple and good UX experience
+
+
 
