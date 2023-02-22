@@ -19,21 +19,23 @@ def just_info():
     """
     give user choice
     Create function for introduction of topic
-    choose between get just general information or go and calcolate dog's per day calories\n
+    choose between get just general information 
+    or go and calcolate dog's per day calories
     """
     print("Welcome to VetSeed, program to authomate data for all vets.")
     while True:
-        print("Please choose what would you like to know\n")
+        print("Please choose what would you like to know:\n")
         print("Do you want to?")
-        choice = input("A) Get general info.\n B) Calcolate calories. [A/B]?:")
+        print(" A) Get general info.\n B) Calcolate calories.")
+        choice = input(" ")
         if choice == "A" or "a":
-            print("General info loading...")
-            general_info()
+            print("General info loading.")
         elif choice == "B" or "b":
             print("Please answer the following questions.")
         elif choice == "Q":
             print("Done!")
         break
+
 
 def general_info():
     """
@@ -42,11 +44,13 @@ def general_info():
     Or is done and do not need anything else
     """
     while True:
-        print("Example instrucion here...")
-        choice_two = input("A) Calcolate calories .\n B) End program. [A/B]?:")
+        print("Example instrucion here.............")
+        print("Would you like to end the program or calcolate calories?")
+        print("Please choose one of the following:")
+        print(" A) Calcolate calories .\n B) End program.")
+        choice_two = input("")
         if choice_two == "A" or "a":
             print("Please answer following questions:")
-            introduction()
         elif choice_two == "B" or "b":
             print("Thank you come back soon.")
             return False
@@ -70,9 +74,7 @@ def introduction():
         if validate_info(saved_name):
             print(f"Thank you")
             print(f"Name of dog provided is {saved_name}\n")
-            dogs_weight()
-        break
-
+            break
     return saved_name
 
 
@@ -114,8 +116,8 @@ def validate_weight(saved_weight):
             )
             return False
 
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
 
     return True
@@ -145,6 +147,7 @@ def validate_info(values):
         return False
 
     return True
+
 
 def dogs_bcs():
     """
@@ -190,23 +193,23 @@ def validate_bcs(saved_bcs):
 
     return True
 
-def calcolate_target_weight(new_bcs, new_weight):
+def calcolate_target_weight():
     """
     Get bcs and weight from dogs_weight and dogs_bcs
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
     """
-    target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
-    print(target_weight)
+    #target_weight = new_weight * [100 % (100 + (new_bcs - 5) * 10)]
+    #print(testt)
 
 
 def main():
     just_info()
     general_info()
+    introduction()
+    dogs_weight()
     dogs_bcs()
-    #new_weight = dogs_weight()
-    #new_bcs = dogs_bcs()
-    #calcolate_target_weight(new_bcs, new_weight)
+    calcolate_target_weight()
 
 
 main()
