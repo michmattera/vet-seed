@@ -1,5 +1,5 @@
-import gspread
 import math
+import gspread
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -217,22 +217,17 @@ def calcolate_target_weight(INFO):
     target_weight_part_three = 100 / target_weight_part_two
     target_weight = int(INFO[1]) * target_weight_part_three
     final_target_weight = format(target_weight, '.2f')
-    overweight = target_weight < int(INFO[2])
-    underweight = target_weight > int(INFO[2])
-    print(target_weight)
-    print(target_weight_part_one)
-    print(target_weight_part_two)
-    print(target_weight_part_three)
+    overweight = target_weight < int(INFO[2])  # deve perdere peso
+    underweight = target_weight > int(INFO[2])  # deve prendere peso
+    
+    INFO.append(final_target_weight)
+    print(f"Ideal weight of dog calcolated is {final_target_weight}")
     print(overweight)
     print(underweight)
-
-    INFO.append(final_target_weight)
     if overweight is True:
-        print(f"Your dog is overweight")
-    else:
-        print(f"Your dog is underweight")
-    
-    print(f"Ideal weight of dog calcolated is {final_target_weight}")
+        print("Your dog is overweight")
+    if overweight is False:
+        print("Your dog is underweight")
 
 
 def update_worksheet(info_dog, SHEET):
