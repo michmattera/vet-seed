@@ -180,6 +180,18 @@ Due to limited resources (time constraints, skills of the developer at the momen
 
 .............................................
 
+## Design
+
+The design of a command line application is usually very simple. The developer though decided that for a better UX experience would be implemented:
+- **colors**:
+    1. **Red** = Would be assign to a wrong value inserted by the user to help him visualize the error.
+    2. **Green** = Would be assign to correct value inserted by user to help him visualize no error was given.
+    3. **Blue** = Would be assign to important datas and return calcolation to highlight it from other text.
+- **Space** = More space between sections and important sentences to highlight right information.
+- **Time** = Between sentences and calcolation for better UX.
+- **Clear** = Functionality to eliminate section by section to not overwhelm the user with information.
+- **Intro design** = ................................................................
+
 
 
 
