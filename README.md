@@ -67,6 +67,8 @@ Developer divided user goals for the following categories:
 - Update existing information of dog with new weight and progress
 - Read general info again if forget something
 
+[Back to top ⇧](#Vet-Seed)
+
 ## Development Planes
 
 Project purpose:
@@ -85,13 +87,71 @@ Development planes were made in the following order:
 
 Used to determine developer goals and user needs.
 
+Chosen target audience: veterinarian - people with basic vet information
+
 #### Developer Goals
 
 Developer goals were the following:
 - Create an application that could pass throught validators without error
 - Address an every-day need and try to simplify using language learned
 - Present the application in a clean and easy to understand manner
-- Try to give even if simple and good UX experience
+- Try to give even if simple good UX experience
+
+#### User needs
+
+User needs were the following:
+- Calcolate if a dog is under, over or ideal weight
+- Calcolate how many calories to give to dog based on the weight
+- Have visual effect if wrong or right input inserted
+- Summary at the end of the program with all information displayed
+- Few questions and answer to simplify process
+- After each section choice to end program or restart
+
+The developer has to get following information about the dog:
+- Name
+- Weight
+- BCS (Body Score condition)
+- Life Stage 
+
+### Scope
+
+Now that we have established the goals of the program we can deduce the necessary features:
+
+1. Multiple choice for user to let him decide what he would actually like to do
+2. Inputs to insert required data
+3. Color effect on wright and wrong values inserted
+4. Message user frequently based on the process and the values given
+5. Calcolate calories per day
+6. Calcolate difference of weight an ideal weight
+7. Table to insert at the end of program for summary of values provided and calculated
+8. Saved data in external sheet
+
+### Structure
+
+Structure for the application was made using [Canva](https://www.canva.com/ "Link to Canva").
+
+Firstly developer searched all information online to see how to calcolate everything and create basic structure.
+
+<details>
+<summary>Formulas for flowchart</summary>
+    
+![Formulas](assets/images/scheme-formulas.png)
+
+</details> 
+
+Then the developer create a structural map based on importance and on how to calcolate everything.
+
+<details>
+<summary>Map structure</summary>
+    
+![Map structure](assets/images/structure-map.png)
+
+</details> 
+
+[Back to top ⇧](#Vet-Seed)
+
+
+
 
 
 
