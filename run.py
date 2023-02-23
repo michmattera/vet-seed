@@ -212,22 +212,26 @@ def calcolate_target_weight(INFO):
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
     """
-    target_weight_part_one = (int(INFO[2]) - 5)
-    target_weight_part_two = (100 + target_weight_part_one * 10)
+    target_weight_part_one = int(INFO[2]) - 5
+    target_weight_part_two = 100 + target_weight_part_one * 10
     target_weight_part_three = 100 / target_weight_part_two
     target_weight = int(INFO[1]) * target_weight_part_three
     final_target_weight = format(target_weight, '.2f')
-    overweight = target_weight < int(INFO[1])  # deve perdere peso
-    underweight = target_weight > int(INFO[1])  # deve prendere peso
+    overweight = target_weight < int(INFO[1])
+    underweight = target_weight > int(INFO[1])
     
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
-    print(overweight)
-    print(underweight)
     if overweight is True:
         print("Your dog is overweight")
-    if overweight is False:
+        weight_difference = int(INFO[1]) - float(INFO[3])
+        print(f"Your dog should lose {format(weight_difference, '.2f')} kg")
+    if underweight is True:
         print("Your dog is underweight")
+        weight_difference = float(INFO[3]) - int(INFO[1])
+        print(f"Your dog should get {format(weight_difference, '.2f')} kg")
+    if not underweight and not overweight:
+        print("Congratulation! Your dog is in the ideal weight")
 
 
 def update_worksheet(info_dog, SHEET):
