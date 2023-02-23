@@ -141,6 +141,11 @@ Firstly developer searched all information online to see how to calcolate everyt
 
 Then the developer create a structural map based on importance and on how to calcolate everything.
 
+
+The structure was then divide in two main sections:
+1. General info = Where the user will just get information
+2. Main section = Where the user will insert data and gety back result
+
 <details>
 <summary>Map structure</summary>
     
@@ -149,6 +154,31 @@ Then the developer create a structural map based on importance and on how to cal
 </details> 
 
 [Back to top ⇧](#Vet-Seed)
+
+
+## Features
+
+### General features
+
+- **General section** = User will get general information and advices on dogs based on age, size, weight.
+- **Input**:
+    1. **Name** = Name of dog ( max 10 letters )
+    2. **Weight** = Weight of the dog measured in the moment ( from 0 to 100 kg)
+    3. **BCS** = 0 to 9 ( 9 scale bcs )
+    4. **Life Stage** = If intact.................
+- **Calcolation**:
+    1. **Ideal weight** = Based on bcs and weight
+    2. **Calories** = How many calories per day should the dog get based on ideal weight and life stage.
+- **Save data** = All data inserted from user were then saved in external google sheet.
+- **Table** = Summary table at the end of application with all data inserted from user and conclusion.
+- **Multiple choice** = Used mainly to change section from main to general and vice versa . Or to restart and end program.
+- **Visual effect** = To give user better UX experience.
+
+### Future features
+
+Due to limited resources (time constraints, skills of the developer at the moment, and other reasons), some features were not implemented.
+
+.............................................
 
 
 
