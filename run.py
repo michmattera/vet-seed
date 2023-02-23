@@ -1,4 +1,5 @@
 import gspread
+import math
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -205,7 +206,7 @@ def validate_bcs(saved_bcs):
     return True
 
 
-def calcolate_target_weight(info_dog):
+def calcolate_target_weight(INFO):
     """
     Get bcs and weight from dogs_weight and dogs_bcs
     Use correct formula to calcolate correct weight
@@ -215,13 +216,23 @@ def calcolate_target_weight(info_dog):
     target_weight_part_two = (100 + target_weight_part_one * 10)
     target_weight_part_three = 100 / target_weight_part_two
     target_weight = int(INFO[1]) * target_weight_part_three
+    final_target_weight = format(target_weight, '.2f')
+    overweight = target_weight < int(INFO[2])
+    underweight = target_weight > int(INFO[2])
     print(target_weight)
     print(target_weight_part_one)
     print(target_weight_part_two)
     print(target_weight_part_three)
+    print(overweight)
+    print(underweight)
 
-    print(f"Ideal weight of dog calcolated is {target_weight}")
-    INFO.append(target_weight)
+    INFO.append(final_target_weight)
+    if overweight is True:
+        print(f"Your dog is overweight")
+    else:
+        print(f"Your dog is underweight")
+    
+    print(f"Ideal weight of dog calcolated is {final_target_weight}")
 
 
 def update_worksheet(info_dog, SHEET):
