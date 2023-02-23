@@ -13,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed').sheet1
 
+INFO = []  # stores a list from user input(weight-name-bsc)
 
 
 def just_info():
@@ -63,7 +64,7 @@ def dogs_name():
     validate info and input from user
     append saved value to global variable
     """
-    #data = profile.get_all_values()
+    #  data = profile.get_all_values()
     # print(data)
     while True:
         print("Please insert first name of dog")
@@ -75,8 +76,8 @@ def dogs_name():
         if validate_info(saved_name):
             print(f"Thank you")
             print(f"Name of dog provided is {saved_name}\n")
-            info.append(saved_name)
-            print(info)
+            INFO.append(saved_name)
+            print(INFO)
             break
     return saved_name
 
@@ -96,8 +97,8 @@ def dogs_weight():
 
         if validate_weight(saved_weight):
             print(f"Weight of dog provided is {saved_weight}\n")
-            info.append(saved_weight)
-            print(info)
+            INFO.append(saved_weight)
+            print(INFO)
             break
     return saved_weight
 
@@ -172,7 +173,7 @@ def dogs_bcs():
 
         if validate_bcs(saved_bcs):
             print(f"Bcs of dog provided is {saved_bcs}")
-            info.append(saved_bcs)
+            INFO.append(saved_bcs)
             break
     return saved_bcs
 
@@ -210,8 +211,17 @@ def calcolate_target_weight(info_dog):
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
     """
-    target_weight = int(info[1]) * [100 % (100 + (int(info[2]) - 5) * 10)]
+    target_weight_part_one = (int(INFO[2]) - 5)
+    target_weight_part_two = (100 + target_weight_part_one * 10)
+    target_weight_part_three = 100 / target_weight_part_two
+    target_weight = int(INFO[1]) * target_weight_part_three
     print(target_weight)
+    print(target_weight_part_one)
+    print(target_weight_part_two)
+    print(target_weight_part_three)
+
+    print(f"Ideal weight of dog calcolated is {target_weight}")
+    INFO.append(target_weight)
 
 
 def update_worksheet(info_dog, SHEET):
@@ -222,9 +232,6 @@ def update_worksheet(info_dog, SHEET):
     worksheet_to_update = SHEET
     worksheet_to_update.append_row(info_dog)
     print(info_dog)
-    
-
-info = []
 
 
 def main():
@@ -238,9 +245,10 @@ def main():
     dogs_weight()
     dogs_bcs()
 
-    info_dog = info
-    update_worksheet(info_dog, SHEET)
+    info_dog = INFO
     calcolate_target_weight(info_dog)
+    
+    update_worksheet(info_dog, SHEET)
 
     
 main()
