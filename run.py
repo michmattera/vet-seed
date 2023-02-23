@@ -217,8 +217,8 @@ def calcolate_target_weight(INFO):
     target_weight_part_three = 100 / target_weight_part_two
     target_weight = int(INFO[1]) * target_weight_part_three
     final_target_weight = format(target_weight, '.2f')
-    overweight = target_weight < int(INFO[2])  # deve perdere peso
-    underweight = target_weight > int(INFO[2])  # deve prendere peso
+    overweight = target_weight < int(INFO[1])  # deve perdere peso
+    underweight = target_weight > int(INFO[1])  # deve prendere peso
     
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
