@@ -1,4 +1,3 @@
-import math
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -75,7 +74,7 @@ def dogs_name():
         saved_name = data_name
 
         if validate_info(saved_name):
-            print(f"Thank you")
+            print("Thank you")
             print(f"Name of dog provided is {saved_name}\n")
             INFO.append(saved_name)
             print(INFO)
@@ -114,14 +113,14 @@ def validate_weight(saved_weight):
     try:
         if not saved_weight:
             raise ValueError(
-                f"Field cannot be left blank"
+                "Field cannot be left blank"
             )
             return False
 
         [int(value) for value in saved_weight]
         if int(saved_weight) <= 0 or int(saved_weight) > 100:
             raise ValueError(
-                f"Please insert value between 0 and 100"
+                "Please insert value between 0 and 100"
             )
             return False
 
@@ -147,7 +146,7 @@ def validate_info(values):
 
         if not values:
             raise ValueError(
-                f"Field cannot be left blank"
+                "Field cannot be left blank"
             )
             return False
 
@@ -173,7 +172,7 @@ def dogs_bcs():
         saved_bcs = data_bcs
 
         if validate_bcs(saved_bcs):
-            print(f"Bcs of dog provided is {saved_bcs}")
+            print(f"Bcs of dog provided is {saved_bcs}\n")
             INFO.append(saved_bcs)
             break
     return saved_bcs
@@ -188,14 +187,14 @@ def validate_bcs(saved_bcs):
     try:
         if not saved_bcs:
             raise ValueError(
-                f"Field cannot be left blank"
+                "Field cannot be left blank"
             )
             return False
 
         [int(value) for value in saved_bcs]
         if int(saved_bcs) <= 0 or int(saved_bcs) >= 10:
             raise ValueError(
-                f"Please insert value between 1 and 9"
+                "Please insert value between 1 and 9"
             )
             return False
 
@@ -219,22 +218,33 @@ def calcolate_target_weight(INFO):
     final_target_weight = format(target_weight, '.2f')
     overweight = target_weight < int(INFO[1])
     underweight = target_weight > int(INFO[1])
-    
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
         print("Your dog is overweight")
         weight_difference = int(INFO[1]) - float(INFO[3])
-        print(f"Your dog should lose {format(weight_difference, '.2f')} kg")
+        print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
     if underweight is True:
         print("Your dog is underweight")
         weight_difference = float(INFO[3]) - int(INFO[1])
-        print(f"Your dog should get {format(weight_difference, '.2f')} kg")
+        print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
     if not underweight and not overweight:
-        print("Congratulation! Your dog is in the ideal weight")
+        print("Congratulation! Your dog is in the ideal weight \n")
 
 
-def update_worksheet(info_dog, SHEET):
+def calcolate_rer():
+    """
+    Calcolate resting energy requirement
+    rer : calcolatation =  weight^0.75 x 70
+    taking saved weight to calcolate rer from info_dog
+    """
+    rer_part_one = int(INFO[1])**0.75
+    rer_part_two = rer_part_one * 70
+    rer = format(rer_part_two, '.2f')
+    print(f"Your dog calcolated rer is {rer} based on his weight")
+
+
+def update_worksheet(info_dog):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
@@ -254,11 +264,10 @@ def main():
     dogs_name()
     dogs_weight()
     dogs_bcs()
-
     info_dog = INFO
     calcolate_target_weight(info_dog)
-    
-    update_worksheet(info_dog, SHEET)
+    calcolate_rer()
+    update_worksheet(info_dog)
 
     
 main()
