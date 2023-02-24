@@ -28,7 +28,7 @@ def just_info():
         print("Please choose what would you like to know:\n")
         print("Do you want to?")
         print(" A) Get general info.\n B) Calcolate calories.")
-        choice = input(" ")
+        choice = input("")
         if choice == "A" or "a":
             print("General info loading.")
         elif choice == "B" or "b":
@@ -231,7 +231,7 @@ def calcolate_target_weight(INFO):
     if not underweight and not overweight:
         print("Congratulation! Your dog is in the ideal weight \n")
         # Calling next function just when dog is in ideal weight
-        life_stage_factor_one()
+    life_stage_factor_one()
 
 
 def calcolate_rer():
@@ -248,7 +248,8 @@ def calcolate_rer():
 
 def life_stage_factor_one():
     """
-    If ideal weight
+    If ideal weight use weight
+    if not in ideal weight use target_weight for calcolation
     Life stage factor multiple choice 1 to see which value should be multiplied
     Multiple choice for user and error if value is not correct
     intact or neutered dog
@@ -258,10 +259,10 @@ def life_stage_factor_one():
         choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
         choice = int(choice)
         if choice == 1:
-            x = 1.5
+            x = 1.6
             print("You selected Neutered")
             break
-        if choice == 2:
+        if choice == 1.8:
             x = 1.7
             print("You selected Intact")
             break
@@ -284,15 +285,15 @@ def calcolate_work_dog():
     choice = int(choice)
     while True:
         if choice == 1:
-            x = 1.8
+            x = 2
             print("You selected Light")
             break
         if choice == 2:
-            x = 3.5
+            x = 3
             print("You selected Moderate")
             break
         if choice == 3:
-            x = 8
+            x = 6
             print("You selected Heavy")
             break
     life_stage.append(x)
@@ -312,15 +313,12 @@ def life_stage_factor_two():
         choice = input("1) Yes\n2) No\n")
         choice = int(choice)
         if choice == 1:
-            calcolate_work_dog()
             print("You selected Yes")
+            calcolate_work_dog()
             break
         if choice == 2:
-            x = 1.7
             print("You selected No")
             break
-    life_stage.append(x)
-    print(life_stage)
 
 
 def calcolate_mer():
