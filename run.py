@@ -244,10 +244,12 @@ def calcolate_rer():
     print(f"Your dog calcolated rer is {rer} based on his weight\n")
 
 
-def life_stage_factor():
+def life_stage_factor_one():
     """
-    Life stage factor multiple choice to see which value should be multiplied
+    If ideal weight
+    Life stage factor multiple choice 1 to see which value should be multiplied
     Multiple choice for user and error if value is not correct
+    intact or neutered dog
     """
     life_stage = []
     while True:
@@ -267,10 +269,31 @@ def life_stage_factor():
             print("Neutered = Infertile dog , with no ability to reproduce.\n")
             print("Intact = dog means a dog with intact sexual organs.\n")
             continue
-        else:
-            raise ValueError(
-                "Error: value not correct, please try again"
-            )
+    life_stage.append(x)
+    print(life_stage)
+
+
+def life_stage_factor_two():
+    """
+    If ideal weight
+    Life stage factor multiple choice 2 to see which value should be multiplied
+    Multiple choice for user and error if value is not correct
+    if dog is a work dog
+    """
+    life_stage = []
+    while True:
+        print("Is the dog a work dog?")
+        print("Select one of the following:")
+        choice = input("1) Yes\n2) No\n3)\n")
+        choice = int(choice)
+        if choice == 1:
+            x = 1.5
+            print("You selected Yes")
+            break
+        if choice == 2:
+            x = 1.7
+            print("You selected No")
+            break
     life_stage.append(x)
     print(life_stage)
 
@@ -278,6 +301,9 @@ def life_stage_factor():
 def calcolate_mer():
     """
     Calcolate mer , using life stage factor and rer
+    if ideal weight then ask for life stage factor
+    if dog has to lose weight is rer * 1
+    if dog has to gain weight is rer * 1.7
     """
 
 
@@ -304,7 +330,7 @@ def main():
     info_dog = INFO
     calcolate_target_weight(info_dog)
     calcolate_rer()
-    life_stage_factor()
+    life_stage_factor_one()
     update_worksheet(info_dog)
 
     
