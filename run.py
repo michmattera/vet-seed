@@ -230,6 +230,8 @@ def calcolate_target_weight(INFO):
         print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
     if not underweight and not overweight:
         print("Congratulation! Your dog is in the ideal weight \n")
+        # Calling next function just when dog is in ideal weight
+        life_stage_factor_one()
 
 
 def calcolate_rer():
@@ -251,7 +253,6 @@ def life_stage_factor_one():
     Multiple choice for user and error if value is not correct
     intact or neutered dog
     """
-    life_stage = []
     while True:
         print("Please answer the following based on life stage of dog:")
         choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
@@ -273,6 +274,31 @@ def life_stage_factor_one():
     print(life_stage)
 
 
+life_stage = []
+
+
+def calcolate_work_dog():
+    print("Work dog selected")
+    print("Select one of the following:")
+    choice = input("1) Light\n2) Moderate\n3)Heavy\n")
+    choice = int(choice)
+    while True:
+        if choice == 1:
+            x = 1.8
+            print("You selected Light")
+            break
+        if choice == 2:
+            x = 3.5
+            print("You selected Moderate")
+            break
+        if choice == 3:
+            x = 8
+            print("You selected Heavy")
+            break
+    life_stage.append(x)
+    print(life_stage)
+
+
 def life_stage_factor_two():
     """
     If ideal weight
@@ -280,14 +306,13 @@ def life_stage_factor_two():
     Multiple choice for user and error if value is not correct
     if dog is a work dog
     """
-    life_stage = []
     while True:
         print("Is the dog a work dog?")
         print("Select one of the following:")
-        choice = input("1) Yes\n2) No\n3)\n")
+        choice = input("1) Yes\n2) No\n")
         choice = int(choice)
         if choice == 1:
-            x = 1.5
+            calcolate_work_dog()
             print("You selected Yes")
             break
         if choice == 2:
@@ -330,7 +355,6 @@ def main():
     info_dog = INFO
     calcolate_target_weight(info_dog)
     calcolate_rer()
-    life_stage_factor_one()
     update_worksheet(info_dog)
 
     
