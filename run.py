@@ -241,7 +241,44 @@ def calcolate_rer():
     rer_part_one = int(INFO[1])**0.75
     rer_part_two = rer_part_one * 70
     rer = format(rer_part_two, '.2f')
-    print(f"Your dog calcolated rer is {rer} based on his weight")
+    print(f"Your dog calcolated rer is {rer} based on his weight\n")
+
+
+def life_stage_factor():
+    """
+    Life stage factor multiple choice to see which value should be multiplied
+    Multiple choice for user and error if value is not correct
+    """
+    life_stage = []
+    while True:
+        print("Please answer the following based on life stage of dog:")
+        choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
+        choice = int(choice)
+        if choice == 1:
+            x = 1.5
+            print("You selected Neutered")
+            break
+        if choice == 2:
+            x = 1.7
+            print("You selected Intact")
+            break
+        if choice == 3:
+            print("Definition:\n")
+            print("Neutered = Infertile dog , with no ability to reproduce.\n")
+            print("Intact = dog means a dog with intact sexual organs.\n")
+            continue
+        else:
+            raise ValueError(
+                "Error: value not correct, please try again"
+            )
+    life_stage.append(x)
+    print(life_stage)
+
+
+def calcolate_mer():
+    """
+    Calcolate mer , using life stage factor and rer
+    """
 
 
 def update_worksheet(info_dog):
@@ -267,6 +304,7 @@ def main():
     info_dog = INFO
     calcolate_target_weight(info_dog)
     calcolate_rer()
+    life_stage_factor()
     update_worksheet(info_dog)
 
     
