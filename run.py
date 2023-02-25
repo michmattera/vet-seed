@@ -14,6 +14,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed').sheet1
 
 INFO = []  # stores a list from user input(weight-name-bsc)
+WEIGHT = ""
+LIFE_STAGE = float()
+MER = []
 
 
 def just_info():
@@ -139,13 +142,11 @@ def validate_info(values):
             raise ValueError(
                 f"Max lenght of name is 10 letters you gave {len(values)}"
             )
-            return False
 
         if not values:
             raise ValueError(
                 "Field cannot be left blank"
             )
-            return False
 
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
@@ -216,14 +217,19 @@ def calcolate_target_weight(INFO):
         print("Your dog is overweight")
         weight_difference = int(INFO[1]) - float(INFO[3])
         print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
+        wei = "overweight"
     if underweight is True:
         print("Your dog is underweight")
         weight_difference = float(INFO[3]) - int(INFO[1])
         print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
+        wei = "underweight"
     if not underweight and not overweight:
         print("Congratulation! Your dog is in the ideal weight \n")
+        wei = "ideal"
         # Calling next function just when dog is in ideal weight
-    is_work_dog()
+    global WEIGHT
+    WEIGHT = wei
+    calcolate_rer()
 
 
 def is_work_dog():
@@ -260,18 +266,20 @@ def calcolate_work_dog():
         if choice == 1:
             x = 2
             print("You selected Light")
+            calcolate_mer_working_dog()
             break
         if choice == 2:
             x = 3
             print("You selected Moderate")
+            calcolate_mer_working_dog()
             break
         if choice == 3:
             x = 6
             print("You selected Heavy")
+            calcolate_mer_working_dog()
             break
-    calcolate_mer_working_dog()
-    life_stage.append(x)
-    print(life_stage)
+        LIFE_STAGE = x
+        print(LIFE_STAGE)
 
 
 def calcolate_mer_working_dog():
@@ -281,17 +289,16 @@ def calcolate_mer_working_dog():
     if ideal weight x per weight
     Calcolate mer , using life stage factor and rer
     """
-    if (INFO[3]) < int(INFO[1]):  # if overweight
-        overweight_mer = life_stage * (INFO[3])
+    if WEIGHT == "overweight":  # if overweight
+        overweight_mer = float(LIFE_STAGE) * float(INFO[4])
         mer = overweight_mer
-        print(overweight_mer)
-    if (INFO[3]) > int(INFO[1]):
-        underweight_mer = life_stage * (INFO[3])
+    if WEIGHT == "underweight":
+        underweight_mer = LIFE_STAGE * (INFO[4])
         mer = underweight_mer
-    if int(INFO[2]) == 5:
-        ideal_weight_mer = life_stage * int(INFO[1])
+    if WEIGHT == "ideal":
+        ideal_weight_mer = LIFE_STAGE * (INFO[4])
         mer = ideal_weight_mer
-    print(mer)
+    INFO.append(mer)
 
 
 def calcolate_rer():
@@ -305,6 +312,7 @@ def calcolate_rer():
     rer = format(rer_part_two, '.2f')
     print(f"Your dog calcolated rer is {rer} based on his weight\n")
     INFO.append(rer)
+    is_work_dog()
 
 
 def life_stage_factor_one():
@@ -332,11 +340,8 @@ def life_stage_factor_one():
             print("Neutered = Infertile dog , with no ability to reproduce.\n")
             print("Intact = dog means a dog with intact sexual organs.\n")
             continue
-    life_stage.append(x)
-    print(life_stage)
-
-
-life_stage = []
+    LIFE_STAGE = x
+    print(LIFE_STAGE)
 
 
 def update_worksheet(info_dog):
@@ -361,7 +366,6 @@ def main():
     dogs_bcs()
     info_dog = INFO
     calcolate_target_weight(info_dog)
-    calcolate_rer()
     update_worksheet(info_dog)
 
     
