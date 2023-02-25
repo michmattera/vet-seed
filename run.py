@@ -115,14 +115,11 @@ def validate_weight(saved_weight):
             raise ValueError(
                 "Field cannot be left blank"
             )
-            return False
 
-        [int(value) for value in saved_weight]
         if int(saved_weight) <= 0 or int(saved_weight) > 100:
             raise ValueError(
                 "Please insert value between 0 and 100"
             )
-            return False
 
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")
@@ -189,15 +186,10 @@ def validate_bcs(saved_bcs):
             raise ValueError(
                 "Field cannot be left blank"
             )
-            return False
-
-        [int(value) for value in saved_bcs]
         if int(saved_bcs) <= 0 or int(saved_bcs) >= 10:
             raise ValueError(
                 "Please insert value between 1 and 9"
             )
-            return False
-
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -231,7 +223,75 @@ def calcolate_target_weight(INFO):
     if not underweight and not overweight:
         print("Congratulation! Your dog is in the ideal weight \n")
         # Calling next function just when dog is in ideal weight
-    life_stage_factor_one()
+    is_work_dog()
+
+
+def is_work_dog():
+    """
+    Life stage factor multiple choice 2 to see which value should be multiplied
+    Multiple choice for user and error if value is not correct
+    if dog is a work dog
+    """
+    while True:
+        print("Is the dog a work dog?")
+        print("Select one of the following:")
+        choice = input("1) Yes\n2) No\n")
+        choice = int(choice)
+        if choice == 1:
+            print("You selected Yes")
+            calcolate_work_dog()
+            break
+        if choice == 2:
+            print("You selected No")
+            life_stage_factor_one()
+            break
+
+
+def calcolate_work_dog():
+    """
+    which kind of work the dog does
+    """
+    print("Work dog selected")
+    print("Kind of exercise that dog has daily")
+    print("Select one of the following:")
+    choice = input("1) Light\n2) Moderate\n3) Heavy\n")
+    choice = int(choice)
+    while True:
+        if choice == 1:
+            x = 2
+            print("You selected Light")
+            break
+        if choice == 2:
+            x = 3
+            print("You selected Moderate")
+            break
+        if choice == 3:
+            x = 6
+            print("You selected Heavy")
+            break
+    calcolate_mer_working_dog()
+    life_stage.append(x)
+    print(life_stage)
+
+
+def calcolate_mer_working_dog():
+    """
+    calcolation based on
+    if overweight or underweight calcolate x per ideal weight
+    if ideal weight x per weight
+    Calcolate mer , using life stage factor and rer
+    """
+    if (INFO[3]) < int(INFO[1]):  # if overweight
+        overweight_mer = life_stage * (INFO[3])
+        mer = overweight_mer
+        print(overweight_mer)
+    if (INFO[3]) > int(INFO[1]):
+        underweight_mer = life_stage * (INFO[3])
+        mer = underweight_mer
+    if int(INFO[2]) == 5:
+        ideal_weight_mer = life_stage * int(INFO[1])
+        mer = ideal_weight_mer
+    print(mer)
 
 
 def calcolate_rer():
@@ -244,6 +304,7 @@ def calcolate_rer():
     rer_part_two = rer_part_one * 70
     rer = format(rer_part_two, '.2f')
     print(f"Your dog calcolated rer is {rer} based on his weight\n")
+    INFO.append(rer)
 
 
 def life_stage_factor_one():
@@ -262,12 +323,12 @@ def life_stage_factor_one():
             x = 1.6
             print("You selected Neutered")
             break
-        if choice == 1.8:
-            x = 1.7
+        if choice == 2:
+            x = 1.8
             print("You selected Intact")
             break
         if choice == 3:
-            print("Definition:\n")
+            print("\nDefinition:\n")
             print("Neutered = Infertile dog , with no ability to reproduce.\n")
             print("Intact = dog means a dog with intact sexual organs.\n")
             continue
@@ -276,58 +337,6 @@ def life_stage_factor_one():
 
 
 life_stage = []
-
-
-def calcolate_work_dog():
-    print("Work dog selected")
-    print("Select one of the following:")
-    choice = input("1) Light\n2) Moderate\n3)Heavy\n")
-    choice = int(choice)
-    while True:
-        if choice == 1:
-            x = 2
-            print("You selected Light")
-            break
-        if choice == 2:
-            x = 3
-            print("You selected Moderate")
-            break
-        if choice == 3:
-            x = 6
-            print("You selected Heavy")
-            break
-    life_stage.append(x)
-    print(life_stage)
-
-
-def life_stage_factor_two():
-    """
-    If ideal weight
-    Life stage factor multiple choice 2 to see which value should be multiplied
-    Multiple choice for user and error if value is not correct
-    if dog is a work dog
-    """
-    while True:
-        print("Is the dog a work dog?")
-        print("Select one of the following:")
-        choice = input("1) Yes\n2) No\n")
-        choice = int(choice)
-        if choice == 1:
-            print("You selected Yes")
-            calcolate_work_dog()
-            break
-        if choice == 2:
-            print("You selected No")
-            break
-
-
-def calcolate_mer():
-    """
-    Calcolate mer , using life stage factor and rer
-    if ideal weight then ask for life stage factor
-    if dog has to lose weight is rer * 1
-    if dog has to gain weight is rer * 1.7
-    """
 
 
 def update_worksheet(info_dog):
