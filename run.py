@@ -304,13 +304,22 @@ def calcolate_mer_working_dog():
 def calcolate_rer():
     """
     Calcolate resting energy requirement
+    for ideal weight
     rer : calcolatation =  weight^0.75 x 70
+    for underweight or overweight
+    rer : calcolatation =  ideal weight^0.75 x 70
     taking saved weight to calcolate rer from info_dog
     """
-    rer_part_one = int(INFO[1])**0.75
-    rer_part_two = rer_part_one * 70
-    rer = format(rer_part_two, '.2f')
-    print(f"Your dog calcolated rer is {rer} based on his weight\n")
+    if WEIGHT == "overweight" or "underweight":
+        rer_part_one = float(INFO[3])**0.75
+        rer_part_two = rer_part_one * 70
+        rer = format(rer_part_two, '.2f')
+        print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
+    if WEIGHT == "ideal":
+        rer_part_one = float(INFO[1])**0.75
+        rer_part_two = rer_part_one * 70
+        rer = format(rer_part_two, '.2f')
+        print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
     INFO.append(rer)
     is_work_dog()
 
