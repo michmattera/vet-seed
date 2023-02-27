@@ -249,7 +249,7 @@ def is_work_dog():
             break
         if choice == 2:
             print("You selected No")
-            life_stage_factor_one()
+            life_stage_factor_one(LIFE_STAGE)
             break
 
 
@@ -267,24 +267,24 @@ def calcolate_work_dog(LIFE_STAGE):
             x = int(2)
             print("You selected Light")
             LIFE_STAGE = x
-            calcolate_mer_working_dog(LIFE_STAGE)
+            calcolate_mer(LIFE_STAGE)
             break
         if choice == 2:
             x = int(3)
             print("You selected Moderate")
             LIFE_STAGE = x
-            calcolate_mer_working_dog(LIFE_STAGE)
+            calcolate_mer(LIFE_STAGE)
             break
         if choice == 3:
             x = int(6)
             print("You selected Heavy")
             LIFE_STAGE = x
-            calcolate_mer_working_dog(LIFE_STAGE)
+            calcolate_mer(LIFE_STAGE)
             break
     return LIFE_STAGE
 
 
-def calcolate_mer_working_dog(LIFE_STAGE):
+def calcolate_mer(LIFE_STAGE):
     """
     calcolation based on
     if overweight or underweight calcolate x per ideal weight
@@ -301,7 +301,7 @@ def calcolate_mer_working_dog(LIFE_STAGE):
         mer = underweight_mer
     if WEIGHT == "ideal":
         ideal_weight_mer = float(LIFE_STAGE) * float(INFO[4])
-        mer = ideal_weight_mer
+        mer = format(ideal_weight_mer, '.2f')
     INFO.append(mer)
 
 
@@ -328,7 +328,7 @@ def calcolate_rer():
     is_work_dog()
 
 
-def life_stage_factor_one():
+def life_stage_factor_one(LIFE_STAGE):
     """
     If ideal weight use weight
     if not in ideal weight use target_weight for calcolation
@@ -343,17 +343,20 @@ def life_stage_factor_one():
         if choice == 1:
             x = float(1.6)
             print("You selected Neutered")
+            LIFE_STAGE = x
+            calcolate_mer(LIFE_STAGE)
             break
         if choice == 2:
             x = float(1.8)
             print("You selected Intact")
+            LIFE_STAGE = x
+            calcolate_mer(LIFE_STAGE)
             break
         if choice == 3:
             print("\nDefinition:\n")
             print("Neutered = Infertile dog , with no ability to reproduce.\n")
             print("Intact = dog means a dog with intact sexual organs.\n")
             continue
-    LIFE_STAGE = x
     return LIFE_STAGE
 
 
