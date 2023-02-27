@@ -245,7 +245,7 @@ def is_work_dog():
         choice = int(choice)
         if choice == 1:
             print("You selected Yes")
-            calcolate_work_dog()
+            calcolate_work_dog(LIFE_STAGE)
             break
         if choice == 2:
             print("You selected No")
@@ -253,7 +253,7 @@ def is_work_dog():
             break
 
 
-def calcolate_work_dog():
+def calcolate_work_dog(LIFE_STAGE):
     """
     which kind of work the dog does
     """
@@ -264,25 +264,27 @@ def calcolate_work_dog():
     choice = int(choice)
     while True:
         if choice == 1:
-            x = 2
+            x = int(2)
             print("You selected Light")
-            calcolate_mer_working_dog()
+            LIFE_STAGE = x
+            calcolate_mer_working_dog(LIFE_STAGE)
             break
         if choice == 2:
-            x = 3
+            x = int(3)
             print("You selected Moderate")
-            calcolate_mer_working_dog()
+            LIFE_STAGE = x
+            calcolate_mer_working_dog(LIFE_STAGE)
             break
         if choice == 3:
-            x = 6
+            x = int(6)
             print("You selected Heavy")
-            calcolate_mer_working_dog()
+            LIFE_STAGE = x
+            calcolate_mer_working_dog(LIFE_STAGE)
             break
-        LIFE_STAGE = x
-        print(LIFE_STAGE)
+    return LIFE_STAGE
 
 
-def calcolate_mer_working_dog():
+def calcolate_mer_working_dog(LIFE_STAGE):
     """
     calcolation based on
     if overweight or underweight calcolate x per ideal weight
@@ -291,12 +293,14 @@ def calcolate_mer_working_dog():
     """
     if WEIGHT == "overweight":  # if overweight
         overweight_mer = float(LIFE_STAGE) * float(INFO[4])
+        print(LIFE_STAGE)
+        print(overweight_mer)
         mer = overweight_mer
     if WEIGHT == "underweight":
-        underweight_mer = LIFE_STAGE * (INFO[4])
+        underweight_mer = float(LIFE_STAGE) * float(INFO[4])
         mer = underweight_mer
     if WEIGHT == "ideal":
-        ideal_weight_mer = LIFE_STAGE * (INFO[4])
+        ideal_weight_mer = float(LIFE_STAGE) * float(INFO[4])
         mer = ideal_weight_mer
     INFO.append(mer)
 
@@ -337,11 +341,11 @@ def life_stage_factor_one():
         choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
         choice = int(choice)
         if choice == 1:
-            x = 1.6
+            x = float(1.6)
             print("You selected Neutered")
             break
         if choice == 2:
-            x = 1.8
+            x = float(1.8)
             print("You selected Intact")
             break
         if choice == 3:
@@ -350,7 +354,7 @@ def life_stage_factor_one():
             print("Intact = dog means a dog with intact sexual organs.\n")
             continue
     LIFE_STAGE = x
-    print(LIFE_STAGE)
+    return LIFE_STAGE
 
 
 def update_worksheet(info_dog):
