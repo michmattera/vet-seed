@@ -30,15 +30,17 @@ def just_info():
     while True:
         print("Please choose what would you like to know:\n")
         print("Do you want to?")
-        print(" A) Get general info.\n B) Calcolate calories.")
+        print(" 1) Get general info.\n 2) Calcolate calories.")
         choice = input("")
-        if choice == "A" or "a":
+        if choice == "1":
             print("General info loading.")
-        elif choice == "B" or "b":
+            general_info()
+        elif choice == "2":
             print("Please answer the following questions.")
+            dogs_name()
         else:
             print('ERROR, Please choose one of the above')
-        break
+            continue
 
 
 def general_info():
@@ -47,17 +49,17 @@ def general_info():
     Let user choose if he wants to calcolate calories
     Or is done and do not need anything else
     """
-    while True:
-        print("Example instrucion here.............")
-        print("Would you like to end the program or calcolate calories?")
-        print("Please choose one of the following:")
-        print(" A) Calcolate calories .\n B) End program.")
-        choice_two = input("")
-        if choice_two == "A" or "a":
-            print("Please answer following questions:")
-        elif choice_two == "B" or "b":
-            print("Thank you come back soon.")
-        break
+    print("Example instrucion here.............")
+    print("Would you like to end the program or calcolate calories?")
+    print("Please choose one of the following:")
+    print(" 1) Calcolate calories .\n 2) End program.")
+    choice_two = input("")
+    if choice_two == "1":
+        print("Please answer following questions:")
+        dogs_name()
+    if choice_two == "2":
+        print("Thank you come back soon.")
+        quit()
 
 
 def dogs_name():
@@ -376,13 +378,11 @@ def main():
     calling all other function here for better structure
     """
     just_info()
-    general_info()
-    dogs_name()
     dogs_weight()
     dogs_bcs()
     info_dog = INFO
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog)
 
-    
+
 main()
