@@ -159,7 +159,7 @@ def validate_weight(saved_weight):
                 "Please insert value between 0 and 100"
             )
 
-        if not float(saved_weight):
+        if saved_weight.isalpha():
             raise ValueError(
                 "Please insert a number"
             )
@@ -229,10 +229,10 @@ def calcolate_target_weight(INFO):
     target_weight_part_one = int(INFO[2]) - 5
     target_weight_part_two = 100 + target_weight_part_one * 10
     target_weight_part_three = 100 / target_weight_part_two
-    target_weight = int(INFO[1]) * target_weight_part_three
+    target_weight = float(INFO[1]) * target_weight_part_three
     final_target_weight = format(target_weight, '.2f')
-    overweight = target_weight < int(INFO[1])
-    underweight = target_weight > int(INFO[1])
+    overweight = target_weight < float(INFO[1])
+    underweight = target_weight > float(INFO[1])
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
@@ -263,19 +263,16 @@ def is_work_dog():
     while True:
         print("Is the dog a work dog?")
         print("Select one of the following:")
-        choice = input("1) Yes\n2) No\n")
-        choice = int(choice)
-        if choice == 1:
+        print("1) Yes\n2) No\n")
+        choice = input("")
+        if choice == "1":
             print("You selected Yes")
             calcolate_work_dog(LIFE_STAGE)
             break
-        if choice == 2:
+        if choice == "2":
             print("You selected No")
             life_stage_factor_one(LIFE_STAGE)
             break
-        if not choice:
-            print('ERROR, field cannot be left empty')
-            continue
         else:
             print('ERROR, Please choose one of the above')
             continue
@@ -289,24 +286,24 @@ def calcolate_work_dog(LIFE_STAGE):
     print("Kind of exercise that dog has daily")
     while True:
         print("Select one of the following:")
-        choice = input("1) Light\n2) Moderate\n3) Heavy\n")
-        choice = int(choice)
-        if choice == 1:
-            x = int(2)
+        print("1) Light\n2) Moderate\n3) Heavy\n")
+        choice = input("")
+        if choice == "1":
+            x = 2
             print("You selected Light")
-            LIFE_STAGE = x
+            LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
-        if choice == 2:
-            x = int(3)
+        if choice == "2":
+            x = 3
             print("You selected Moderate")
-            LIFE_STAGE = x
+            LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
-        if choice == 3:
-            x = int(6)
+        if choice == "3":
+            x = 6
             print("You selected Heavy")
-            LIFE_STAGE = x
+            LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         else:
