@@ -37,7 +37,7 @@ def just_info():
             general_info()
         elif choice == "2":
             print("Please answer the following questions.")
-            dogs_name()
+            main()
         else:
             print('ERROR, Please choose one of the above')
             continue
@@ -52,11 +52,11 @@ def general_info():
     print("Example instrucion here.............")
     print("Would you like to end the program or calcolate calories?")
     print("Please choose one of the following:")
-    print(" 1) Calcolate calories .\n 2) End program.")
+    print(" 1) Calcolate calories.\n 2) End program.")
     choice_two = input("")
     if choice_two == "1":
         print("Please answer following questions:")
-        dogs_name()
+        main()
     if choice_two == "2":
         print("Thank you come back soon.")
         quit()
@@ -377,12 +377,14 @@ def main():
     main function
     calling all other function here for better structure
     """
-    just_info()
+    dogs_name()
     dogs_weight()
     dogs_bcs()
     info_dog = INFO
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog)
+    quit()
 
 
+just_info()
 main()
