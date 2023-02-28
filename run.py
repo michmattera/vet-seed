@@ -50,16 +50,20 @@ def general_info():
     Or is done and do not need anything else
     """
     print("Example instrucion here.............")
-    print("Would you like to end the program or calcolate calories?")
-    print("Please choose one of the following:")
-    print(" 1) Calcolate calories.\n 2) End program.")
-    choice_two = input("")
-    if choice_two == "1":
-        print("Please answer following questions:")
-        main()
-    if choice_two == "2":
-        print("Thank you come back soon.")
-        quit()
+    while True:
+        print("Would you like to end the program or calcolate calories?")
+        print("Please choose one of the following:")
+        print(" 1) Calcolate calories.\n 2) End program.")
+        choice_two = input("")
+        if choice_two == "1":
+            print("Please answer following questions:")
+            main()
+        if choice_two == "2":
+            print("Thank you come back soon.")
+            quit()
+        else:
+            print('ERROR, Please choose one of the above')
+            continue
 
 
 def dogs_name():
@@ -85,6 +89,35 @@ def dogs_name():
             print(INFO)
             break
     return saved_name
+
+
+def validate_info(saved_name):
+    """
+    Validate info
+    gave error if more that 10 letters
+    gave error if number or if more than one world was given
+    gave error if empty space
+    """
+    try:
+        if len(saved_name) > 10:
+            raise ValueError(
+                f"Max lenght of name is 10 letters you gave {len(saved_name)}"
+            )
+
+        if not saved_name:
+            raise ValueError(
+                "Field cannot be left blank"
+            )
+
+        if saved_name.isdigit():
+            raise ValueError(
+                "Numbers or spaces are not accepted"
+            )
+
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+    return True
 
 
 def dogs_weight():
@@ -121,37 +154,18 @@ def validate_weight(saved_weight):
                 "Field cannot be left blank"
             )
 
-        if int(saved_weight) <= 0 or int(saved_weight) > 100:
+        if float(saved_weight) <= 0 or float(saved_weight) > 100:
             raise ValueError(
                 "Please insert value between 0 and 100"
             )
 
+        if not float(saved_weight):
+            raise ValueError(
+                "Please insert a number"
+            )
+
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")
-        return False
-
-    return True
-
-
-def validate_info(values):
-    """
-    Validate info
-    gave error if more that 10 letters
-    gave error if number or if more than one world was given
-    """
-    try:
-        if len(values) > 10:
-            raise ValueError(
-                f"Max lenght of name is 10 letters you gave {len(values)}"
-            )
-
-        if not values:
-            raise ValueError(
-                "Field cannot be left blank"
-            )
-
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
         return False
 
     return True
@@ -185,7 +199,7 @@ def validate_bcs(saved_bcs):
     Give error to user for invalid value
     """
     try:
-        if not saved_bcs:
+        if not (saved_bcs):
             raise ValueError(
                 "Field cannot be left blank"
             )
@@ -193,6 +207,12 @@ def validate_bcs(saved_bcs):
             raise ValueError(
                 "Please insert value between 1 and 9"
             )
+
+        if saved_bcs.isalpha():
+            raise ValueError(
+                "Please insert a number"
+            )
+
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -217,12 +237,12 @@ def calcolate_target_weight(INFO):
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
         print("Your dog is overweight")
-        weight_difference = int(INFO[1]) - float(INFO[3])
+        weight_difference = float(INFO[1]) - float(INFO[3])
         print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
         wei = "overweight"
     if underweight is True:
         print("Your dog is underweight")
-        weight_difference = float(INFO[3]) - int(INFO[1])
+        weight_difference = float(INFO[3]) - float(INFO[1])
         print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
         wei = "underweight"
     if not underweight and not overweight:
@@ -253,6 +273,12 @@ def is_work_dog():
             print("You selected No")
             life_stage_factor_one(LIFE_STAGE)
             break
+        if not choice:
+            print('ERROR, field cannot be left empty')
+            continue
+        else:
+            print('ERROR, Please choose one of the above')
+            continue
 
 
 def calcolate_work_dog(LIFE_STAGE):
@@ -261,10 +287,10 @@ def calcolate_work_dog(LIFE_STAGE):
     """
     print("Work dog selected")
     print("Kind of exercise that dog has daily")
-    print("Select one of the following:")
-    choice = input("1) Light\n2) Moderate\n3) Heavy\n")
-    choice = int(choice)
     while True:
+        print("Select one of the following:")
+        choice = input("1) Light\n2) Moderate\n3) Heavy\n")
+        choice = int(choice)
         if choice == 1:
             x = int(2)
             print("You selected Light")
@@ -283,6 +309,9 @@ def calcolate_work_dog(LIFE_STAGE):
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
+        else:
+            print('ERROR, Please choose one of the above')
+            continue
     return LIFE_STAGE
 
 
