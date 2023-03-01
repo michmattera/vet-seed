@@ -113,6 +113,11 @@ def validate_info(saved_name):
             raise ValueError(
                 "Numbers or spaces are not accepted"
             )
+        
+        if " " in saved_name:
+            raise ValueError(
+                "no more than one world accepted"
+            )
 
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")
