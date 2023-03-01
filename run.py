@@ -11,12 +11,16 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('VetSeed').sheet1
+SHEET = GSPREAD_CLIENT.open('VetSeed')
 
+profile = SHEET.worksheet('profile')
+gen_info = SHEET.worksheet('general_info')
+#dangerous = gen_info['A']
+data = gen_info.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
-WEIGHT = ""
-LIFE_STAGE = float()
-MER = []
+WEIGHT = ""  # stores saved_weight
+LIFE_STAGE = float()  # depending on life stage different values stored
+MER = []  # stores calcolated mer and after append everything to profile
 
 
 def just_info():
@@ -34,33 +38,10 @@ def just_info():
         choice = input("")
         if choice == "1":
             print("General info loading.")
-            general_info()
+            display_info()
         elif choice == "2":
             print("Please answer the following questions.")
             main()
-        else:
-            print('ERROR, Please choose one of the above')
-            continue
-
-
-def general_info():
-    """
-    List general info and give another choice to user
-    Let user choose if he wants to calcolate calories
-    Or is done and do not need anything else
-    """
-    print("Example instrucion here.............")
-    while True:
-        print("Would you like to end the program or calcolate calories?")
-        print("Please choose one of the following:")
-        print(" 1) Calcolate calories.\n 2) End program.")
-        choice_two = input("")
-        if choice_two == "1":
-            print("Please answer following questions:")
-            main()
-        if choice_two == "2":
-            print("Thank you come back soon.")
-            quit()
         else:
             print('ERROR, Please choose one of the above')
             continue
@@ -393,12 +374,47 @@ def life_stage_factor_one(LIFE_STAGE):
     return LIFE_STAGE
 
 
+def display_info():
+    """
+    gave user choice which info would like to be displayed
+    after choice loop through element of info chosen with column indexes
+    after calling choice_calc_end to calcolate calories or end program
+    """
+    for column in data:
+        print(column[0])
+    for row in data:
+        print(row[0])
+    quit()
+
+
+def choice_calc_end():
+    """
+    List general info and give another choice to user
+    Let user choose if he wants to calcolate calories
+    Or is done and do not need anything else
+    """
+    while True:
+        print("Would you like to end the program or calcolate calories?")
+        print("Please choose one of the following:")
+        print(" 1) Calcolate calories.\n 2) End program.")
+        choice_two = input("")
+        if choice_two == "1":
+            print("Please answer following questions:")
+            main()
+        if choice_two == "2":
+            print("Thank you come back soon.")
+            quit()
+        else:
+            print('ERROR, Please choose one of the above')
+            continue
+
+
 def update_worksheet(info_dog):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
-    worksheet_to_update = SHEET
+    worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
     print(info_dog)
 
