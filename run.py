@@ -383,8 +383,13 @@ def display_info():
         rows.append(row)
     i = 1
     for row in rows[0]:
-        print(f"{i}) {row}")
+        print(f" {i}) {row}")
         i += 1
+    choice_topic = input("")
+    chosen_topic = int(choice_topic)
+    #  try to display to user right column based on n selected, and i
+    column_vals = gen_info.col_values(chosen_topic)
+    print(column_vals)
     quit()
 
 
