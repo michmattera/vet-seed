@@ -14,8 +14,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed')
 
 profile = SHEET.worksheet('profile')
-gen_info = SHEET.worksheet('general_info')
 #dangerous = gen_info['A']
+gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
 WEIGHT = ""  # stores saved_weight
@@ -27,7 +27,7 @@ def just_info():
     """
     give user choice
     Create function for introduction of topic
-    choose between get just general information 
+    choose between get just general information
     or go and calcolate dog's per day calories
     """
     print("Welcome to VetSeed, program to authomate data for all vets.")
@@ -54,8 +54,6 @@ def dogs_name():
     validate info and input from user
     append saved value to global variable
     """
-    #  data = profile.get_all_values()
-    # print(data)
     while True:
         print("Please insert first name of dog")
         print("Example: Bob\n")
@@ -63,7 +61,7 @@ def dogs_name():
         data_name = input("Name of dog:\n")
         saved_name = data_name
 
-        if validate_info(saved_name):
+        if validate_name(saved_name):
             print("Thank you")
             print(f"Name of dog provided is {saved_name}\n")
             INFO.append(saved_name)
@@ -72,9 +70,9 @@ def dogs_name():
     return saved_name
 
 
-def validate_info(saved_name):
+def validate_name(saved_name):
     """
-    Validate info
+    Validate name
     gave error if more that 10 letters
     gave error if number or if more than one world was given
     gave error if empty space
@@ -92,9 +90,8 @@ def validate_info(saved_name):
 
         if saved_name.isdigit():
             raise ValueError(
-                "Numbers or spaces are not accepted"
-            )
-        
+                "Numbers are not accepted"
+            )      
         if " " in saved_name:
             raise ValueError(
                 "no more than one world accepted"
@@ -199,8 +196,8 @@ def validate_bcs(saved_bcs):
                 "Please insert a number"
             )
 
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
         return False
 
     return True
@@ -380,10 +377,14 @@ def display_info():
     after choice loop through element of info chosen with column indexes
     after calling choice_calc_end to calcolate calories or end program
     """
-    for column in data:
-        print(column[0])
+    print("Please select argument:\n")
+    rows = []
     for row in data:
-        print(row[0])
+        rows.append(row)
+    i = 1
+    for row in rows[0]:
+        print(f"{i}) {row}")
+        i += 1
     quit()
 
 
