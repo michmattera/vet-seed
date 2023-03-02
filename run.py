@@ -374,8 +374,10 @@ def life_stage_factor_one(LIFE_STAGE):
 def display_info():
     """
     gave user choice which info would like to be displayed
-    after choice loop through element of info chosen with column indexes
-    after calling choice_calc_end to calcolate calories or end program
+    info from external sheet file
+    after choice loop through element of info chosen to show right column
+    validate input
+    call choice_calc_end to calcolate calories or end program
     """
     print("Please select argument:\n")
     rows = []
@@ -385,13 +387,41 @@ def display_info():
     for row in rows[0]:
         print(f" {i}) {row}")
         i += 1
-    choice_topic = input("")
-    chosen_topic = int(choice_topic)
-    #  try to display to user right column based on n selected, and i
-    column_vals = gen_info.col_values(chosen_topic)
-    print(column_vals)
+    while True:
+        choice_topic = input("")
+        chosen_topic = choice_topic
+        column_vals = gen_info.col_values(chosen_topic)
+        column = '\n'.join(column_vals)
+        if validate_topic(chosen_topic, column):
+            print(column)
+            break
+
     quit()
 
+
+def validate_topic(chosen_topic, column):
+    """
+    validate user input from display_info and gave error if wrong input
+    """
+    try:
+        if not chosen_topic:
+            raise ValueError(
+                "Field cannot be left blank"
+            )
+        if chosen_topic > column:
+            raise ValueError(
+                "Number selected out of range, please select one of the above"
+            )
+        if chosen_topic.isalpha():
+            raise ValueError(
+                "Please insert a number"
+            )
+
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+
+    return True
 
 def choice_calc_end():
     """
