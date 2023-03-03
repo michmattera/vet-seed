@@ -1,5 +1,9 @@
 import gspread
+
 from google.oauth2.service_account import Credentials
+# import module
+from art import * # Return ASCII text (default font) and default chr_ignore=True 
+tprint("vet seed","rnd-xlarge")
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
