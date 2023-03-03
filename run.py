@@ -14,7 +14,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed')
 
 profile = SHEET.worksheet('profile')
-#dangerous = gen_info['A']
 gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
@@ -30,7 +29,6 @@ def just_info():
     choose between get just general information
     or go and calcolate dog's per day calories
     """
-    print("Welcome to VetSeed, program to authomate data for all vets.")
     while True:
         print("Please choose what would you like to know:\n")
         print("Do you want to?")
@@ -245,6 +243,7 @@ def is_work_dog():
     """
     while True:
         print("Is the dog a work dog?")
+        print("Example: police dog, therapy dogs, assistance dogs")
         print("Select one of the following:")
         print("1) Yes\n2) No\n")
         choice = input("")
@@ -396,7 +395,7 @@ def display_info():
             print(column)
             break
 
-    quit()
+    choice_calc_end()
 
 
 def validate_topic(chosen_topic, column):
@@ -423,6 +422,7 @@ def validate_topic(chosen_topic, column):
 
     return True
 
+
 def choice_calc_end():
     """
     List general info and give another choice to user
@@ -430,14 +430,17 @@ def choice_calc_end():
     Or is done and do not need anything else
     """
     while True:
-        print("Would you like to end the program or calcolate calories?")
+        print("\nWould you like to end program ,calcolate calories or continue?")
         print("Please choose one of the following:")
-        print(" 1) Calcolate calories.\n 2) End program.")
+        print(" 1) More info.\n 2) Calcolate calories.\n 3) End program.")
         choice_two = input("")
         if choice_two == "1":
+            print("More general information.")
+            display_info()
+        if choice_two == "2":
             print("Please answer following questions:")
             main()
-        if choice_two == "2":
+        if choice_two == "3":
             print("Thank you come back soon.")
             quit()
         else:
