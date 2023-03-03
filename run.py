@@ -2,7 +2,7 @@
 import gspread
 import bcrypt
 from google.oauth2.service_account import Credentials
-from art import * 
+from art import *
 tprint("vet seed","rnd-xlarge")
 
 SCOPE = [
@@ -26,16 +26,20 @@ LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer and after append everything to profile
 
 class PasswordDatabase:
-    def __init__(self):
-        self.data = dict() 
+    def __init__(self, user, password):
+        self.user = user
+        self.password = password
+        self.data = dict()
     def register(self, user, password):
         if user in self.data:
+            print("user already registered")
             return False
         pwd_hash = self.hash_password(password)
         self.data[user] = pwd_hash
         return True
     def login(self, user, password):
         if user not in self.data:
+            print("please register")
             return False
         pwd_bytes = password.encode("utf-8")
         return bcrypt.checkpw(pwd_bytes, self.data[user])
@@ -45,27 +49,12 @@ class PasswordDatabase:
         return bcrypt.hashpw(pwd_bytes, salt)
 
 #  https://plainenglish.io/blog/store-passwords-safely-in-python-e38a8c0c8618#log-in-a-user
-db = PasswordDatabase()
-print("Registering users")  
-print(db.register("john", "password"))  
-print(db.register("Seth", "HelloWorld"))  
-print(db.register("john", "myname"))
-print("Login")  
-print(db.login("abc", "password"))  
-print(db.login("john", "pwd"))  
-print(db.login("john", "password"))
 
-def login():
-    """
-    create username to save info dog
-    and all past dogs if user wants to access info
-    """
-    print("Create username or login if already created one!")
-    while True:
-        username = input("")
-        saved_username = username
 
-    return saved_username
+user = input("Enter user: ")
+password = input("Enter password: ")
+
+enter = PasswordDatabase.register(user, password)
 
 
 def just_info():
@@ -526,5 +515,6 @@ def main():
     quit()
 
 
+login__or_register()
 just_info()
 main()
