@@ -24,37 +24,48 @@ INFO = []  # stores a list from user input(weight-name-bsc)
 WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer and after append everything to profile
-
-class PasswordDatabase:
-    def __init__(self, user, password):
-        self.user = user
-        self.password = password
-        self.data = dict()
-    def register(self, user, password):
-        if user in self.data:
-            print("user already registered")
-            return False
-        pwd_hash = self.hash_password(password)
-        self.data[user] = pwd_hash
-        return True
-    def login(self, user, password):
-        if user not in self.data:
-            print("please register")
-            return False
-        pwd_bytes = password.encode("utf-8")
-        return bcrypt.checkpw(pwd_bytes, self.data[user])
-    def hash_password(self, password):
-        pwd_bytes = password.encode("utf-8")
-        salt = bcrypt.gensalt()
-        return bcrypt.hashpw(pwd_bytes, salt)
-
-#  https://plainenglish.io/blog/store-passwords-safely-in-python-e38a8c0c8618#log-in-a-user
+LOG_DET = []
 
 
-user = input("Enter user: ")
-password = input("Enter password: ")
+def menu():
+    """
+    Choice to user to login, create an account or gen info
+    """
+    print("Welcome to Vet Seed...")
+    print(" Please select one of the following before continue\n")
+    print(" 1) Login.\n 2) Create account.\n")
+    choice = input("")
+    while True:
+        if choice == "1":
+            print("Input your login details")
+            user = input("Username: ")
+            psw = input("Password:")
+        if choice == "2":
+            create_account()
 
-enter = PasswordDatabase.register(user, password)
+
+def create_account():
+    """
+    Create account , asking user to enter username and password
+    after save username and password in external sheet for future login
+    """
+    while True:
+        print("Please insert username and password")
+        print("Username should not be longer than 10 letters")
+        user = input("Username: ")
+        print("Password at least 5 letters and one capital letter")
+        psw = input("Password: ")
+        print("Username and password valid")
+        print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
+        choice = input("")
+        if choice == "1":
+            saved_cred = [user, psw]
+            LOG_DET.append(saved_cred)
+            print(LOG_DET)
+            print("Thank you all information will be saved in your account")
+            just_info()
+        if choice == "2":
+            continue
 
 
 def just_info():
@@ -515,6 +526,6 @@ def main():
     quit()
 
 
-login__or_register()
+menu()
 just_info()
 main()

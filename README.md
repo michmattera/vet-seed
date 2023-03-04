@@ -17,7 +17,6 @@
     1. [General Features](#general-features)
     2. [Future features](#future-features)
 5. [Design](#design)
-    1. [ Color Palette](#color-palette)
 6. [Issues and Bugs](#issues-and-bugs)
 7. [Technology Used](#technology-used)
     1. [Languages Used](#languages-used)
@@ -165,7 +164,10 @@ The structure was then divide in two main sections:
     1. **Name** = Name of dog ( max 10 letters )
     2. **Weight** = Weight of the dog measured in the moment ( from 0 to 100 kg)
     3. **BCS** = 0 to 9 ( 9 scale bcs )
-    4. **Life Stage** = If intact.................
+    4. **Life Stage** = Depending on the following criterias:
+        - Working dog = Exercise( Easy: 2 - Medium: 4 - Heavy: 6)
+        - No working dog = If dog ( Intact: 1.8 - Neutered: 1.6)
+        - Ideal, over or under weight = If dog ( Ideal weight: lifeStage * weight - Over/Under weight: lifeStage * ideal weight)
 - **Calcolation**:
     1. **Ideal weight** = Based on bcs and weight
     2. **Calories** = How many calories per day should the dog get based on ideal weight and life stage.
