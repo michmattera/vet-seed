@@ -26,6 +26,8 @@ WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer and after append everything to profile
 LOG_DET = []
+user_data = credent.get_all_values()
+print(user_data)
 
 
 def menu():
@@ -41,8 +43,31 @@ def menu():
             print("Input your login details")
             user = input("Username: ")
             psw = input("Password:")
+            try_user = user
+            try_psw = psw
+            try_det = [try_psw, try_user]
+            if try_det in user_data:
+                print(f"welcome {try_user}")
+                quit()
+            if try_det not in user_data:
+                print("Please try again")
+                continue
         if choice == "2":
             create_account()
+
+
+def check_log_det(user, psw):
+    """
+    check login details from user input to login and saved credentials
+    check if row is the same of values inserted from user
+    """
+    print(f"{user} and {psw}")
+    if user and psw in user_data:
+        print(f"welcome {user}")
+        quit()
+    if user and data not in user_data:
+        print("Please try again")
+        menu()
 
 
 def create_account():
