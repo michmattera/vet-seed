@@ -1,6 +1,5 @@
 #  import module
 import gspread
-import bcrypt
 from google.oauth2.service_account import Credentials
 from art import *
 tprint("vet seed","rnd-xlarge")
@@ -21,20 +20,19 @@ profile = SHEET.worksheet('profile')
 credent = SHEET.worksheet('credentials')
 gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
+user_data = credent.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
 WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer and after append everything to profile
-LOG_DET = []
-user_data = credent.get_all_values()
-print(user_data)
+LOG_DET = []  # stores username and password from user input
 
 
 def menu():
     """
     Choice to user to login, create an account or gen info
     """
-    print("Welcome to Vet Seed...")
+    print("Welcome to Vet Seed programs that helps")
     print(" Please select one of the following before continue\n")
     print(" 1) Login.\n 2) Create account.\n")
     choice = input("")
@@ -50,10 +48,10 @@ def menu():
                 print(f"welcome {try_user}")
                 quit()
             if try_det not in user_data:
-                print("Please try again")
+                print("Please try again\n")
                 continue
         if choice == "2":
-            create_account()
+            create_username()
 
 
 def check_log_det(user, psw):
@@ -70,30 +68,95 @@ def check_log_det(user, psw):
         menu()
 
 
-def create_account():
+def create_username():
     """
-    Create account , asking user to enter username and password
-    after save username and password in external sheet for future login
+    Create account , asking user to enter username
+    validate user from input 
     """
     while True:
-        print("Please insert username and password")
+        print("Please insert username")
         print("Username should not be longer than 10 letters")
         user = input("Username: ")
+        saved_user = user
+
+        if validate_user(saved_user):
+            print("Thank you")
+            create_password(saved_user)
+    return saved_user
+
+
+def create_password(saved_user):
+    """
+    Create account , asking user to enter username
+    validate user from input 
+    """
+    while True:
+        print("Please insert password")
         print("Password at least 5 letters and one capital letter")
         psw = input("Password: ")
+        saved_password = psw
+
+        if validate_psw(saved_password):
+            print("Thank you")
+            create_account(saved_password, saved_user)
+    return saved_password
+
+
+def create_account(saved_password, saved_user):
+    """
+    Create account , taking saved variable from following function
+    create_username and create_password after validate the user inputs
+    save username and password in external sheet for future login
+    """
+    while True:
+
         print("Username and password valid")
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            saved_user = user
-            saved_pass = psw
             LOG_DET.append(saved_user)
-            LOG_DET.append(saved_pass)
+            LOG_DET.append(saved_password)
             print(LOG_DET)
             print("Thank you all information will be saved in your account")
             just_info()
         if choice == "2":
-            continue
+            create_username()
+
+
+def validate_user(user):
+    """
+    check user value from create_account
+    check if value is there
+    check if is no longer than 10 letters
+    """
+    try:
+        if len(user) > 10:
+            raise ValueError(
+                f"Max lenght of name is 10 letters you gave {len(user)}"
+            )
+
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+    return True
+
+
+def validate_psw(password):
+    """
+    check user value from create_account
+    check if value is there
+    check if is no longer than 10 letters
+    """
+    try:
+        if len(password) < 5:
+            raise ValueError(
+                f"Min lenght of password is 5 letters you gave {len(password)}"
+            )
+
+    except ValueError as error:
+        print(f"Invalid data: {error}, please try again.\n")
+        return False
+    return True
 
 
 def just_info():
@@ -163,7 +226,8 @@ def validate_name(saved_name):
         if saved_name.isdigit():
             raise ValueError(
                 "Numbers are not accepted"
-            )      
+            )
+
         if " " in saved_name:
             raise ValueError(
                 "no more than one world accepted"
