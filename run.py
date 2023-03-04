@@ -18,6 +18,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed')
 
 profile = SHEET.worksheet('profile')
+credent = SHEET.worksheet('credentials')
 gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
@@ -59,8 +60,10 @@ def create_account():
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            saved_cred = [user, psw]
-            LOG_DET.append(saved_cred)
+            saved_user = user
+            saved_pass = psw
+            LOG_DET.append(saved_user)
+            LOG_DET.append(saved_pass)
             print(LOG_DET)
             print("Thank you all information will be saved in your account")
             just_info()
@@ -494,7 +497,7 @@ def choice_calc_end():
             continue
 
 
-def update_worksheet(info_dog):
+def update_worksheet(info_dog, info_user):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
@@ -502,6 +505,9 @@ def update_worksheet(info_dog):
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
     print(info_dog)
+    worksheet_to_update = credent
+    worksheet_to_update.append_row(info_user)
+    print(info_user)
 
 
 def summary_info(info_dog):
@@ -520,8 +526,9 @@ def main():
     dogs_weight()
     dogs_bcs()
     info_dog = INFO
+    info_user = LOG_DET
     calcolate_target_weight(info_dog)
-    update_worksheet(info_dog)
+    update_worksheet(info_dog, info_user)
     summary_info(info_dog)
     quit()
 
