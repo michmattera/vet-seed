@@ -3,6 +3,7 @@ import os
 import sys
 # importing the random module
 import random
+from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
 from termcolor import colored, cprint
@@ -26,6 +27,7 @@ credent = SHEET.worksheet('credentials')
 gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
 user_data = credent.get_all_values()
+dog_datas = profile.get_all_values()
 INFO = []  # stores a list from user input(weight-name-bsc)
 WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
@@ -69,6 +71,7 @@ def menu():
             create_username()
         else:
             cprint("Please select one of the above", 'red')
+            clearScreen()
             continue
 
 
@@ -132,9 +135,9 @@ def create_account(saved_password, saved_user):
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
+            unicode = (random.randint(0,100000))
             LOG_DET.append(saved_user)
             LOG_DET.append(saved_password)
-            unicode = (random.randint(0,100000))
             LOG_DET.append(unicode)
             INFO.append(unicode)
             print(LOG_DET)
@@ -642,13 +645,16 @@ def update_worksheet(info_dog, info_user):
     print(info_user)
 
 
-
-def summary_info():
+def show_info():
     """
     get all info of dog saved and show it in a table
-    using username
+    using unicode
     if already saved dog than show all dogs summary
     """
+    cprint(tabulate(
+        dog_datas[1,6], headers=["Unicode","Name"],
+        tablefmt='fancy_grid'), 'blue')
+
 
 def main():
     """
@@ -662,7 +668,7 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    summary_info()
+    show_info()
     quit()
 
 
