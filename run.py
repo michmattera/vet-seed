@@ -1,10 +1,13 @@
 #  import module
 import os
 import sys
+# importing the random module
+import random
 import gspread
 from google.oauth2.service_account import Credentials
-import art
 from termcolor import colored, cprint
+import art
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -45,10 +48,10 @@ def menu():
     cprint(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
     cprint(art.INTRO)
-    print(" Please select one of the following before continue\n")
-    print(" 1) Login.\n 2) Create account.\n")
-    choice = input("")
     while True:
+        print(" Please select one of the following before continue\n")
+        print(" 1) Login.\n 2) Create account.\n")
+        choice = input("")
         if choice == "1":
             print("Input your login details")
             user = input("Username: ")
@@ -64,6 +67,9 @@ def menu():
                 continue
         if choice == "2":
             create_username()
+        else:
+            cprint("Please select one of the above", 'red')
+            continue
 
 
 def check_log_det(user, psw):
@@ -128,6 +134,9 @@ def create_account(saved_password, saved_user):
         if choice == "1":
             LOG_DET.append(saved_user)
             LOG_DET.append(saved_password)
+            unicode = (random.randint(0,100000))
+            LOG_DET.append(unicode)
+            INFO.append(unicode)
             print(LOG_DET)
             print("Thank you all information will be saved in your account")
             just_info()
@@ -178,7 +187,7 @@ def validate_psw(password):
                 uppercase_count += 1
             if uppercase_count == 0:
                 raise ValueError(
-                    "One capital letter required"
+                    "First lettere required capital letter"
                 )
 
     except ValueError as error:
@@ -373,23 +382,23 @@ def calcolate_target_weight(INFO):
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
     """
-    target_weight_part_one = int(INFO[2]) - 5
+    target_weight_part_one = int(INFO[3]) - 5
     target_weight_part_two = 100 + target_weight_part_one * 10
     target_weight_part_three = 100 / target_weight_part_two
-    target_weight = float(INFO[1]) * target_weight_part_three
+    target_weight = float(INFO[2]) * target_weight_part_three
     final_target_weight = format(target_weight, '.2f')
-    overweight = target_weight < float(INFO[1])
-    underweight = target_weight > float(INFO[1])
+    overweight = target_weight < float(INFO[2])
+    underweight = target_weight > float(INFO[2])
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
-        cprint("Your dog is overweight", 'orange')
-        weight_difference = float(INFO[1]) - float(INFO[3])
+        cprint("Your dog is overweight", 'yellow')
+        weight_difference = float(INFO[2]) - float(INFO[4])
         print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
         wei = "overweight"
     if underweight is True:
-        cprint("Your dog is underweight", 'orange')
-        weight_difference = float(INFO[3]) - float(INFO[1])
+        cprint("Your dog is underweight", 'yellow')
+        weight_difference = float(INFO[4]) - float(INFO[2])
         print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
         wei = "underweight"
     if not underweight and not overweight:
@@ -470,15 +479,15 @@ def calcolate_mer(LIFE_STAGE):
     Calcolate mer , using life stage factor and rer
     """
     if WEIGHT == "overweight":  # if overweight
-        overweight_mer = float(LIFE_STAGE) * float(INFO[4])
+        overweight_mer = float(LIFE_STAGE) * float(INFO[5])
         print(LIFE_STAGE)
         print(overweight_mer)
         mer = overweight_mer
     if WEIGHT == "underweight":
-        underweight_mer = float(LIFE_STAGE) * float(INFO[4])
+        underweight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = underweight_mer
     if WEIGHT == "ideal":
-        ideal_weight_mer = float(LIFE_STAGE) * float(INFO[4])
+        ideal_weight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = format(ideal_weight_mer, '.2f')
     INFO.append(mer)
 
@@ -493,12 +502,12 @@ def calcolate_rer():
     taking saved weight to calcolate rer from info_dog
     """
     if WEIGHT == "overweight" or "underweight":
-        rer_part_one = float(INFO[3])**0.75
+        rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
         print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
     if WEIGHT == "ideal":
-        rer_part_one = float(INFO[1])**0.75
+        rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
         print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
@@ -624,6 +633,7 @@ def update_worksheet(info_dog, info_user):
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
+    print("Updating  datas...")
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
     print(info_dog)
@@ -632,12 +642,13 @@ def update_worksheet(info_dog, info_user):
     print(info_user)
 
 
-def summary_info(info_dog):
+
+def summary_info():
     """
     get all info of dog saved and show it in a table
+    using username
     if already saved dog than show all dogs summary
     """
-
 
 def main():
     """
@@ -651,7 +662,7 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    summary_info(info_dog)
+    summary_info()
     quit()
 
 
