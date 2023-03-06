@@ -1,11 +1,10 @@
 #  import module
 import os
+import sys
 import gspread
 from google.oauth2.service_account import Credentials
-from art import *
-import sys
+import art
 from termcolor import colored, cprint
-tprint("vet seed","rnd-xlarge")
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -42,6 +41,8 @@ def menu():
     """
     Choice to user to login, create an account or gen info
     """
+    art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
+    cprint(art.TITLE)
     print("Welcome to Vet Seed programs that helps")
     print(" Please select one of the following before continue\n")
     print(" 1) Login.\n 2) Create account.\n")
