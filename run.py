@@ -1,7 +1,10 @@
 #  import module
+import os
 import gspread
 from google.oauth2.service_account import Credentials
 from art import *
+import sys
+from termcolor import colored, cprint
 tprint("vet seed","rnd-xlarge")
 
 SCOPE = [
@@ -28,6 +31,13 @@ MER = []  # stores calcolated mer and after append everything to profile
 LOG_DET = []  # stores username and password from user input
 
 
+def clearScreen():
+    '''
+    Function for cleaning the cli screen
+    '''
+    os.system("clear")
+
+
 def menu():
     """
     Choice to user to login, create an account or gen info
@@ -45,10 +55,10 @@ def menu():
             try_psw = psw
             try_det = [try_psw, try_user]
             if try_det in user_data:
-                print(f"welcome {try_user}")
+                cprint(f"welcome {try_user}", 'green')
                 quit()
             if try_det not in user_data:
-                print("Please try again\n")
+                cprint("Please try again\n", 'red')
                 continue
         if choice == "2":
             create_username()
@@ -61,10 +71,10 @@ def check_log_det(user, psw):
     """
     print(f"{user} and {psw}")
     if user and psw in user_data:
-        print(f"welcome {user}")
+        cprint(f"welcome {user}", 'green')
         quit()
     if user and data not in user_data:
-        print("Please try again")
+        cprint("Please try again", 'red')
         menu()
 
 
@@ -110,7 +120,7 @@ def create_account(saved_password, saved_user):
     """
     while True:
 
-        print("Username and password valid")
+        cprint("Username and password valid\n", 'green')
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
@@ -140,7 +150,7 @@ def validate_user(user):
             )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
     return True
 
@@ -170,7 +180,7 @@ def validate_psw(password):
                 )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
     return True
 
@@ -194,7 +204,7 @@ def just_info():
             print("Please answer the following questions.")
             main()
         else:
-            print('ERROR, Please choose one of the above')
+            cprint('ERROR, Please choose one of the above', 'red')
             continue
 
 
@@ -214,7 +224,7 @@ def dogs_name():
 
         if validate_name(saved_name):
             print("Thank you")
-            print(f"Name of dog provided is {saved_name}\n")
+            cprint(f"Name of dog provided is {saved_name}\n", 'green')
             INFO.append(saved_name)
             print(INFO)
             break
@@ -250,7 +260,7 @@ def validate_name(saved_name):
             )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
     return True
 
@@ -269,7 +279,7 @@ def dogs_weight():
         saved_weight = data_weight
 
         if validate_weight(saved_weight):
-            print(f"Weight of dog provided is {saved_weight}\n")
+            cprint(f"Weight of dog provided is {saved_weight}\n", 'green')
             INFO.append(saved_weight)
             print(INFO)
             break
@@ -300,7 +310,7 @@ def validate_weight(saved_weight):
             )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
 
     return True
@@ -321,7 +331,7 @@ def dogs_bcs():
         saved_bcs = data_bcs
 
         if validate_bcs(saved_bcs):
-            print(f"Bcs of dog provided is {saved_bcs}\n")
+            cprint(f"Bcs of dog provided is {saved_bcs}\n", 'green')
             INFO.append(saved_bcs)
             break
     return saved_bcs
@@ -349,7 +359,7 @@ def validate_bcs(saved_bcs):
             )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
 
     return True
@@ -371,17 +381,17 @@ def calcolate_target_weight(INFO):
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
-        print("Your dog is overweight")
+        cprint("Your dog is overweight", 'orange')
         weight_difference = float(INFO[1]) - float(INFO[3])
         print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
         wei = "overweight"
     if underweight is True:
-        print("Your dog is underweight")
+        cprint("Your dog is underweight", 'orange')
         weight_difference = float(INFO[3]) - float(INFO[1])
         print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
         wei = "underweight"
     if not underweight and not overweight:
-        print("Congratulation! Your dog is in the ideal weight \n")
+        cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
         wei = "ideal"
         # Calling next function just when dog is in ideal weight
     global WEIGHT
@@ -403,10 +413,12 @@ def is_work_dog():
         choice = input("")
         if choice == "1":
             print("You selected Yes")
+            clearScreen()
             calcolate_work_dog(LIFE_STAGE)
             break
         if choice == "2":
             print("You selected No")
+            clearScreen()
             life_stage_factor_one(LIFE_STAGE)
             break
         else:
@@ -571,7 +583,7 @@ def validate_topic(chosen_topic, column):
             )
 
     except ValueError as error:
-        print(f"Invalid data: {error}, please try again.\n")
+        cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
 
     return True
@@ -590,15 +602,18 @@ def choice_calc_end():
         choice_two = input("")
         if choice_two == "1":
             print("More general information.")
+            clearScreen()
             display_info()
         if choice_two == "2":
             print("Please answer following questions:")
+            clearScreen()
             main()
         if choice_two == "3":
             print("Thank you come back soon.")
+            clearScreen()
             quit()
         else:
-            print('ERROR, Please choose one of the above')
+            cprint('ERROR, Please choose one of the above', 'red')
             continue
 
 
