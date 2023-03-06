@@ -23,3 +23,17 @@ By: Michelle Mattera, 2023.
 
 
 '''
+
+INTRO = '''
+
+Welcome to VetSeed, program for veterinarians to simplify calcolations, access
+general information, save and be able to access all datas just creating an
+account!\n
+With the information provide you will be able to:\n
+- create account and save all datas to be accessible in future login.\n
+- calcolate per day calories to give dogs.\n
+- calcolate difference between weight and ideal weight.\n
+- Access general information.\n
+
+
+'''

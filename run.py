@@ -43,7 +43,8 @@ def menu():
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
     cprint(art.TITLE)
-    print("Welcome to Vet Seed programs that helps")
+    art.INTRO = colored(art.INTRO, 'green')
+    cprint(art.INTRO)
     print(" Please select one of the following before continue\n")
     print(" 1) Login.\n 2) Create account.\n")
     choice = input("")
