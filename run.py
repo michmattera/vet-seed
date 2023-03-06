@@ -134,6 +134,10 @@ def validate_user(user):
             raise ValueError(
                 f"Max lenght of name is 10 letters you gave {len(user)}"
             )
+        if not user:
+            raise ValueError(
+                "Field cannot be empty"
+            )
 
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")
@@ -147,11 +151,23 @@ def validate_psw(password):
     check if value is there
     check if is no longer than 10 letters
     """
+    uppercase_count = 0
     try:
         if len(password) < 5:
             raise ValueError(
                 f"Min lenght of password is 5 letters you gave {len(password)}"
             )
+        if not password:
+            raise ValueError(
+                "Field cannot be empty"
+            )
+        for i in password:
+            if i.isupper():
+                uppercase_count += 1
+            if uppercase_count == 0:
+                raise ValueError(
+                    "One capital letter required"
+                )
 
     except ValueError as error:
         print(f"Invalid data: {error}, please try again.\n")
