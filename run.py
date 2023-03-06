@@ -58,12 +58,15 @@ def menu():
             print("Input your login details")
             user = input("Username: ")
             psw = input("Password:")
+            uni = input("Unicode: ")
             try_user = user
             try_psw = psw
-            try_det = [try_psw, try_user]
+            try_uni = uni
+            try_det = [try_psw, try_user, try_uni]
             if try_det in user_data:
                 cprint(f"welcome {try_user}", 'green')
-                quit()
+                show_info()
+                break
             if try_det not in user_data:
                 cprint("Please try again\n", 'red')
                 continue
@@ -73,20 +76,6 @@ def menu():
             cprint("Please select one of the above", 'red')
             clearScreen()
             continue
-
-
-def check_log_det(user, psw):
-    """
-    check login details from user input to login and saved credentials
-    check if row is the same of values inserted from user
-    """
-    print(f"{user} and {psw}")
-    if user and psw in user_data:
-        cprint(f"welcome {user}", 'green')
-        quit()
-    if user and data not in user_data:
-        cprint("Please try again", 'red')
-        menu()
 
 
 def create_username():
@@ -141,8 +130,11 @@ def create_account(saved_password, saved_user):
             LOG_DET.append(unicode)
             INFO.append(unicode)
             print(LOG_DET)
+            cprint(f"Unicode assign to you : {unicode}", 'blue')
+            cprint("Please save unicode. Unicode required to login\n", 'blue')
             print("Thank you all information will be saved in your account")
             just_info()
+            return unicode
         if choice == "2":
             create_username()
 
@@ -643,6 +635,8 @@ def update_worksheet(info_dog, info_user):
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
     print(info_user)
+    #new_list = info_dog[1] + info_dog[2] + info_dog[3] + info_user[0]
+    #print(new_list)
 
 
 def show_info():
@@ -652,7 +646,8 @@ def show_info():
     if already saved dog than show all dogs summary
     """
     cprint(tabulate(
-        dog_datas[1,6], headers=["Unicode","Name"],
+        dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
+         "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
 
 
