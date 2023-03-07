@@ -65,7 +65,8 @@ def menu():
             try_det = [try_psw, try_user, try_uni]
             if try_det in user_data:
                 cprint(f"welcome {try_user}", 'green')
-                show_info(uni)
+                INFO.append(try_uni)
+                #show_info(uni)
                 break
             if try_det not in user_data:
                 cprint("Please try again\n", 'red')
@@ -124,7 +125,7 @@ def create_account(saved_password, saved_user):
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            unicode = (random.randint(0,100000))
+            unicode = (random.randint(0 ,100000))
             LOG_DET.append(saved_user)
             LOG_DET.append(saved_password)
             LOG_DET.append(unicode)
@@ -505,7 +506,7 @@ def calcolate_rer():
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
+        print(f"Your dog calcolated rer is {rer} based on his weight\n")
     INFO.append(rer)
     is_work_dog()
 
@@ -645,40 +646,27 @@ def show_info(uni):
     """
     # get the current uni value
     print('UNI: ', uni)
-
-    # get the current dog info (just so I can see the values)
-    print('DOG INFO: ', dog_datas)
-
-    # find the unicode cell in the profile worksheet
-    uni_cell = profile.find(uni)
-
-    # test print for the row of the specified unicode
-    print('TEST: ', uni_cell.row)
-
-    # get the row values of the whole row with the unicode value in it
-    uni_row = profile.row_values(uni_cell.row)
-
     # test print the row
+    uni_cell = profile.find(uni)
+    print(uni_cell)
+
+    print('TEST: ', uni_cell.row)
+    uni_row = profile.row_values(uni_cell.row)
     print('ROW: ', uni_row)
-    
     # for loop to select all rows with the same unicode
-    for uni_cell in cell:
-        print(uni_cell.row)
 
+    #for row in rows[0]:
+       # print(f" {i}) {row}")
+       # i += 1
 
-    current_uni = uni
-    same_uni_list = []
 # trying to access with unicode used for login datas from dog_datas and print
     # for current_uni in dog_datas:
         # print(row[current_uni])
 
-
-
-
-    cprint(tabulate(
-        dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
-         "Ideal weight", "RER", "MER"],
-        tablefmt='fancy_grid'), 'blue')
+    #cprint(tabulate(
+        #dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
+        # "Ideal weight", "RER", "MER"],
+        #tablefmt='fancy_grid'), 'blue')
 
 
 def main():
@@ -693,7 +681,7 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    show_info(uni)
+    #show_info(uni)
     quit()
 
 
