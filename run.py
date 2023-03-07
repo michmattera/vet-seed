@@ -57,7 +57,7 @@ def menu():
         if choice == "1":
             print("Input your login details")
             user = input("Username: ")
-            psw = input("Password:")
+            psw = input("Password: ")
             uni = input("Unicode: ")
             try_user = user
             try_psw = psw
@@ -65,7 +65,7 @@ def menu():
             try_det = [try_psw, try_user, try_uni]
             if try_det in user_data:
                 cprint(f"welcome {try_user}", 'green')
-                show_info()
+                show_info(uni)
                 break
             if try_det not in user_data:
                 cprint("Please try again\n", 'red')
@@ -635,16 +635,46 @@ def update_worksheet(info_dog, info_user):
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
     print(info_user)
-    #new_list = info_dog[1] + info_dog[2] + info_dog[3] + info_user[0]
-    #print(new_list)
 
 
-def show_info():
+def show_info(uni):
     """
     get all info of dog saved and show it in a table
     using unicode
     if already saved dog than show all dogs summary
     """
+    # get the current uni value
+    print('UNI: ', uni)
+
+    # get the current dog info (just so I can see the values)
+    print('DOG INFO: ', dog_datas)
+
+    # find the unicode cell in the profile worksheet
+    uni_cell = profile.find(uni)
+
+    # test print for the row of the specified unicode
+    print('TEST: ', uni_cell.row)
+
+    # get the row values of the whole row with the unicode value in it
+    uni_row = profile.row_values(uni_cell.row)
+
+    # test print the row
+    print('ROW: ', uni_row)
+    
+    # for loop to select all rows with the same unicode
+    for uni_cell in cell:
+        print(uni_cell.row)
+
+
+    current_uni = uni
+    same_uni_list = []
+# trying to access with unicode used for login datas from dog_datas and print
+    # for current_uni in dog_datas:
+        # print(row[current_uni])
+
+
+
+
     cprint(tabulate(
         dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
          "Ideal weight", "RER", "MER"],
@@ -663,7 +693,7 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    show_info()
+    show_info(uni)
     quit()
 
 
