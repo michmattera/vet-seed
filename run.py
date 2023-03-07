@@ -55,7 +55,7 @@ def menu():
         print(" 1) Login.\n 2) Create account.\n")
         choice = input("")
         if choice == "1":
-            print("Input your login details")
+            print("\nInput your login details")
             user = input("Username: ")
             psw = input("Password: ")
             uni = input("Unicode: ")
@@ -86,12 +86,12 @@ def create_username():
     """
     while True:
         print("Please insert username")
-        print("Username should not be longer than 10 letters")
+        print("Username should not be longer than 10 letters\n")
         user = input("Username: ")
         saved_user = user
 
         if validate_user(saved_user):
-            print("Thank you")
+            print("Thank you\n")
             create_password(saved_user)
     return saved_user
 
@@ -103,7 +103,7 @@ def create_password(saved_user):
     """
     while True:
         print("Please insert password")
-        print("Password at least 5 letters and one capital letter")
+        print("Password at least 5 letters and one capital letter\n")
         psw = input("Password: ")
         saved_password = psw
 
@@ -183,7 +183,7 @@ def validate_psw(password):
                 uppercase_count += 1
             if uppercase_count == 0:
                 raise ValueError(
-                    "First lettere required capital letter"
+                    "First letter required capital letter"
                 )
 
     except ValueError as error:
@@ -206,9 +206,11 @@ def just_info():
         choice = input("")
         if choice == "1":
             print("General info loading.")
+            clearScreen()
             display_info()
         elif choice == "2":
             print("Please answer the following questions.")
+            clearScreen()
             main()
         else:
             cprint('ERROR, Please choose one of the above', 'red')
@@ -390,12 +392,12 @@ def calcolate_target_weight(INFO):
     if overweight is True:
         cprint("Your dog is overweight", 'yellow')
         weight_difference = float(INFO[2]) - float(INFO[4])
-        print(f"Your dog should lose {format(weight_difference, '.2f')} kg \n")
+        cprint(f"Your dog should lose {format(weight_difference, '.2f')} kg\n", 'yellow')
         wei = "overweight"
     if underweight is True:
         cprint("Your dog is underweight", 'yellow')
         weight_difference = float(INFO[4]) - float(INFO[2])
-        print(f"Your dog should get {format(weight_difference, '.2f')} kg \n")
+        cprint(f"Your dog should get {format(weight_difference, '.2f')} kg\n", 'yellow')
         wei = "underweight"
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
@@ -501,12 +503,12 @@ def calcolate_rer():
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        print(f"Your dog calcolated rer is {rer} based on his ideal weight\n")
+        cprint(f"Your dog calcolated rer is {rer} based on his ideal weight\n", 'blue')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        print(f"Your dog calcolated rer is {rer} based on his weight\n")
+        cprint(f"Your dog calcolated rer is {rer} based on his weight\n", 'blue')
     INFO.append(rer)
     is_work_dog()
 
@@ -638,21 +640,21 @@ def update_worksheet(info_dog, info_user):
     print(info_user)
 
 
-def show_info(uni):
+def show_info():
     """
     get all info of dog saved and show it in a table
     using unicode
     if already saved dog than show all dogs summary
     """
     # get the current uni value
-    print('UNI: ', uni)
+    #print('UNI: ', uni)
     # test print the row
-    uni_cell = profile.find(uni)
-    print(uni_cell)
+    #uni_cell = profile.find(uni)
+    #print(uni_cell)
 
-    print('TEST: ', uni_cell.row)
-    uni_row = profile.row_values(uni_cell.row)
-    print('ROW: ', uni_row)
+    #print('TEST: ', uni_cell.row)
+    #uni_row = profile.row_values(uni_cell.row)
+    #print('ROW: ', uni_row)
     # for loop to select all rows with the same unicode
 
     #for row in rows[0]:
@@ -663,10 +665,10 @@ def show_info(uni):
     # for current_uni in dog_datas:
         # print(row[current_uni])
 
-    #cprint(tabulate(
-        #dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
-        # "Ideal weight", "RER", "MER"],
-        #tablefmt='fancy_grid'), 'blue')
+    cprint(tabulate(
+        dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
+         "Ideal weight", "RER", "MER"],
+        tablefmt='fancy_grid'), 'blue')
 
 
 def main():
@@ -681,7 +683,7 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    #show_info(uni)
+    show_info()
     quit()
 
 
