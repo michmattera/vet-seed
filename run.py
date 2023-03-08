@@ -3,6 +3,7 @@ import os
 import sys
 # importing the random module
 import random
+from operator import itemgetter
 from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
@@ -42,7 +43,7 @@ def clearScreen():
     os.system("clear")
 
 
-def menu():
+def menu(dog_datas):
     """
     Choice to user to login, create an account or gen info
     """
@@ -66,7 +67,7 @@ def menu():
             if try_det in user_data:
                 cprint(f"welcome {try_user}", 'green')
                 INFO.append(try_uni)
-                #show_info(uni)
+                show_info(uni, dog_datas)
                 break
             if try_det not in user_data:
                 cprint("Please try again\n", 'red')
@@ -645,12 +646,35 @@ def update_worksheet(info_dog, info_user):
     print(info_user)
 
 
-def show_info():
+def Extract(dog_datas):
+    return list(map(itemgetter(0), dog_datas))
+
+
+def show_info(uni, dog_datas):
     """
     get all info of dog saved and show it in a table
     using unicode
     if already saved dog than show all dogs summary
     """
+    print(dog_datas)
+    print(str(uni))
+    test = Extract(dog_datas)
+    print(test)
+    new_test = [index for (index, item) in enumerate(test) if item == uni]
+    print(new_test)
+    i = 0
+    for i in new_test:
+        print(dog_datas[i])
+        i += 1
+    #testrr = dog_datas[i]
+    cprint(tabulate(
+        dog_datas[i], headers=["Unicode", "Name", "Weight", "BCS",
+         "Ideal weight", "RER", "MER"],
+        tablefmt='fancy_grid'), 'blue')
+
+
+#[1, 3, 5]
+
     # get the current uni value
     #print('UNI: ', uni)
     # test print the row
@@ -670,11 +694,6 @@ def show_info():
     # for current_uni in dog_datas:
         # print(row[current_uni])
 
-    cprint(tabulate(
-        dog_datas[1:6], headers=["Unicode", "Name", "Weight", "BCS",
-         "Ideal weight", "RER", "MER"],
-        tablefmt='fancy_grid'), 'blue')
-
 
 def main():
     """
@@ -688,10 +707,10 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    show_info()
+    show_info(uni, dog_datas)
     quit()
 
 
-menu()
+menu(dog_datas)
 just_info()
 main()
