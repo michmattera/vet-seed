@@ -103,7 +103,7 @@ def create_password(saved_user):
     """
     while True:
         print("Please insert password")
-        print("Password at least 5 letters and one capital letter\n")
+        print("Requirements: 5 letters, one number and first capital letter\n")
         psw = input("Password: ")
         saved_password = psw
 
@@ -184,6 +184,11 @@ def validate_psw(password):
             if uppercase_count == 0:
                 raise ValueError(
                     "First letter required capital letter"
+                )
+        for i in password:
+            if i not in "0123456789":
+                raise ValueError(
+                    "At least one number required"
                 )
 
     except ValueError as error:
@@ -661,7 +666,7 @@ def show_info():
        # print(f" {i}) {row}")
        # i += 1
 
-# trying to access with unicode used for login datas from dog_datas and print
+    # trying to access with unicode used for login datas from dog_datas and print
     # for current_uni in dog_datas:
         # print(row[current_uni])
 
