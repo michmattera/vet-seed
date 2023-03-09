@@ -45,7 +45,10 @@ def clearScreen():
 
 def menu(dog_datas):
     """
-    Choice to user to login, create an account or gen info
+    Choice user is saved and can login, create an account or gen info
+    display art ASCII
+    save unicode from login to save in save datas
+
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
     cprint(art.TITLE)
@@ -65,9 +68,9 @@ def menu(dog_datas):
             try_uni = uni
             try_det = [try_psw, try_user, try_uni]
             if try_det in user_data:
-                cprint(f"welcome {try_user}", 'green')
+                cprint(f"welcome back {try_user}", 'green')
                 INFO.append(try_uni)
-                show_info(uni, dog_datas)
+                login_menu(uni)
                 break
             if try_det not in user_data:
                 cprint("Please try again\n", 'red')
@@ -77,6 +80,33 @@ def menu(dog_datas):
         else:
             cprint("Please select one of the above", 'red')
             clearScreen()
+            continue
+
+
+def login_menu(uni):
+    """
+    multiple choice just for login users
+    choose between gen info, calcolate calories or display dogs info
+    """
+    while True:
+        print(" Please select one of the following before continue\n")
+        print(" 1) Get general info.\n 2) Calcolate calories.")
+        print(" 3) Show saved dogs\n")
+        choice = input("")
+        if choice == "1":
+            print("General info loading.")
+            clearScreen()
+            display_info()
+        elif choice == "2":
+            print("Please answer the following questions.")
+            clearScreen()
+            main()
+        elif choice == "3":
+            print("Loading saved dogs information ...")
+            clearScreen()
+            show_info(uni, dog_datas)
+        else:
+            cprint('ERROR, Please choose one of the above', 'red')
             continue
 
 
@@ -135,7 +165,7 @@ def create_account(saved_password, saved_user):
             cprint(f"Unicode assign to you : {unicode}", 'blue')
             cprint("Please save unicode. Unicode required to login\n", 'blue')
             print("Thank you all information will be saved in your account")
-            just_info()
+            #just_info()
             return unicode
         if choice == "2":
             create_username()
@@ -196,31 +226,6 @@ def validate_psw(password):
         cprint(f"Invalid data: {error}, please try again.\n", 'red')
         return False
     return True
-
-
-def just_info():
-    """
-    give user choice
-    Create function for introduction of topic
-    choose between get just general information
-    or go and calcolate dog's per day calories
-    """
-    while True:
-        print("Please choose what would you like to know:\n")
-        print("Do you want to?")
-        print(" 1) Get general info.\n 2) Calcolate calories.")
-        choice = input("")
-        if choice == "1":
-            print("General info loading.")
-            clearScreen()
-            display_info()
-        elif choice == "2":
-            print("Please answer the following questions.")
-            clearScreen()
-            main()
-        else:
-            cprint('ERROR, Please choose one of the above', 'red')
-            continue
 
 
 def dogs_name():
@@ -604,19 +609,20 @@ def validate_topic(chosen_topic, column):
     return True
 
 
-def choice_calc_end():
+def choice_calc_end(uni):
     """
     List general info and give another choice to user
     Let user choose if he wants to calcolate calories
     Or is done and do not need anything else
     """
     while True:
-        print("\nWould you like to end program ,calcolate calories or continue?")
+        print("\nWould you like to end program ,calcolate calories or end program?")
         print("Please choose one of the following:")
-        print(" 1) More info.\n 2) Calcolate calories.\n 3) End program.")
+        print(" 1) Display general information.\n 2) Calcolate calories.")
+        print(" 3) Show saved dogs.\n 4) End program.\n")
         choice_two = input("")
         if choice_two == "1":
-            print("More general information.")
+            print("Display general information.")
             clearScreen()
             display_info()
         if choice_two == "2":
@@ -624,6 +630,10 @@ def choice_calc_end():
             clearScreen()
             main()
         if choice_two == "3":
+            print("Loading saved dogs information ...")
+            clearScreen()
+            show_info()
+        if choice_two == "4":
             print("Thank you come back soon.")
             clearScreen()
             quit()
@@ -644,6 +654,8 @@ def update_worksheet(info_dog, info_user):
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
     print(info_user)
+    cprint("All datas updated", 'green')
+    choice_calc_end()
 
 
 def Extract(dog_datas):
@@ -665,14 +677,12 @@ def show_info(uni, dog_datas):
     test = []
     for i in new_test:
         test.append(dog_datas[i])
-        print(dog_datas[i])
         i += 1
-    print(test)
-
     cprint(tabulate(
         test, headers=["Unicode", "Name", "Weight", "BCS",
         "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
+    choice_calc_end()
 
 
 def main():
@@ -687,10 +697,8 @@ def main():
     info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog, info_user)
-    show_info(uni, dog_datas)
     quit()
 
 
 menu(dog_datas)
-just_info()
 main()
