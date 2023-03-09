@@ -1,7 +1,5 @@
-#  import module
+#  import modules
 import os
-import sys
-# importing the random module
 import random
 from operator import itemgetter
 from tabulate import tabulate
@@ -23,27 +21,29 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('VetSeed')
 
+# import from excel specific sheet and store values in variables
 profile = SHEET.worksheet('profile')
+dog_datas = profile.get_all_values()
 credent = SHEET.worksheet('credentials')
+user_data = credent.get_all_values()
 gen_info = SHEET.worksheet('general_info')
 data = gen_info.get_all_values()
-user_data = credent.get_all_values()
-dog_datas = profile.get_all_values()
-INFO = []  # stores a list from user input(weight-name-bsc)
+
+INFO = []  # stores a list from user input(weight-name-bsc-rer-mer)
 WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
-MER = []  # stores calcolated mer and after append everything to profile
-LOG_DET = []  # stores username and password from user input
+MER = []  # stores calcolated mer
+LOG_DET = []  # stores username ,password  and unicode
 
 
-def clearScreen():
+def clear_screen():
     '''
-    Function for cleaning the cli screen
+    Function for cleaning the screen
     '''
     os.system("clear")
 
 
-def menu(dog_datas):
+def menu():
     """
     Choice user is saved and can login, create an account or gen info
     display art ASCII
@@ -79,32 +79,37 @@ def menu(dog_datas):
             create_username()
         else:
             cprint("Please select one of the above", 'red')
-            clearScreen()
+            clear_screen()
             continue
 
 
 def login_menu(uni):
     """
     multiple choice just for login users
-    choose between gen info, calcolate calories or display dogs info
+    choose between gen info, calcolate calories, 
+    display dogs info or end program
     """
     while True:
         print(" Please select one of the following before continue\n")
         print(" 1) Get general info.\n 2) Calcolate calories.")
-        print(" 3) Show saved dogs\n")
+        print(" 3) Show saved dogs\n 4) End program." )
         choice = input("")
         if choice == "1":
             print("General info loading.")
-            clearScreen()
+            clear_screen()
             display_info()
         elif choice == "2":
             print("Please answer the following questions.")
-            clearScreen()
+            clear_screen()
             main()
         elif choice == "3":
             print("Loading saved dogs information ...")
-            clearScreen()
-            show_info(uni, dog_datas)
+            clear_screen()
+            show_info(uni)
+        elif choice == "4":
+            print("Thank you come back soon.")
+            clear_screen()
+            quit()
         else:
             cprint('ERROR, Please choose one of the above', 'red')
             continue
@@ -113,7 +118,7 @@ def login_menu(uni):
 def create_username():
     """
     Create account , asking user to enter username
-    validate user from input 
+    validate user input with validate_user
     """
     while True:
         print("Please insert username")
@@ -129,8 +134,9 @@ def create_username():
 
 def create_password(saved_user):
     """
-    Create account , asking user to enter username
-    validate user from input 
+    Create account , asking user to enter password
+    validate user input 
+    if validate create account and stores values
     """
     while True:
         print("Please insert password")
@@ -147,8 +153,11 @@ def create_password(saved_user):
 def create_account(saved_password, saved_user):
     """
     Create account , taking saved variable from following function
-    create_username and create_password after validate the user inputs
-    save username and password in external sheet for future login
+    create_username and create_password after validate user inputs
+    assign if validate unicode that user will need to login
+    save username ,password and unicode in external sheet for future login
+    asking user to confirm all datas will be saved
+    or to change restartfunction asking username and password again
     """
     while True:
 
@@ -156,7 +165,7 @@ def create_account(saved_password, saved_user):
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            unicode = (random.randint(0 ,100000))
+            unicode = (random.randint(0, 100000))
             LOG_DET.append(saved_user)
             LOG_DET.append(saved_password)
             LOG_DET.append(unicode)
@@ -165,7 +174,6 @@ def create_account(saved_password, saved_user):
             cprint(f"Unicode assign to you : {unicode}", 'blue')
             cprint("Please save unicode. Unicode required to login\n", 'blue')
             print("Thank you all information will be saved in your account")
-            #just_info()
             return unicode
         if choice == "2":
             create_username()
@@ -176,6 +184,7 @@ def validate_user(user):
     check user value from create_account
     check if value is there
     check if is no longer than 10 letters
+    raise error if wrong input
     """
     try:
         if len(user) > 10:
@@ -197,7 +206,10 @@ def validate_psw(password):
     """
     check user value from create_account
     check if value is there
-    check if is no longer than 10 letters
+    check if is long at least 5 letters
+    if first is capital letter
+    and if there is at least one number
+    raise error if otherwise
     """
     uppercase_count = 0
     try:
@@ -230,7 +242,6 @@ def validate_psw(password):
 
 def dogs_name():
     """
-    define goal of program
     ask user to insert name of dog
     validate info and input from user
     append saved value to global variable
@@ -255,8 +266,9 @@ def validate_name(saved_name):
     """
     Validate name
     gave error if more that 10 letters
-    gave error if number or if more than one world was given
-    gave error if empty space
+    gave error if number instead of letter was given
+    if more than one world was given
+    raise error if empty space
     """
     try:
         if len(saved_name) > 10:
@@ -340,7 +352,7 @@ def dogs_bcs():
     """
     Ask user to insert bcs of dog
     Check that right input was provided
-    Useing validate_bcs to validate info from user
+    Using validate_bcs to validate info from user
     validate info and input from user
     append saved value to global variable
     """
@@ -390,6 +402,7 @@ def calcolate_target_weight(INFO):
     Get bcs and weight from dogs_weight and dogs_bcs
     Use correct formula to calcolate correct weight
     Let the user know if dog is under-over or correct weight
+    call function to calcolate rer based on weight of dog
     """
     target_weight_part_one = int(INFO[3]) - 5
     target_weight_part_two = 100 + target_weight_part_one * 10
@@ -402,13 +415,13 @@ def calcolate_target_weight(INFO):
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     if overweight is True:
         cprint("Your dog is overweight", 'yellow')
-        weight_difference = float(INFO[2]) - float(INFO[4])
-        cprint(f"Your dog should lose {format(weight_difference, '.2f')} kg\n", 'yellow')
+        weight_diff = float(INFO[2]) - float(INFO[4])
+        cprint(f"Dog should lose {format(weight_diff, '.2f')} kg\n", 'yellow')
         wei = "overweight"
     if underweight is True:
-        cprint("Your dog is underweight", 'yellow')
-        weight_difference = float(INFO[4]) - float(INFO[2])
-        cprint(f"Your dog should get {format(weight_difference, '.2f')} kg\n", 'yellow')
+        cprint("Dog is underweight", 'yellow')
+        weight_diff = float(INFO[4]) - float(INFO[2])
+        cprint(f"Dog should get {format(weight_diff, '.2f')} kg",'yellow')
         wei = "underweight"
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
@@ -433,12 +446,12 @@ def is_work_dog():
         choice = input("")
         if choice == "1":
             print("You selected Yes")
-            clearScreen()
+            clear_screen()
             calcolate_work_dog(LIFE_STAGE)
             break
         if choice == "2":
             print("You selected No")
-            clearScreen()
+            clear_screen()
             life_stage_factor_one(LIFE_STAGE)
             break
         else:
@@ -449,6 +462,7 @@ def is_work_dog():
 def calcolate_work_dog(LIFE_STAGE):
     """
     which kind of work the dog does
+    based on choice calcolate final calories to provide the dog
     """
     print("Work dog selected")
     print("Kind of exercise that dog has daily")
@@ -509,17 +523,18 @@ def calcolate_rer():
     for underweight or overweight
     rer : calcolatation =  ideal weight^0.75 x 70
     taking saved weight to calcolate rer from info_dog
+    calling function to see if dog is a work dog
     """
     if WEIGHT == "overweight" or "underweight":
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"Your dog calcolated rer is {rer} based on his ideal weight\n", 'blue')
+        cprint(f"Dog calcolated rer is {rer} based on his ideal weight\n", 'blue')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"Your dog calcolated rer is {rer} based on his weight\n", 'blue')
+        cprint(f"Dog calcolated rer is {rer} based on his weight\n", 'blue')
     INFO.append(rer)
     is_work_dog()
 
@@ -531,6 +546,7 @@ def life_stage_factor_one(LIFE_STAGE):
     Life stage factor multiple choice 1 to see which value should be multiplied
     Multiple choice for user and error if value is not correct
     intact or neutered dog
+    return value to store in global variable
     """
     while True:
         print("Please answer the following based on life stage of dog:")
@@ -581,8 +597,6 @@ def display_info():
             print(column)
             break
 
-    choice_calc_end()
-
 
 def validate_topic(chosen_topic, column):
     """
@@ -609,43 +623,11 @@ def validate_topic(chosen_topic, column):
     return True
 
 
-def choice_calc_end(uni):
-    """
-    List general info and give another choice to user
-    Let user choose if he wants to calcolate calories
-    Or is done and do not need anything else
-    """
-    while True:
-        print("\nWould you like to end program ,calcolate calories or end program?")
-        print("Please choose one of the following:")
-        print(" 1) Display general information.\n 2) Calcolate calories.")
-        print(" 3) Show saved dogs.\n 4) End program.\n")
-        choice_two = input("")
-        if choice_two == "1":
-            print("Display general information.")
-            clearScreen()
-            display_info()
-        if choice_two == "2":
-            print("Please answer following questions:")
-            clearScreen()
-            main()
-        if choice_two == "3":
-            print("Loading saved dogs information ...")
-            clearScreen()
-            show_info()
-        if choice_two == "4":
-            print("Thank you come back soon.")
-            clearScreen()
-            quit()
-        else:
-            cprint('ERROR, Please choose one of the above', 'red')
-            continue
-
-
 def update_worksheet(info_dog, info_user):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
+    call again function to give user choice of what he wants to do
     """
     print("Updating  datas...")
     worksheet_to_update = profile
@@ -655,23 +637,23 @@ def update_worksheet(info_dog, info_user):
     worksheet_to_update.append_row(info_user)
     print(info_user)
     cprint("All datas updated", 'green')
-    choice_calc_end()
+    login_menu(info_user[2])
 
 
-def Extract(dog_datas):
+def extract(dog_datas):
     """
     extract first item in dog-datas list of lists
     """
     return list(map(itemgetter(0), dog_datas))
 
 
-def show_info(uni, dog_datas):
+def show_info(uni):
     """
     get all info of dog saved and show it in a table
     using index from function Extract
     if already saved dog than show all dogs summary
     """
-    test = Extract(dog_datas)
+    test = extract(dog_datas)
     new_test = [index for (index, item) in enumerate(test) if item == uni]
     i = 0
     test = []
@@ -682,7 +664,7 @@ def show_info(uni, dog_datas):
         test, headers=["Unicode", "Name", "Weight", "BCS",
         "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
-    choice_calc_end()
+    login_menu(uni)
 
 
 def main():
