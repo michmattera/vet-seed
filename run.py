@@ -144,7 +144,7 @@ def create_password(saved_user):
         psw = input("Password: ")
         saved_password = psw
 
-        if validate_psw(saved_password):
+        if validate_password(saved_password):
             print("Thank you")
             create_account(saved_password, saved_user)
     return saved_password
@@ -202,7 +202,7 @@ def validate_user(user):
     return True
 
 
-def validate_psw(password):
+def validate_password(password):
     """
     check user value from create_account
     check if value is there
@@ -212,6 +212,7 @@ def validate_psw(password):
     raise error if otherwise
     """
     uppercase_count = 0
+    flag = False
     try:
         if len(password) < 5:
             raise ValueError(
@@ -229,10 +230,15 @@ def validate_psw(password):
                     "First letter required capital letter"
                 )
         for i in password:
-            if i not in "0123456789":
-                raise ValueError(
-                    "At least one number required"
-                )
+            if i.isdigit():
+                flag = True
+                break
+        if flag:
+            print("Password is valid")
+        else:
+            raise ValueError(
+                "At least one number required"
+            )
 
     except ValueError as error:
         cprint(f"Invalid data: {error}, please try again.\n", 'red')
@@ -636,8 +642,9 @@ def update_worksheet(info_dog, info_user):
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
     print(info_user)
+    uni = info_dog[0]
     cprint("All datas updated", 'green')
-    login_menu(info_user[2])
+    login_menu(uni)
 
 
 def extract(dog_datas):
@@ -682,5 +689,5 @@ def main():
     quit()
 
 
-menu(dog_datas)
+menu()
 main()
