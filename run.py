@@ -647,52 +647,32 @@ def update_worksheet(info_dog, info_user):
 
 
 def Extract(dog_datas):
+    """
+    extract first item in dog-datas list of lists
+    """
     return list(map(itemgetter(0), dog_datas))
 
 
 def show_info(uni, dog_datas):
     """
     get all info of dog saved and show it in a table
-    using unicode
+    using index from function Extract
     if already saved dog than show all dogs summary
     """
-    print(dog_datas)
-    print(str(uni))
     test = Extract(dog_datas)
-    print(test)
     new_test = [index for (index, item) in enumerate(test) if item == uni]
-    print(new_test)
     i = 0
+    test = []
     for i in new_test:
+        test.append(dog_datas[i])
         print(dog_datas[i])
         i += 1
-    #testrr = dog_datas[i]
+    print(test)
+
     cprint(tabulate(
-        dog_datas[i], headers=["Unicode", "Name", "Weight", "BCS",
-         "Ideal weight", "RER", "MER"],
+        test, headers=["Unicode", "Name", "Weight", "BCS",
+        "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
-
-
-#[1, 3, 5]
-
-    # get the current uni value
-    #print('UNI: ', uni)
-    # test print the row
-    #uni_cell = profile.find(uni)
-    #print(uni_cell)
-
-    #print('TEST: ', uni_cell.row)
-    #uni_row = profile.row_values(uni_cell.row)
-    #print('ROW: ', uni_row)
-    # for loop to select all rows with the same unicode
-
-    #for row in rows[0]:
-       # print(f" {i}) {row}")
-       # i += 1
-
-    # trying to access with unicode used for login datas from dog_datas and print
-    # for current_uni in dog_datas:
-        # print(row[current_uni])
 
 
 def main():
