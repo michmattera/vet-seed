@@ -171,9 +171,11 @@ def create_account(saved_password, saved_user):
             LOG_DET.append(unicode)
             INFO.append(unicode)
             print(LOG_DET)
+            uni = unicode
             cprint(f"Unicode assign to you : {unicode}", 'blue')
             cprint("Please save unicode. Unicode required to login\n", 'blue')
             print("Thank you all information will be saved in your account")
+            login_menu(uni)
             return unicode
         if choice == "2":
             create_username()
@@ -644,6 +646,9 @@ def update_worksheet(info_dog, info_user):
     print(info_user)
     uni = info_dog[0]
     cprint("All datas updated", 'green')
+    #profile = SHEET.worksheet('profile')
+    #dog_datas = profile.get_all_values()
+    print(dog_datas)
     login_menu(uni)
 
 
