@@ -514,13 +514,20 @@ def calcolate_mer(LIFE_STAGE):
         print(LIFE_STAGE)
         print(overweight_mer)
         mer = overweight_mer
+        cprint("Calcolating calories to give dog to help him lose weight...\n")
+        cprint(f"Kcal {mer}", 'yellow')
     if WEIGHT == "underweight":
         underweight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = underweight_mer
+        cprint("Calcolating calories to give dog to help him get weight...\n")
+        cprint(f"Kcal {mer}", 'yellow')
     if WEIGHT == "ideal":
         ideal_weight_mer = float(LIFE_STAGE) * float(INFO[5])
-        mer = format(ideal_weight_mer, '.2f')
-    INFO.append(mer)
+        mer = ideal_weight_mer
+        cprint("Please continue to give dog daily...\n")
+        cprint(f"Kcal {mer}", 'green')
+    final_mer = format(mer, '.2f')
+    INFO.append(final_mer)
 
 
 def calcolate_rer():
