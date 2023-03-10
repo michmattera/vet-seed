@@ -644,9 +644,12 @@ def update_worksheet(info_dog, info_user):
     Update the relevant worksheet with the data provided
     call again function to give user choice of what he wants to do
     """
+    info_dog = INFO
+    info_user = LOG_DET
     print("Updating  datas...")
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
+    #worksheet_to_update.append_row(info_dog)
     print(info_dog)
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
@@ -654,8 +657,6 @@ def update_worksheet(info_dog, info_user):
     uni = info_dog[0]
     cprint("All datas updated", 'green')
     #profile = SHEET.worksheet('profile')
-    #dog_datas = profile.get_all_values()
-    print(dog_datas)
     login_menu(uni)
 
 
@@ -672,6 +673,8 @@ def show_info(uni):
     using index from function Extract
     if already saved dog than show all dogs summary
     """
+    dog_datas = profile.get_all_values()
+    print(dog_datas)
     test = extract(dog_datas)
     new_test = [index for (index, item) in enumerate(test) if item == uni]
     i = 0
