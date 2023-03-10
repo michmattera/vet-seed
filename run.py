@@ -59,6 +59,7 @@ def menu():
         print(" 1) Login.\n 2) Create account.\n")
         choice = input("")
         if choice == "1":
+            clear_screen()
             print("\nInput your login details")
             user = input("Username: ")
             psw = input("Password: ")
@@ -68,11 +69,13 @@ def menu():
             try_uni = uni
             try_det = [try_psw, try_user, try_uni]
             if try_det in user_data:
-                cprint(f"welcome back {try_user}", 'green')
+                clear_screen()
+                cprint(f"Welcome back {try_user}\n", 'green')
                 INFO.append(try_uni)
                 login_menu(uni)
                 break
             if try_det not in user_data:
+                cprint("Information inserted not valid\n", 'red')
                 cprint("Please try again\n", 'red')
                 continue
         if choice == "2":
@@ -120,6 +123,7 @@ def create_username():
     Create account , asking user to enter username
     validate user input with validate_user
     """
+    clear_screen()
     while True:
         print("Please insert username")
         print("Username should not be longer than 10 letters\n")
@@ -127,6 +131,7 @@ def create_username():
         saved_user = user
 
         if validate_user(saved_user):
+            clear_screen()
             print("Thank you\n")
             create_password(saved_user)
     return saved_user
@@ -138,6 +143,7 @@ def create_password(saved_user):
     validate user input 
     if validate create account and stores values
     """
+    clear_screen()
     while True:
         print("Please insert password")
         print("Requirements: 5 letters, one number and first capital letter\n")
@@ -145,7 +151,6 @@ def create_password(saved_user):
         saved_password = psw
 
         if validate_password(saved_password):
-            print("Thank you")
             create_account(saved_password, saved_user)
     return saved_password
 
@@ -170,11 +175,12 @@ def create_account(saved_password, saved_user):
             LOG_DET.append(saved_password)
             LOG_DET.append(unicode)
             INFO.append(unicode)
-            print(LOG_DET)
+            #print(LOG_DET)
             uni = unicode
+            clear_screen()
             cprint(f"Unicode assign to you : {unicode}", 'blue')
             cprint("Please save unicode. Unicode required to login\n", 'blue')
-            print("Thank you all information will be saved in your account")
+            cprint("All information will be saved in your account\n", 'blue')
             login_menu(uni)
             return unicode
         if choice == "2":
@@ -236,7 +242,7 @@ def validate_password(password):
                 flag = True
                 break
         if flag:
-            print("Password is valid")
+            cprint("Password is valid", 'green')
         else:
             raise ValueError(
                 "At least one number required"
@@ -262,7 +268,8 @@ def dogs_name():
         saved_name = data_name
 
         if validate_name(saved_name):
-            print("Thank you")
+            clear_screen()
+            cprint("Valid name", 'green')
             cprint(f"Name of dog provided is {saved_name}\n", 'green')
             INFO.append(saved_name)
             print(INFO)
@@ -319,6 +326,8 @@ def dogs_weight():
         saved_weight = data_weight
 
         if validate_weight(saved_weight):
+            clear_screen()
+            cprint("Valid weight", 'green')
             cprint(f"Weight of dog provided is {saved_weight}\n", 'green')
             INFO.append(saved_weight)
             print(INFO)
@@ -371,6 +380,8 @@ def dogs_bcs():
         saved_bcs = data_bcs
 
         if validate_bcs(saved_bcs):
+            clear_screen()
+            cprint("Valid Bcs", 'green')
             cprint(f"Bcs of dog provided is {saved_bcs}\n", 'green')
             INFO.append(saved_bcs)
             break
@@ -421,6 +432,7 @@ def calcolate_target_weight(INFO):
     underweight = target_weight > float(INFO[2])
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
+    clear_screen()
     if overweight is True:
         cprint("Your dog is overweight", 'yellow')
         weight_diff = float(INFO[2]) - float(INFO[4])
@@ -478,21 +490,22 @@ def calcolate_work_dog(LIFE_STAGE):
         print("Select one of the following:")
         print("1) Light\n2) Moderate\n3) Heavy\n")
         choice = input("")
+        clear_screen()
         if choice == "1":
             x = 2
-            print("You selected Light")
+            cprint("You selected Light", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         if choice == "2":
             x = 3
-            print("You selected Moderate")
+            cprint("You selected Moderate", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         if choice == "3":
             x = 6
-            print("You selected Heavy")
+            cprint("You selected Heavy", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
@@ -514,12 +527,12 @@ def calcolate_mer(LIFE_STAGE):
         print(LIFE_STAGE)
         print(overweight_mer)
         mer = overweight_mer
-        cprint("Calcolating calories to give dog to help him lose weight...\n")
+        cprint("Calcolating calories to help dog lose weight...\n", 'blue')
         cprint(f"Kcal {mer}", 'yellow')
     if WEIGHT == "underweight":
         underweight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = underweight_mer
-        cprint("Calcolating calories to give dog to help him get weight...\n")
+        cprint("Calcolating calories to help dog get weight...\n", 'blue')
         cprint(f"Kcal {mer}", 'yellow')
     if WEIGHT == "ideal":
         ideal_weight_mer = float(LIFE_STAGE) * float(INFO[5])
@@ -544,12 +557,12 @@ def calcolate_rer():
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"Dog calcolated rer is {rer} based on his ideal weight\n", 'blue')
+        cprint(f"RER calcolated is {rer} based on his ideal weight\n", 'blue')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"Dog calcolated rer is {rer} based on his weight\n", 'blue')
+        cprint(f"RER calcolated is {rer} based on his weight\n", 'blue')
     INFO.append(rer)
     is_work_dog()
 
@@ -567,15 +580,16 @@ def life_stage_factor_one(LIFE_STAGE):
         print("Please answer the following based on life stage of dog:")
         choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
         choice = int(choice)
+        clear_screen()
         if choice == 1:
             x = float(1.6)
-            print("You selected Neutered")
+            cprint("You selected Neutered", 'blue')
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
         if choice == 2:
             x = float(1.8)
-            print("You selected Intact")
+            cprint("You selected Intact", 'blue')
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
@@ -609,6 +623,7 @@ def display_info():
         column_vals = gen_info.col_values(chosen_topic)
         column = '\n'.join(column_vals)
         if validate_topic(chosen_topic, column):
+            clear_screen()
             print(column)
             break
 
@@ -646,16 +661,16 @@ def update_worksheet(info_dog, info_user):
     """
     info_dog = INFO
     info_user = LOG_DET
-    print("Updating  datas...")
+    cprint("Updating  datas...", 'blue')
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
     #worksheet_to_update.append_row(info_dog)
-    print(info_dog)
+    #print(info_dog)
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
-    print(info_user)
+    #print(info_user)
     uni = info_dog[0]
-    cprint("All datas updated", 'green')
+    cprint("All datas updated and saved", 'green')
     #profile = SHEET.worksheet('profile')
     login_menu(uni)
 
@@ -674,7 +689,7 @@ def show_info(uni):
     if already saved dog than show all dogs summary
     """
     dog_datas = profile.get_all_values()
-    print(dog_datas)
+    #print(dog_datas)
     test = extract(dog_datas)
     new_test = [index for (index, item) in enumerate(test) if item == uni]
     i = 0
