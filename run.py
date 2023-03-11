@@ -97,7 +97,7 @@ def login_menu(uni):
     while True:
         print(" Please select one of the following before continue\n")
         print(" 1) Get general info.\n 2) Calcolate calories.")
-        print(" 3) Show saved dogs\n 4) End program." )
+        print(" 3) Show saved dogs\n 4) End program.")
         choice = input("")
         if choice == "1":
             print("General info loading.")
@@ -114,7 +114,7 @@ def login_menu(uni):
         elif choice == "4":
             print("Thank you come back soon.")
             clear_screen()
-            quit()
+            end_program()
         else:
             cprint('ERROR, Please choose one of the above', 'red')
             continue
@@ -666,18 +666,14 @@ def update_worksheet(info_dog, info_user):
     call again function to give user choice of what he wants to do
     """
     info_dog = INFO
-    info_user = LOG_DET
+    #info_user = LOG_DET
     cprint("Updating  datas...", 'blue')
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
-    #worksheet_to_update.append_row(info_dog)
-    #print(info_dog)
-    worksheet_to_update = credent
-    worksheet_to_update.append_row(info_user)
-    #print(info_user)
+    #worksheet_to_update = credent
+    #worksheet_to_update.append_row(info_user)
     uni = info_dog[0]
     cprint("All datas updated and saved", 'green')
-    #profile = SHEET.worksheet('profile')
     login_menu(uni)
 
 
@@ -716,6 +712,19 @@ def show_info(uni):
         tablefmt='fancy_grid'), 'blue')
     print(test) # not work display empty list if create acc
     login_menu(uni)
+
+
+def end_program():
+    """
+    end program, thank the user , update all informations
+    updating info user here so also if there is no calcolation but just
+    general info consulted info_user is saved
+    """
+    cprint("Thank you", 'blue')
+    info_user = LOG_DET
+    worksheet_to_update = credent
+    worksheet_to_update.append_row(info_user)
+    quit()
 
 
 def main():
