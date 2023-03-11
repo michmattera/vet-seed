@@ -67,16 +67,20 @@ def menu():
             try_user = user
             try_psw = psw
             try_uni = uni
-            try_det = [try_psw, try_user, try_uni]
+            try_det = [try_user, try_psw, try_uni]
+            print(try_det)
+            print(user_data)
             if try_det in user_data:
                 clear_screen()
                 cprint(f"Welcome back {try_user}\n", 'green')
                 INFO.append(try_uni)
+                quit()
                 login_menu(uni)
                 break
             if try_det not in user_data:
                 cprint("Information inserted not valid\n", 'red')
                 cprint("Please try again\n", 'red')
+                quit()
                 continue
         if choice == "2":
             create_username()
@@ -675,11 +679,13 @@ def update_worksheet(info_dog, info_user):
     login_menu(uni)
 
 
-def extract(dog_datas):
+def extract(new_dog_datas):
     """
     extract first item in dog-datas list of lists
     """
-    return list(map(itemgetter(0), dog_datas))
+    new_dog_datas = profile.get_all_values()
+    print(new_dog_datas)
+    return list(map(itemgetter(0), new_dog_datas))
 
 
 def show_info(uni):
@@ -688,19 +694,25 @@ def show_info(uni):
     using index from function Extract
     if already saved dog than show all dogs summary
     """
-    dog_datas = profile.get_all_values()
-    #print(dog_datas)
-    test = extract(dog_datas)
-    new_test = [index for (index, item) in enumerate(test) if item == uni]
+    new_dog_datas = profile.get_all_values() # work
+    testing = extract(new_dog_datas) # work
+    print(testing) # work
+    print(uni)
+    # not working when creating acc, working if login
+    new_test = [index for (index, item) in enumerate(testing) if item == uni]  # not
+    print(new_test) # not work display empty
     i = 0
     test = []
+    print(uni) # work
     for i in new_test:
-        test.append(dog_datas[i])
+        print(new_dog_datas[i]) # not work
+        test.append(new_dog_datas[i]) # not work
         i += 1
     cprint(tabulate(
         test, headers=["Unicode", "Name", "Weight", "BCS",
         "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
+    print(test) # not work display empty list if create acc
     login_menu(uni)
 
 
