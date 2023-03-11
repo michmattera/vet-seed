@@ -673,6 +673,7 @@ def update_worksheet(info_dog, info_user):
     #worksheet_to_update = credent
     #worksheet_to_update.append_row(info_user)
     uni = info_dog[0]
+    print(type(uni))
     cprint("All datas updated and saved", 'green')
     login_menu(uni)
 
@@ -696,12 +697,15 @@ def show_info(uni):
     testing = extract(new_dog_datas) # work
     print(testing) # work
     print(uni)
+    print(type(uni))
     # not working when creating acc, working if login
-    new_test = [index for (index, item) in enumerate(testing) if item == uni]  # not
+    str_uni = str(uni)
+    new_test = [index for (index, item) in enumerate(testing) if item == str_uni]
     print(new_test) # not work display empty
     i = 0
     test = []
     print(uni) # work
+    print(type(uni))
     for i in new_test:
         print(new_dog_datas[i]) # not work
         test.append(new_dog_datas[i]) # not work
