@@ -74,13 +74,11 @@ def menu():
                 clear_screen()
                 cprint(f"Welcome back {try_user}\n", 'green')
                 INFO.append(try_uni)
-                quit()
                 login_menu(uni)
                 break
             if try_det not in user_data:
                 cprint("Information inserted not valid\n", 'red')
                 cprint("Please try again\n", 'red')
-                quit()
                 continue
         if choice == "2":
             create_username()
@@ -264,6 +262,7 @@ def dogs_name():
     validate info and input from user
     append saved value to global variable
     """
+    uni = INFO[0]
     while True:
         print("Please insert first name of dog")
         print("Example: Bob\n")
@@ -275,6 +274,9 @@ def dogs_name():
             clear_screen()
             cprint("Valid name", 'green')
             cprint(f"Name of dog provided is {saved_name}\n", 'green')
+# https://stackoverflow.com/questions/850795/different-ways-of-clearing-lists
+            del INFO[:]
+            INFO.append(uni)
             INFO.append(saved_name)
             print(INFO)
             break
