@@ -74,7 +74,7 @@ def menu():
                 clear_screen()
                 cprint(f"Welcome back {try_user}\n", 'green')
                 INFO.append(try_uni)
-                login_menu(uni)
+                multiple_choice(uni)
                 break
             if try_det not in user_data:
                 cprint("Information inserted not valid\n", 'red')
@@ -88,7 +88,7 @@ def menu():
             continue
 
 
-def login_menu(uni):
+def multiple_choice(uni):
     """
     multiple choice just for login users
     choose between gen info, calcolate calories, 
@@ -183,7 +183,7 @@ def create_account(saved_password, saved_user):
             cprint(f"Unicode assign to you : {unicode}", 'blue')
             cprint("Please save unicode. Unicode required to login\n", 'blue')
             cprint("All information will be saved in your account\n", 'blue')
-            login_menu(uni)
+            multiple_choice(uni)
             return unicode
         if choice == "2":
             create_username()
@@ -675,7 +675,7 @@ def update_worksheet(info_dog, info_user):
     uni = info_dog[0]
     print(type(uni))
     cprint("All datas updated and saved", 'green')
-    login_menu(uni)
+    multiple_choice(uni)
 
 
 def extract(new_dog_datas):
@@ -683,39 +683,38 @@ def extract(new_dog_datas):
     extract first item in dog-datas list of lists
     """
     new_dog_datas = profile.get_all_values()
-    print(new_dog_datas)
     return list(map(itemgetter(0), new_dog_datas))
 
 
 def show_info(uni):
     """
-    get all info of dog saved and show it in a table
-    using index from function Extract
-    if already saved dog than show all dogs summary
+    get again info from dog_datas updated
+    call function Extract to extract indexes of all rows in list
+    stringify uni so from create acc does not return int
+    for loop to find in indexes list uni
+    and then for all uni found print it in tabulate
+    if not uni found then print error message
+    calling function to give user multiple choice
+
     """
-    new_dog_datas = profile.get_all_values() # work
-    testing = extract(new_dog_datas) # work
-    print(testing) # work
-    print(uni)
-    print(type(uni))
-    # not working when creating acc, working if login
-    str_uni = str(uni)
-    new_test = [index for (index, item) in enumerate(testing) if item == str_uni]
-    print(new_test) # not work display empty
+    new_dog_datas = profile.get_all_values()
+    ind_list = extract(new_dog_datas)
+    str_u = str(uni)
+    ind_uni = [index for (index, item) in enumerate(ind_list) if item == str_u]
     i = 0
     test = []
-    print(uni) # work
-    print(type(uni))
-    for i in new_test:
-        print(new_dog_datas[i]) # not work
-        test.append(new_dog_datas[i]) # not work
+    for i in ind_uni:
+        print(new_dog_datas[i])
+        test.append(new_dog_datas[i])
         i += 1
     cprint(tabulate(
         test, headers=["Unicode", "Name", "Weight", "BCS",
         "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
-    print(test) # not work display empty list if create acc
-    login_menu(uni)
+    if not ind_uni:
+        cprint("No dogs saved", 'red')
+        cprint("To save dog please calcolate calories\n", 'red')
+    multiple_choice(uni)
 
 
 def end_program():
