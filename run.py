@@ -34,6 +34,7 @@ WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer
 LOG_DET = []  # stores username ,password  and unicode
+unicode_list = credent.col_values(3)
 
 
 def clear_screen():
@@ -90,8 +91,8 @@ def menu():
 
 def multiple_choice(uni):
     """
-    multiple choice just for login users
-    choose between gen info, calcolate calories, 
+    multiple choice
+    choose between gen info, calcolate calories,
     display dogs info or end program
     """
     while True:
@@ -162,28 +163,31 @@ def create_account(saved_password, saved_user):
     Create account , taking saved variable from following function
     create_username and create_password after validate user inputs
     assign if validate unicode that user will need to login
+    check if unicode in not already in use, if it is restart
     save username ,password and unicode in external sheet for future login
     asking user to confirm all datas will be saved
-    or to change restartfunction asking username and password again
+    or to change restart function asking username and password again
     """
     while True:
-
         cprint("Username and password valid\n", 'green')
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            unicode = (random.randint(0, 100000))
-            LOG_DET.append(saved_user)
-            LOG_DET.append(saved_password)
-            LOG_DET.append(unicode)
-            INFO.append(unicode)
-            #print(LOG_DET)
-            uni = unicode
-            clear_screen()
-            cprint(f"Unicode assign to you : {unicode}", 'blue')
-            cprint("Please save unicode. Unicode required to login\n", 'blue')
-            cprint("All information will be saved in your account\n", 'blue')
-            multiple_choice(uni)
+            unicode = (random.randint(0, 2))
+            if str(unicode) not in unicode_list:
+                LOG_DET.append(saved_user)
+                LOG_DET.append(saved_password)
+                LOG_DET.append(unicode)
+                INFO.append(unicode)
+                uni = unicode
+                clear_screen()
+                cprint(f"Unicode assign to you : {unicode}", 'blue')
+                cprint("Please save unicode. Unicode required to login\n", 'blue')
+                cprint("All information will be saved in your account\n", 'blue')
+                multiple_choice(uni)
+            if str(unicode) in unicode_list:
+                print("Unicode already in use...")
+                continue
             return unicode
         if choice == "2":
             create_username()
@@ -666,12 +670,9 @@ def update_worksheet(info_dog, info_user):
     call again function to give user choice of what he wants to do
     """
     info_dog = INFO
-    #info_user = LOG_DET
     cprint("Updating  datas...", 'blue')
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
-    #worksheet_to_update = credent
-    #worksheet_to_update.append_row(info_user)
     uni = info_dog[0]
     print(type(uni))
     cprint("All datas updated and saved", 'green')
