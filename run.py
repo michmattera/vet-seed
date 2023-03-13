@@ -78,7 +78,7 @@ def menu():
     art.INTRO = colored(art.INTRO, 'green')
     print_slow(art.INTRO)
     while True:
-        time.sleep(2)
+        time.sleep(4)
         clear_screen()
         print(" Please select one of the following before continue\n")
         print(" 1) Login.\n 2) Create account.\n")
@@ -119,6 +119,7 @@ def multiple_choice(uni):
     """
     while True:
         time.sleep(2)
+        print("\n")
         print(" Please select one of the following before continue\n")
         print(" 1) Get general info.\n 2) Calcolate calories.")
         print(" 3) Show saved dogs\n 4) End program.")
