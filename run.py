@@ -58,7 +58,7 @@ def print_slow(text):
 
 def print_slow_art(text):
     """
-    function to print slow
+    function to print slow just art
     """
     for x in text:    # cycle through the text one character at a time
         print(x, end='', flush=True)  # print one character
@@ -118,6 +118,7 @@ def multiple_choice(uni):
     display dogs info or end program
     """
     while True:
+        time.sleep(2)
         print(" Please select one of the following before continue\n")
         print(" 1) Get general info.\n 2) Calcolate calories.")
         print(" 3) Show saved dogs\n 4) End program.")
@@ -127,7 +128,6 @@ def multiple_choice(uni):
             clear_screen()
             display_info()
         elif choice == "2":
-            print("Please answer the following questions.")
             clear_screen()
             main()
         elif choice == "3":
@@ -135,7 +135,8 @@ def multiple_choice(uni):
             clear_screen()
             show_info(uni)
         elif choice == "4":
-            print("Thank you come back soon.")
+            cprint("Thank you come back soon.", 'blue')
+            time.sleep(2)
             clear_screen()
             end_program()
         else:
@@ -177,7 +178,7 @@ def create_password(saved_user):
         saved_password = psw
 
         if validate_password(saved_password):
-            cprint("Thank you, valid password given\n", 'green')
+            cprint("Thank you\n", 'green')
             time.sleep(2)
             clear_screen()
             create_account(saved_password, saved_user)
@@ -294,6 +295,7 @@ def dogs_name():
     append saved value to global variable
     """
     uni = INFO[0]
+    print("Please answer the following questions.\n")
     while True:
         print("Please insert first name of dog")
         print("Example: Bob\n")
@@ -302,14 +304,14 @@ def dogs_name():
         saved_name = data_name
 
         if validate_name(saved_name):
-            clear_screen()
             cprint("Valid name", 'green')
             cprint(f"Name of dog provided is {saved_name}\n", 'green')
+            time.sleep(2)
+            clear_screen()
 # https://stackoverflow.com/questions/850795/different-ways-of-clearing-lists
             del INFO[:]
             INFO.append(uni)
             INFO.append(saved_name)
-            print(INFO)
             break
     return saved_name
 
@@ -363,11 +365,11 @@ def dogs_weight():
         saved_weight = data_weight
 
         if validate_weight(saved_weight):
-            clear_screen()
             cprint("Valid weight", 'green')
             cprint(f"Weight of dog provided is {saved_weight}\n", 'green')
+            time.sleep(2)
+            clear_screen()
             INFO.append(saved_weight)
-            print(INFO)
             break
     return saved_weight
 
@@ -417,9 +419,10 @@ def dogs_bcs():
         saved_bcs = data_bcs
 
         if validate_bcs(saved_bcs):
-            clear_screen()
             cprint("Valid Bcs", 'green')
             cprint(f"Bcs of dog provided is {saved_bcs}\n", 'green')
+            time.sleep(2)
+            clear_screen()
             INFO.append(saved_bcs)
             break
     return saved_bcs
@@ -470,6 +473,8 @@ def calcolate_target_weight(INFO):
     INFO.append(final_target_weight)
     print(f"Ideal weight of dog calcolated is {final_target_weight}")
     clear_screen()
+    print_slow("Calcolating....\n")
+    time.sleep(2)
     if overweight is True:
         cprint("Your dog is overweight", 'yellow')
         weight_diff = float(INFO[2]) - float(INFO[4])
@@ -478,7 +483,7 @@ def calcolate_target_weight(INFO):
     if underweight is True:
         cprint("Dog is underweight", 'yellow')
         weight_diff = float(INFO[4]) - float(INFO[2])
-        cprint(f"Dog should get {format(weight_diff, '.2f')} kg", 'yellow')
+        cprint(f"Dog should get {format(weight_diff, '.2f')} kg\n", 'yellow')
         wei = "underweight"
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
@@ -496,18 +501,22 @@ def is_work_dog():
     if dog is a work dog
     """
     while True:
-        print("Is the dog a work dog?")
-        print("Example: police dog, therapy dogs, assistance dogs")
+        print_slow("To calcolate precise calories per day")
+        print_slow("please answer the following:\n")
+        print("Is the dog a work dog?\n")
+        print("Example: police dog, therapy dogs, assistance dogs\n")
         print("Select one of the following:")
         print("1) Yes\n2) No\n")
         choice = input("")
         if choice == "1":
-            print("You selected Yes")
+            cprint("You selected Yes", 'blue')
+            time.sleep(2)
             clear_screen()
             calcolate_work_dog(LIFE_STAGE)
             break
         if choice == "2":
-            print("You selected No")
+            cprint("You selected No" , 'blue')
+            time.sleep(2)
             clear_screen()
             life_stage_factor_one(LIFE_STAGE)
             break
@@ -561,8 +570,6 @@ def calcolate_mer(LIFE_STAGE):
     """
     if WEIGHT == "overweight":  # if overweight
         overweight_mer = float(LIFE_STAGE) * float(INFO[5])
-        print(LIFE_STAGE)
-        print(overweight_mer)
         mer = overweight_mer
         cprint("Calcolating calories to help dog lose weight...\n", 'blue')
         cprint(f"Kcal {mer}", 'yellow')
@@ -594,13 +601,14 @@ def calcolate_rer():
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated is {rer} based on his ideal weight\n", 'blue')
+        cprint(f"RER calcolated is {rer} based on his ideal weight\n", 'yellow')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated is {rer} based on his weight\n", 'blue')
+        cprint(f"RER calcolated is {rer} based on his weight\n", 'green')
     INFO.append(rer)
+    time.sleep(2)
     is_work_dog()
 
 
@@ -621,12 +629,14 @@ def life_stage_factor_one(LIFE_STAGE):
         if choice == 1:
             x = float(1.6)
             cprint("You selected Neutered", 'blue')
+            time.sleep(2)
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
         if choice == 2:
             x = float(1.8)
             cprint("You selected Intact", 'blue')
+            time.sleep(2)
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
@@ -697,12 +707,14 @@ def update_worksheet(info_dog):
     call again function to give user choice of what he wants to do
     """
     info_dog = INFO
-    cprint("Updating  datas...", 'blue')
+    print_slow("Updating datas...\n")
+    time.sleep(2)
     worksheet_to_update = profile
     worksheet_to_update.append_row(info_dog)
     uni = info_dog[0]
-    print(type(uni))
-    cprint("All datas updated and saved", 'green')
+    cprint("All datas updated and saved\n", 'green')
+    time.sleep(2)
+    clear_screen()
     multiple_choice(uni)
 
 
@@ -725,6 +737,8 @@ def show_info(uni):
     calling function to give user multiple choice
 
     """
+    print_slow("Finding dogs....\n")
+    time.sleep(1)
     new_dog_datas = profile.get_all_values()
     ind_list = extract(new_dog_datas)
     str_u = str(uni)
@@ -732,7 +746,6 @@ def show_info(uni):
     i = 0
     test = []
     for i in ind_uni:
-        print(new_dog_datas[i])
         test.append(new_dog_datas[i])
         i += 1
     cprint(tabulate(
@@ -742,6 +755,7 @@ def show_info(uni):
     if not ind_uni:
         cprint("No dogs saved", 'red')
         cprint("To save dog please calcolate calories\n", 'red')
+    time.sleep(2)
     multiple_choice(uni)
 
 
@@ -751,10 +765,10 @@ def end_program():
     updating info user here so also if there is no calcolation but just
     general info consulted info_user is saved
     """
-    cprint("Thank you", 'blue')
     info_user = LOG_DET
     worksheet_to_update = credent
     worksheet_to_update.append_row(info_user)
+    time.sleep(2)
     quit()
 
 
@@ -767,9 +781,9 @@ def main():
     dogs_weight()
     dogs_bcs()
     info_dog = INFO
-    info_user = LOG_DET
+    #info_user = LOG_DET
     calcolate_target_weight(info_dog)
-    update_worksheet(info_dog, info_user)
+    update_worksheet(info_dog)
     quit()
 
 
