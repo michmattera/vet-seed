@@ -2,6 +2,8 @@
 import os
 import random
 from operator import itemgetter
+import time
+from time import sleep
 from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
@@ -34,7 +36,7 @@ WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer
 LOG_DET = []  # stores username ,password  and unicode
-unicode_list = credent.col_values(3)
+unicode_list = credent.col_values(3)  # get unicode from 3 column of credent
 
 
 def clear_screen():
@@ -42,6 +44,26 @@ def clear_screen():
     Function for cleaning the screen
     '''
     os.system("clear")
+
+
+def print_slow(text):
+    """
+    function to print slow
+    """
+    for x in text:    # cycle through the text one character at a time
+        print(x, end='', flush=True)  # print one character
+        sleep(0.03)
+    print()  # go to new line
+
+
+def print_slow_art(text):
+    """
+    function to print slow
+    """
+    for x in text:    # cycle through the text one character at a time
+        print(x, end='', flush=True)  # print one character
+        sleep(0.01)
+    print()  # go to new line
 
 
 def menu():
@@ -52,10 +74,12 @@ def menu():
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
-    cprint(art.TITLE)
+    print_slow_art(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
-    cprint(art.INTRO)
+    print_slow(art.INTRO)
     while True:
+        time.sleep(2)
+        clear_screen()
         print(" Please select one of the following before continue\n")
         print(" 1) Login.\n 2) Create account.\n")
         choice = input("")
@@ -69,8 +93,6 @@ def menu():
             try_psw = psw
             try_uni = uni
             try_det = [try_user, try_psw, try_uni]
-            print(try_det)
-            print(user_data)
             if try_det in user_data:
                 clear_screen()
                 cprint(f"Welcome back {try_user}\n", 'green')
@@ -134,8 +156,9 @@ def create_username():
         saved_user = user
 
         if validate_user(saved_user):
+            cprint("Thank you, valid username given\n", 'green')
+            time.sleep(2)
             clear_screen()
-            print("Thank you\n")
             create_password(saved_user)
     return saved_user
 
@@ -143,7 +166,7 @@ def create_username():
 def create_password(saved_user):
     """
     Create account , asking user to enter password
-    validate user input 
+    validate user input
     if validate create account and stores values
     """
     clear_screen()
@@ -154,6 +177,9 @@ def create_password(saved_user):
         saved_password = psw
 
         if validate_password(saved_password):
+            cprint("Thank you, valid password given\n", 'green')
+            time.sleep(2)
+            clear_screen()
             create_account(saved_password, saved_user)
     return saved_password
 
@@ -173,7 +199,7 @@ def create_account(saved_password, saved_user):
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("")
         if choice == "1":
-            unicode = (random.randint(0, 2))
+            unicode = (random.randint(100, 5000))
             if str(unicode) not in unicode_list:
                 LOG_DET.append(saved_user)
                 LOG_DET.append(saved_password)
@@ -182,8 +208,9 @@ def create_account(saved_password, saved_user):
                 uni = unicode
                 clear_screen()
                 cprint(f"Unicode assign to you : {unicode}", 'blue')
-                cprint("Please save unicode. Unicode required to login\n", 'blue')
-                cprint("All information will be saved in your account\n", 'blue')
+                cprint("Please save unicode.\n", 'blue')
+                cprint("Unicode required to login\n", 'blue')
+                time.sleep(2)
                 multiple_choice(uni)
             if str(unicode) in unicode_list:
                 print("Unicode already in use...")
@@ -451,7 +478,7 @@ def calcolate_target_weight(INFO):
     if underweight is True:
         cprint("Dog is underweight", 'yellow')
         weight_diff = float(INFO[4]) - float(INFO[2])
-        cprint(f"Dog should get {format(weight_diff, '.2f')} kg",'yellow')
+        cprint(f"Dog should get {format(weight_diff, '.2f')} kg", 'yellow')
         wei = "underweight"
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
@@ -631,10 +658,10 @@ def display_info():
         choice_topic = input("")
         chosen_topic = choice_topic
         column_vals = gen_info.col_values(chosen_topic)
-        column = '\n'.join(column_vals)
+        column = '\n\n'.join(column_vals)
         if validate_topic(chosen_topic, column):
             clear_screen()
-            print(column)
+            print_slow(column)
             break
 
 
@@ -663,7 +690,7 @@ def validate_topic(chosen_topic, column):
     return True
 
 
-def update_worksheet(info_dog, info_user):
+def update_worksheet(info_dog):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
@@ -710,7 +737,7 @@ def show_info(uni):
         i += 1
     cprint(tabulate(
         test, headers=["Unicode", "Name", "Weight", "BCS",
-        "Ideal weight", "RER", "MER"],
+                       "Ideal weight", "RER", "MER"],
         tablefmt='fancy_grid'), 'blue')
     if not ind_uni:
         cprint("No dogs saved", 'red')
