@@ -6,6 +6,12 @@ import time  # use to wait specific time before running next function
 from time import sleep  # use for slow test
 from tabulate import tabulate  # use to display final datas
 import gspread  # use to store datas
+#import msvcrt
+from platform import system
+if system() == 'Windows':
+    from msvcrt import getch
+else:
+    from getch import getch
 from google.oauth2.service_account import Credentials  # credentials
 from termcolor import colored, cprint   # use to import colors
 import art  # use for intro ASCII
@@ -37,6 +43,22 @@ LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer
 LOG_DET = []  # stores username ,password  and unicode
 unicode_list = credent.col_values(3)  # get unicode from 3 column of credent
+
+
+class keyboardDisable():
+
+    def start(self):
+        self.on = True
+
+    def stop(self):
+        self.on = False
+
+    def __call__(self):
+        while self.on:
+            getch()
+
+    def __init__(self):
+        self.on = False
 
 
 def clear_screen():
@@ -206,21 +228,19 @@ def create_account(saved_password, saved_user):
         choice = input("\n")
         if choice == "1":
             unicode = (random.randint(100, 5000))
-            if str(unicode) not in unicode_list:
-                LOG_DET.append(saved_user)
-                LOG_DET.append(saved_password)
-                LOG_DET.append(unicode)
-                INFO.append(unicode)
-                uni = unicode
-                clear_screen()
-                cprint(f"Unicode assign to you : {unicode}", 'blue')
-                cprint("Please save unicode.\n", 'blue')
-                cprint("Unicode required to login\n", 'blue')
-                time.sleep(2)
-                multiple_choice(uni)
-            if str(unicode) in unicode_list:
-                print("Unicode already in use...")
-                continue
+            while str(unicode) in unicode_list:
+                unicode = (random.randint(100, 5000))
+            LOG_DET.append(saved_user)
+            LOG_DET.append(saved_password)
+            LOG_DET.append(unicode)
+            INFO.append(unicode)
+            uni = unicode
+            clear_screen()
+            cprint(f"Unicode assign to you : {unicode}", 'blue')
+            cprint("Please save unicode.\n", 'blue')
+            cprint("Unicode required to login\n", 'blue')
+            time.sleep(2)
+            multiple_choice(uni)
             return unicode
         if choice == "2":
             create_username()
@@ -676,8 +696,11 @@ def display_info():
         column_vals = gen_info.col_values(chosen_topic)
         column = '\n\n'.join(column_vals)
         if validate_topic(chosen_topic, column):
+            disable = keyboardDisable()
+            disable.start()
             clear_screen()
             print_slow(column)
+            disable.stop()
             break
 
 
