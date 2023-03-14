@@ -1,14 +1,14 @@
 #  import modules
 import os
-import random
-from operator import itemgetter
-import time
-from time import sleep
-from tabulate import tabulate
-import gspread
-from google.oauth2.service_account import Credentials
-from termcolor import colored, cprint
-import art
+import random  # use to create random unicode for user
+from operator import itemgetter  # use to get right data to display in table
+import time  # use to wait specific time before running next function
+from time import sleep  # use for slow test
+from tabulate import tabulate  # use to display final datas
+import gspread  # use to store datas
+from google.oauth2.service_account import Credentials  # credentials
+from termcolor import colored, cprint   # use to import colors
+import art  # use for intro ASCII
 
 
 SCOPE = [
@@ -48,10 +48,10 @@ def clear_screen():
 
 def print_slow(text):
     """
-    function to print slow
+    function to print slow text
     """
-    for x in text:    # cycle through the text one character at a time
-        print(x, end='', flush=True)  # print one character
+    for value in text:    # cycle through the text one character at a time
+        print(value, end='', flush=True)  # print one character
         sleep(0.03)
     print()  # go to new line
 
@@ -60,17 +60,20 @@ def print_slow_art(text):
     """
     function to print slow just art
     """
-    for x in text:    # cycle through the text one character at a time
-        print(x, end='', flush=True)  # print one character
+    for value in text:    # cycle through the text one character at a time
+        print(value, end='', flush=True)  # print one character
         sleep(0.01)
     print()  # go to new line
 
 
 def menu():
     """
-    Choice user is saved and can login, create an account or gen info
+    first function intro to user
     display art ASCII
-    save unicode from login to save in save datas
+    choice: login or create account
+    if login check from sheet for credentials
+    if right datas then login
+    if create calling function to create account
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
@@ -82,13 +85,13 @@ def menu():
         clear_screen()
         print(" Please select one of the following before continue\n")
         print(" 1) Login.\n 2) Create account.\n")
-        choice = input("")
+        choice = input("\n")
         if choice == "1":
             clear_screen()
             print("\nInput your login details")
-            user = input("Username: ")
-            psw = input("Password: ")
-            uni = input("Unicode: ")
+            user = input("Username: \n")
+            psw = input("Password: \n")
+            uni = input("Unicode: \n")
             try_user = user
             try_psw = psw
             try_uni = uni
@@ -114,8 +117,9 @@ def menu():
 def multiple_choice(uni):
     """
     multiple choice
-    choose between gen info, calcolate calories,
+    choose between general info, calcolate calories,
     display dogs info or end program
+    each choice clear screen and call right function
     """
     while True:
         time.sleep(2)
@@ -123,7 +127,7 @@ def multiple_choice(uni):
         print(" Please select one of the following before continue\n")
         print(" 1) Get general info.\n 2) Calcolate calories.")
         print(" 3) Show saved dogs\n 4) End program.")
-        choice = input("")
+        choice = input("\n")
         if choice == "1":
             print("General info loading.")
             clear_screen()
@@ -147,14 +151,14 @@ def multiple_choice(uni):
 
 def create_username():
     """
-    Create account , asking user to enter username
+    if user wants to Create account , ask user to create username
     validate user input with validate_user
     """
     clear_screen()
     while True:
         print("Please insert username")
         print("Username should not be longer than 10 letters\n")
-        user = input("Username: ")
+        user = input("Username: \n")
         saved_user = user
 
         if validate_user(saved_user):
@@ -167,15 +171,15 @@ def create_username():
 
 def create_password(saved_user):
     """
-    Create account , asking user to enter password
+    after create username, asking user to enter password
     validate user input
-    if validate create account and stores values
+    if validate call create_account and stores values
     """
     clear_screen()
     while True:
         print("Please insert password")
         print("Requirements: 5 letters, one number and first capital letter\n")
-        psw = input("Password: ")
+        psw = input("Password: \n")
         saved_password = psw
 
         if validate_password(saved_password):
@@ -199,7 +203,7 @@ def create_account(saved_password, saved_user):
     while True:
         cprint("Username and password valid\n", 'green')
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
-        choice = input("")
+        choice = input("\n")
         if choice == "1":
             unicode = (random.randint(100, 5000))
             if str(unicode) not in unicode_list:
@@ -301,7 +305,7 @@ def dogs_name():
         print("Please insert first name of dog")
         print("Example: Bob\n")
 
-        data_name = input("Name of dog:\n")
+        data_name = input("Name of dog: \n")
         saved_name = data_name
 
         if validate_name(saved_name):
@@ -310,6 +314,7 @@ def dogs_name():
             time.sleep(2)
             clear_screen()
 # https://stackoverflow.com/questions/850795/different-ways-of-clearing-lists
+# link and info used to clear the list
             del INFO[:]
             INFO.append(uni)
             INFO.append(saved_name)
@@ -362,7 +367,7 @@ def dogs_weight():
     print("Please provide weight of dog")
     print("Please provide exact weight from 0 to 100 kg")
     while True:
-        data_weight = input("Weight of dog:")
+        data_weight = input("Weight of dog: \n")
         saved_weight = data_weight
 
         if validate_weight(saved_weight):
@@ -416,7 +421,7 @@ def dogs_bcs():
     print("Please provide bcs of dog")
     print("Bcs should be a value between 1 and 9")
     while True:
-        data_bcs = input("Bcs of dog:")
+        data_bcs = input("Bcs of dog: \n")
         saved_bcs = data_bcs
 
         if validate_bcs(saved_bcs):
@@ -508,7 +513,7 @@ def is_work_dog():
         print("Example: police dog, therapy dogs, assistance dogs\n")
         print("Select one of the following:")
         print("1) Yes\n2) No\n")
-        choice = input("")
+        choice = input("\n")
         if choice == "1":
             cprint("You selected Yes", 'blue')
             time.sleep(2)
@@ -536,7 +541,7 @@ def calcolate_work_dog(LIFE_STAGE):
     while True:
         print("Select one of the following:")
         print("1) Light\n2) Moderate\n3) Heavy\n")
-        choice = input("")
+        choice = input("\n")
         clear_screen()
         if choice == "1":
             x = 2
@@ -602,12 +607,12 @@ def calcolate_rer():
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated is {rer} based on his ideal weight\n", 'yellow')
+        cprint(f"RER calcolated : {rer} based on his ideal weight\n", 'yellow')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated is {rer} based on his weight\n", 'green')
+        cprint(f"RER calcolated : {rer} based on his weight\n", 'green')
     INFO.append(rer)
     time.sleep(2)
     is_work_dog()
@@ -623,7 +628,7 @@ def life_stage_factor_one(LIFE_STAGE):
     return value to store in global variable
     """
     while True:
-        print("Please answer the following based on life stage of dog:")
+        print("Please answer the following based on life stage of dog:\n")
         choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
         choice = int(choice)
         clear_screen()
@@ -782,10 +787,8 @@ def main():
     dogs_weight()
     dogs_bcs()
     info_dog = INFO
-    #info_user = LOG_DET
     calcolate_target_weight(info_dog)
     update_worksheet(info_dog)
-    quit()
 
 
 menu()
