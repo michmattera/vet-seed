@@ -253,9 +253,26 @@ The developer found different issues and bugs during the creation of the applica
 Main language used was **Python**.
 All other languages used were provided from **Code institute** to use as base to show deployed project.
 
+### External Programs-Website Used
 
 
-- 
+-The developer used different external programs throughout the development of this project.
+
+Below are all external programs used :
+- [Heroku]()
+     - Heroku was used to deploy final project.
+- [GitPod](https://gitpod.io/ "Link to GitPod homepage")
+     - GitPod was used for writing code, committing, and then pushing to GitHub.
+- [GitHub](https://github.com/ "Link to GitHub")
+     - GitHub was used to store the project after pushing.
+- [Canva](https://www.canva.com/ "Link to Canva homepage")
+     - Canva was used to create structural and formulas map.
+- [Am I Responsive?](http://ami.responsivedesign.is/# "Link to Am I Responsive Homepage")
+     - Am I Responsive was used to see responsive design throughout the process and to generate mockup imagery to be used.
+- [Ezgif](https://ezgif.com/video-to-gif "Link to go to ezgif homepage")
+    - Ezgif was used to convert all videos to gifs for the testing file.
+- [Free screen recorder](https://screencast-o-matic.com/screen-recorder?from=app&installed=true "Link to go to Free screen recorder homepage")
+    - Free screen recorder was used to screen record all videos for the testing files.
 
 
 
