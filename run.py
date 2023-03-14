@@ -521,7 +521,7 @@ def is_work_dog():
             calcolate_work_dog(LIFE_STAGE)
             break
         if choice == "2":
-            cprint("You selected No" , 'blue')
+            cprint("You selected No", 'blue')
             time.sleep(2)
             clear_screen()
             life_stage_factor_one(LIFE_STAGE)
