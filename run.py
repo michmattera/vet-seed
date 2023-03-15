@@ -6,12 +6,6 @@ import time  # use to wait specific time before running next function
 from time import sleep  # use for slow test
 from tabulate import tabulate  # use to display final datas
 import gspread  # use to store datas
-#import msvcrt
-from platform import system
-if system() == 'Windows':
-    from msvcrt import getch
-else:
-    from getch import getch
 from google.oauth2.service_account import Credentials  # credentials
 from termcolor import colored, cprint   # use to import colors
 import art  # use for intro ASCII
@@ -43,22 +37,6 @@ LIFE_STAGE = float()  # depending on life stage different values stored
 MER = []  # stores calcolated mer
 LOG_DET = []  # stores username ,password  and unicode
 unicode_list = credent.col_values(3)  # get unicode from 3 column of credent
-
-
-class keyboardDisable():
-
-    def start(self):
-        self.on = True
-
-    def stop(self):
-        self.on = False
-
-    def __call__(self):
-        while self.on:
-            getch()
-
-    def __init__(self):
-        self.on = False
 
 
 def clear_screen():
@@ -102,9 +80,9 @@ def menu():
     print_slow_art(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
     print_slow(art.INTRO)
+    time.sleep(4)
+    clear_screen()
     while True:
-        time.sleep(4)
-        clear_screen()
         print(" Please select one of the following before continue\n")
         print(" 1) Login.\n 2) Create account.\n")
         choice = input("\n")
@@ -132,7 +110,6 @@ def menu():
             create_username()
         else:
             cprint("Please select one of the above", 'red')
-            clear_screen()
             continue
 
 
@@ -222,8 +199,8 @@ def create_account(saved_password, saved_user):
     asking user to confirm all datas will be saved
     or to change restart function asking username and password again
     """
+    cprint("Username and password valid\n", 'green')
     while True:
-        cprint("Username and password valid\n", 'green')
         print("Do you want to confirm? Select:\n 1) Confirm.\n 2) Change")
         choice = input("\n")
         if choice == "1":
@@ -236,14 +213,38 @@ def create_account(saved_password, saved_user):
             INFO.append(unicode)
             uni = unicode
             clear_screen()
-            cprint(f"Unicode assign to you : {unicode}", 'blue')
+            cprint(f"Unicode assign to you : {unicode}\n", 'blue')
             cprint("Please save unicode.\n", 'blue')
             cprint("Unicode required to login\n", 'blue')
             time.sleep(2)
-            multiple_choice(uni)
+            #multiple_choice(uni)
+            are_you_ready(uni)
             return unicode
         if choice == "2":
             create_username()
+        else:
+            cprint('ERROR, Please choose one of the above', 'red')
+            continue
+
+
+def are_you_ready(uni):
+    """
+    Choice to user after assign unicode before going to main menu
+    be sure that user saved unicode before going on
+    """
+    while True:
+        print("Are you ready to go to main menu?\n")
+        print("Please type yes to continue")
+        choice = input("\n")
+        if choice == "yes":
+            cprint("Thank you", 'green')
+            print_slow("Loading...")
+            time.sleep(2)
+            clear_screen()
+            multiple_choice(uni)
+        else:
+            cprint('ERROR, Please type YES to continue', 'red')
+            continue
 
 
 def validate_user(user):
@@ -692,15 +693,12 @@ def display_info():
         i += 1
     while True:
         choice_topic = input("")
-        chosen_topic = choice_topic
+        chosen_topic = str(choice_topic)
         column_vals = gen_info.col_values(chosen_topic)
         column = '\n\n'.join(column_vals)
         if validate_topic(chosen_topic, column):
-            disable = keyboardDisable()
-            disable.start()
             clear_screen()
             print_slow(column)
-            disable.stop()
             break
 
 
@@ -708,6 +706,7 @@ def validate_topic(chosen_topic, column):
     """
     validate user input from display_info and gave error if wrong input
     """
+    #test = True
     try:
         if not chosen_topic:
             raise ValueError(
@@ -717,7 +716,14 @@ def validate_topic(chosen_topic, column):
             raise ValueError(
                 "Number selected out of range, please select one of the above"
             )
-        if chosen_topic.isalpha():
+        #if chosen_topic.isalpha():
+        for i in chosen_topic:
+            if i.isalpha():
+                #test = False
+                raise ValueError(
+                    "Please insert a number"
+                )
+        if int not in column:
             raise ValueError(
                 "Please insert a number"
             )
