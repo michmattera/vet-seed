@@ -650,27 +650,33 @@ def life_stage_factor_one(LIFE_STAGE):
     """
     while True:
         print("Please answer the following based on life stage of dog:\n")
-        choice = input("1) Neutered\n2) Intact\n3) Definition:\n")
-        choice = int(choice)
-        clear_screen()
-        if choice == 1:
+        choice = input("1) Neutered\n2) Intact\n\nPress d for definition\n")
+        if choice == "1":
             x = float(1.6)
+            clear_screen()
             cprint("You selected Neutered", 'blue')
             time.sleep(2)
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
-        if choice == 2:
+        if choice == "2":
             x = float(1.8)
+            clear_screen()
             cprint("You selected Intact", 'blue')
             time.sleep(2)
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
-        if choice == 3:
-            print("\nDefinition:\n")
-            print("Neutered = Infertile dog , with no ability to reproduce.\n")
-            print("Intact = dog means a dog with intact sexual organs.\n")
+        if choice == "d":
+            print("\nDefinition: \n")
+            print_slow("Neutered = Infertile dog , with no ability to reproduce.\n")
+            print_slow("Intact = dog means a dog with intact sexual organs.\n")
+            clear_screen()
+            continue
+        else:
+            cprint(
+                "Please select one of the above", 'red'
+            )
             continue
     return LIFE_STAGE
 
