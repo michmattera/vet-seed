@@ -33,10 +33,10 @@ data = gen_info.get_all_values()
 
 INFO = []  # stores a list from user input(weight-name-bsc-rer-mer)
 WEIGHT = ""  # stores saved_weight
-LIFE_STAGE = float()  # depending on life stage different values stored
-MER = []  # stores calcolated mer
-LOG_DET = []  # stores username ,password  and unicode
-unicode_list = credent.col_values(3)  # get unicode from 3 column of credent
+LIFE_STAGE = float()  # depending on the life stage different values stored
+MER = []  # stores calculated mer
+LOG_DET = []  # stores username, password, and Unicode
+unicode_list = credent.col_values(3)  # get unicode from 3 columns of credent
 
 
 def clear_screen():
@@ -53,27 +53,27 @@ def print_slow(text):
     for value in text:    # cycle through the text one character at a time
         print(value, end='', flush=True)  # print one character
         sleep(0.03)
-    print()  # go to new line
+    print()  # go to a new line
 
 
 def print_slow_art(text):
     """
-    function to print slow just art
+    function to print slowly just art
     """
     for value in text:    # cycle through the text one character at a time
         print(value, end='', flush=True)  # print one character
         sleep(0.01)
-    print()  # go to new line
+    print()  # go to a new line
 
 
 def menu():
     """
     first function intro to user
     display art ASCII
-    choice: login or create account
-    if login check from sheet for credentials
-    if right datas then login
-    if create calling function to create account
+    choice: login or create an account
+    if login check from a sheet for credentials
+    if the right data then login
+    if create call a  function to create an account
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
@@ -116,9 +116,9 @@ def menu():
 def multiple_choice(uni):
     """
     multiple choice
-    choose between general info, calcolate calories,
-    display dogs info or end program
-    each choice clear screen and call right function
+    choose between general info, calculate calories,
+    display dog's info or end the program
+    each choice clears screen and call the right function
     """
     while True:
         time.sleep(2)
@@ -150,7 +150,7 @@ def multiple_choice(uni):
 
 def create_username():
     """
-    if user wants to Create account , ask user to create username
+    if the user wants to create account , ask the user to create a username
     validate user input with validate_user
     """
     clear_screen()
@@ -170,7 +170,7 @@ def create_username():
 
 def create_password(saved_user):
     """
-    after create username, asking user to enter password
+    after creating the username, ask user to enter the password
     validate user input
     if validate call create_account and stores values
     """
@@ -190,13 +190,13 @@ def create_password(saved_user):
 
 def create_account(saved_password, saved_user):
     """
-    Create account , taking saved variable from following function
-    create_username and create_password after validate user inputs
-    assign if validate unicode that user will need to login
-    check if unicode in not already in use, if it is restart
-    save username ,password and unicode in external sheet for future login
-    asking user to confirm all datas will be saved
-    or to change restart function asking username and password again
+    Create an account, taking saved variables from the following function
+    create_username and create_password after validating user inputs
+    assign if validate Unicode that user will need to login
+    check if Unicode is not already in use, if it is restarted
+    save username, password, and Unicode in the external sheet for future login
+    asking the user to confirm all data will be saved
+    or to change the restart function by asking username and password again
     """
     cprint("Username and password valid\n", 'green')
     while True:
@@ -216,7 +216,6 @@ def create_account(saved_password, saved_user):
             cprint("Please save unicode.\n", 'blue')
             cprint("Unicode required to login\n", 'blue')
             time.sleep(2)
-            #multiple_choice(uni)
             are_you_ready(uni)
             return unicode
         if choice == "2":
@@ -228,8 +227,8 @@ def create_account(saved_password, saved_user):
 
 def are_you_ready(uni):
     """
-    Choice to user after assign unicode before going to main menu
-    be sure that user saved unicode before going on
+    The choice of the user after assigning Unicode before going to the main menu
+    be sure that user saved Unicode before going on
     """
     while True:
         print("Are you ready to go to main menu?\n")
@@ -250,14 +249,14 @@ def are_you_ready(uni):
 def validate_user(user):
     """
     check user value from create_account
-    check if value is there
+    check if the value is there
     check if is no longer than 10 letters
-    raise error if wrong input
+    raise an error if the wrong input
     """
     try:
         if len(user) > 10:
             raise ValueError(
-                f"Max lenght of name is 10 letters you gave {len(user)}"
+                f"Max length of name is 10 letters you gave {len(user)}"
             )
         if not user:
             raise ValueError(
@@ -273,18 +272,18 @@ def validate_user(user):
 def validate_password(password):
     """
     check user value from create_account
-    check if value is there
+    check if the value is there
     check if is long at least 5 letters
-    if first is capital letter
+    if the first is a capital letter
     and if there is at least one number
-    raise error if otherwise
+    raise an error if otherwise
     """
     uppercase_count = 0
     flag = False
     try:
         if len(password) < 5:
             raise ValueError(
-                f"Min lenght of password is 5 letters you gave {len(password)}"
+                f"Min length of password is 5 letters you gave {len(password)}"
             )
         if not password:
             raise ValueError(
@@ -316,9 +315,9 @@ def validate_password(password):
 
 def dogs_name():
     """
-    ask user to insert name of dog
-    validate info and input from user
-    append saved value to global variable
+    ask the user to insert the name of the dog
+    validate info and input from the user
+    append saved value to a global variable
     """
     uni = INFO[0]
     print("Please answer the following questions.\n")
@@ -346,15 +345,15 @@ def dogs_name():
 def validate_name(saved_name):
     """
     Validate name
-    gave error if more that 10 letters
-    gave error if number instead of letter was given
+    gave an error if more than 10 letters
+    gave an error if a number instead of a letter was given
     if more than one world was given
-    raise error if empty space
+    raise an error if empty space
     """
     try:
         if len(saved_name) > 10:
             raise ValueError(
-                f"Max lenght of name is 10 letters you gave {len(saved_name)}"
+                f"Max length of name is 10 letters you gave {len(saved_name)}"
             )
 
         if not saved_name:
@@ -380,10 +379,10 @@ def validate_name(saved_name):
 
 def dogs_weight():
     """
-    Ask user to insert weight of dog
-    Check that right input was provided
-    validate info and input from user
-    append saved value to global variable
+    Ask the user to insert the weight of the dog
+    Check that the right input was provided
+    validate info and input from the user
+    append saved value to a global variable
     """
     print("Please provide weight of dog")
     print("Please provide exact weight from 0 to 100 kg")
@@ -404,9 +403,9 @@ def dogs_weight():
 def validate_weight(saved_weight):
     """
     Validate weight
-    check if value was between 0 and 100
-    check if values was not a letter
-    give error if invalid value or empty
+    check if the value was between 0 and 100
+    check if values were not a letter
+    give an error if invalid value or empty
     """
     try:
         if not saved_weight:
@@ -416,7 +415,7 @@ def validate_weight(saved_weight):
 
         if float(saved_weight) <= 0 or float(saved_weight) > 100:
             raise ValueError(
-                "Please insert value between 0 and 100"
+                "Please insert a value between 0 and 100"
             )
 
         if saved_weight.isalpha():
@@ -433,11 +432,11 @@ def validate_weight(saved_weight):
 
 def dogs_bcs():
     """
-    Ask user to insert bcs of dog
-    Check that right input was provided
+    Ask the user to insert bcs of the dog
+    Check that the right input was provided
     Using validate_bcs to validate info from user
-    validate info and input from user
-    append saved value to global variable
+    validate info and input from the user
+    append saved value to a global variable
     """
     print("Please provide bcs of dog")
     print("Bcs should be a value between 1 and 9")
@@ -457,9 +456,9 @@ def dogs_bcs():
 
 def validate_bcs(saved_bcs):
     """
-    Function to get body score condition of dog
-    Correct value should be from 1 to 9
-    Give error to user for invalid value
+    Function to get body score condition of the dog
+    The correct value should be from 1 to 9
+    Give an error to the user for an invalid value
     """
     try:
         if not (saved_bcs):
@@ -468,7 +467,7 @@ def validate_bcs(saved_bcs):
             )
         if int(saved_bcs) <= 0 or int(saved_bcs) >= 10:
             raise ValueError(
-                "Please insert value between 1 and 9"
+                "Please insert a value between 1 and 9"
             )
 
         if saved_bcs.isalpha():
@@ -485,10 +484,10 @@ def validate_bcs(saved_bcs):
 
 def calcolate_target_weight(INFO):
     """
-    Get bcs and weight from dogs_weight and dogs_bcs
-    Use correct formula to calcolate correct weight
-    Let the user know if dog is under-over or correct weight
-    call function to calcolate rer based on weight of dog
+    Get BCS and weight from dogs_weight and dogs_bcs
+    Use the correct formula to calculate the correct weight
+    Let the user know if dog is under-weight, over-weight or correct weight
+    call function to calculate rer based on the weight of the dog
     """
     target_weight_part_one = int(INFO[3]) - 5
     target_weight_part_two = 100 + target_weight_part_one * 10
@@ -498,9 +497,9 @@ def calcolate_target_weight(INFO):
     overweight = target_weight < float(INFO[2])
     underweight = target_weight > float(INFO[2])
     INFO.append(final_target_weight)
-    print(f"Ideal weight of dog calcolated is {final_target_weight}")
+    print(f"Ideal weight of dog calculated is {final_target_weight}")
     clear_screen()
-    print_slow("Calcolating....\n")
+    print_slow("Calculating....\n")
     time.sleep(2)
     if overweight is True:
         cprint("Your dog is overweight", 'yellow')
@@ -515,7 +514,7 @@ def calcolate_target_weight(INFO):
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
         wei = "ideal"
-        # Calling next function just when dog is in ideal weight
+        # Calling next function just when the dog is in the ideal weight
     global WEIGHT
     WEIGHT = wei
     calcolate_rer()
@@ -524,11 +523,11 @@ def calcolate_target_weight(INFO):
 def is_work_dog():
     """
     Life stage factor multiple choice 2 to see which value should be multiplied
-    Multiple choice for user and error if value is not correct
-    if dog is a work dog
+    Multiple choice for user and error if the value is not correct
+    if the dog is a working dog
     """
     while True:
-        print_slow("To calcolate precise calories per day")
+        print_slow("To calculate precise calories per day")
         print_slow("please answer the following:\n")
         print("Is the dog a work dog?\n")
         print("Example: police dog, therapy dogs, assistance dogs\n")
@@ -555,7 +554,7 @@ def is_work_dog():
 def calcolate_work_dog(LIFE_STAGE):
     """
     which kind of work the dog does
-    based on choice calcolate final calories to provide the dog
+    based on choice calculate final calories to provide the dog
     """
     print("Work dog selected")
     print("Kind of exercise that dog has daily")
@@ -590,10 +589,10 @@ def calcolate_work_dog(LIFE_STAGE):
 
 def calcolate_mer(LIFE_STAGE):
     """
-    calcolation based on
-    if overweight or underweight calcolate x per ideal weight
+    calculation based on
+    if overweight or underweight calculate x per ideal weight
     if ideal weight x per weight
-    Calcolate mer , using life stage factor and rer
+    Calculate mer , using life stage factor and rer
     """
     if WEIGHT == "overweight":  # if overweight
         overweight_mer = float(LIFE_STAGE) * float(INFO[5])
@@ -616,19 +615,19 @@ def calcolate_mer(LIFE_STAGE):
 
 def calcolate_rer():
     """
-    Calcolate resting energy requirement
+    Calculate resting energy requirement
     for ideal weight
-    rer : calcolatation =  weight^0.75 x 70
+    rer : calculation =  weight^0.75 x 70
     for underweight or overweight
-    rer : calcolatation =  ideal weight^0.75 x 70
-    taking saved weight to calcolate rer from info_dog
-    calling function to see if dog is a work dog
+    rer : calculation =  ideal weight^0.75 x 70
+    taking saved weight to calculate rer from info_dog
+    calling function to see if the dog is a working dog
     """
     if WEIGHT == "overweight" or "underweight":
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated : {rer} based on his ideal weight\n", 'yellow')
+        cprint(f"RER calculated : {rer} based on his ideal weight\n", 'yellow')
     if WEIGHT == "ideal":
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
@@ -641,12 +640,12 @@ def calcolate_rer():
 
 def life_stage_factor_one(LIFE_STAGE):
     """
-    If ideal weight use weight
-    if not in ideal weight use target_weight for calcolation
+    If the ideal weight use the weight
+    if not in ideal weight use target_weight for calculation
     Life stage factor multiple choice 1 to see which value should be multiplied
-    Multiple choice for user and error if value is not correct
+    Multiple choice for user and error if the value is not correct
     intact or neutered dog
-    return value to store in global variable
+    return value to store in a global variable
     """
     while True:
         print("Please answer the following based on life stage of dog:\n")
@@ -684,11 +683,11 @@ def life_stage_factor_one(LIFE_STAGE):
 
 def display_info():
     """
-    gave user choice which info would like to be displayed
+    gave the user a choice of which info would like to be displayed
     info from external sheet file
-    after choice loop through element of info chosen to show right column
+    after a choice loop through the element of info chosen to show the right column
     validate input
-    call choice_calc_end to calcolate calories or end program
+    call choice_calc_end to calculate calories or end the program
     """
     print("Please select argument:\n")
     rows = []
@@ -711,7 +710,7 @@ def display_info():
 
 def validate_topic(chosen_topic, column):
     """
-    validate user input from display_info and gave error if wrong input
+    validate user input from display_info and gave an error if the wrong input
     """
     #test = True
     try:
@@ -746,7 +745,7 @@ def update_worksheet(info_dog):
     """
     Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
-    call again function to give user choice of what he wants to do
+    call again function to give the user choice of what he wants to do
     """
     info_dog = INFO
     print_slow("Updating datas...\n")
@@ -762,7 +761,7 @@ def update_worksheet(info_dog):
 
 def extract(new_dog_datas):
     """
-    extract first item in dog-datas list of lists
+    extract the first item in dog-data list of lists
     """
     new_dog_datas = profile.get_all_values()
     return list(map(itemgetter(0), new_dog_datas))
@@ -771,12 +770,12 @@ def extract(new_dog_datas):
 def show_info(uni):
     """
     get again info from dog_datas updated
-    call function Extract to extract indexes of all rows in list
+    call function Extract to extract indexes of all rows in the list
     stringify uni so from create acc does not return int
     for loop to find in indexes list uni
     and then for all uni found print it in tabulate
-    if not uni found then print error message
-    calling function to give user multiple choice
+    if not uni found then print an error message
+    calling function to give the user multiple choice
 
     """
     print_slow("Finding dogs....\n")
@@ -796,15 +795,15 @@ def show_info(uni):
         tablefmt='fancy_grid'), 'blue')
     if not ind_uni:
         cprint("No dogs saved", 'red')
-        cprint("To save dog please calcolate calories\n", 'red')
+        cprint("To save dog please calculate calories\n", 'red')
     time.sleep(2)
     multiple_choice(uni)
 
 
 def end_program():
     """
-    end program, thank the user , update all informations
-    updating info user here so also if there is no calcolation but just
+    end program, thank the user, update all information
+    updating info user here so also if there is no calculation but just
     general info consulted info_user is saved
     """
     info_user = LOG_DET
@@ -817,7 +816,7 @@ def end_program():
 def main():
     """
     main function
-    calling all other function here for better structure
+    calling all other functions here for better structure
     """
     dogs_name()
     dogs_weight()
