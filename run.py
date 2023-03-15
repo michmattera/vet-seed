@@ -161,7 +161,7 @@ def create_username():
         saved_user = user
 
         if validate_user(saved_user):
-            cprint("Thank you, valid username given\n", 'green')
+            cprint("Thank you\n", 'green')
             time.sleep(2)
             clear_screen()
             create_password(saved_user)
@@ -182,7 +182,6 @@ def create_password(saved_user):
         saved_password = psw
 
         if validate_password(saved_password):
-            cprint("Thank you\n", 'green')
             time.sleep(2)
             clear_screen()
             create_account(saved_password, saved_user)
@@ -234,6 +233,7 @@ def are_you_ready(uni):
     """
     while True:
         print("Are you ready to go to main menu?\n")
+        print("If you saved Unicode")
         print("Please type yes to continue")
         choice = input("\n")
         if choice == "yes":
@@ -302,7 +302,7 @@ def validate_password(password):
                 flag = True
                 break
         if flag:
-            cprint("Password is valid", 'green')
+            cprint("Thank you", 'green')
         else:
             raise ValueError(
                 "At least one number required"
@@ -650,7 +650,8 @@ def life_stage_factor_one(LIFE_STAGE):
     """
     while True:
         print("Please answer the following based on life stage of dog:\n")
-        choice = input("1) Neutered\n2) Intact\n\nPress d for definition\n")
+        cprint("Press d for definition\n", 'blue')
+        choice = input("1) Neutered\n2) Intact\n\n")
         if choice == "1":
             x = float(1.6)
             clear_screen()
@@ -669,7 +670,7 @@ def life_stage_factor_one(LIFE_STAGE):
             break
         if choice == "d":
             print("\nDefinition: \n")
-            print_slow("Neutered = Infertile dog , with no ability to reproduce.\n")
+            print_slow("Neutered = Infertile dog ,no ability to reproduce.\n")
             print_slow("Intact = dog means a dog with intact sexual organs.\n")
             clear_screen()
             continue
