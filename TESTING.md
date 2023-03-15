@@ -18,7 +18,9 @@
 2. [Code validation](#code-validation)
 3. [Bugs](#bugs)
 
+## Manual testing
 
+Manual testing was performed after deploying the project to heroku platform.
 
 
 
