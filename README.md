@@ -275,6 +275,11 @@ Below are all external programs used :
     - Free screen recorder was used to screen record all videos for the testing files.
 
 
+## Testing
+
+Testing information can be found in a different Testing [file](TESTING.md "Link to testing file")
+
+
 
 
 
