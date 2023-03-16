@@ -77,10 +77,10 @@ def menu():
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
-    print_slow_art(art.TITLE)
+    #print_slow_art(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
-    print_slow(art.INTRO)
-    time.sleep(4)
+    #print_slow(art.INTRO)
+    #time.sleep(4)
     clear_screen()
     while True:
         print(" Please select one of the following before continue\n")
@@ -130,7 +130,7 @@ def multiple_choice(uni):
         if choice == "1":
             print("General info loading.")
             clear_screen()
-            display_info(uni)
+            display_arguments(uni)
         elif choice == "2":
             clear_screen()
             main()
@@ -681,14 +681,14 @@ def life_stage_factor_one(LIFE_STAGE):
     return LIFE_STAGE
 
 
-def display_info(uni):
+def display_arguments(uni):
     """
-    gave the user a choice of which info would like to be displayed
+    gave the user a choice between arguments to show
     info from external sheet file
     for each row than print all column
-    after a choice loop through the element of info chosen to show the right col
-    validate input
-    call choice_calc_end to calculate calories or end the program
+    validate input to be an integer
+    if not integer gave error
+    if integer than calling display_chosen_topic
     """
     print("Please select argument:\n")
     rows = []
@@ -702,15 +702,21 @@ def display_info(uni):
         choice_topic = input("")
         try:
             int(choice_topic)
-            test(choice_topic, uni)
+            #test(choice_topic, uni)
         except:
             cprint('Sorry, that is not a number, please try again\n', 'red')
             continue
+        display_chosen_topic(choice_topic, uni)
 
 
-def test(choice_topic, uni):
+def display_chosen_topic(choice_topic, uni):
     """
-    test
+    for each chosen topic print all rows of that column
+    than validate if user input is valid
+    if is in range than print column
+    otherwise error
+    after printing right column gave user again multiple choice
+    to decide what he would like to do
     """
     while True:
         column_vals = gen_info.col_values(choice_topic)
@@ -720,12 +726,9 @@ def test(choice_topic, uni):
                 raise ValueError(
                     "Number selected out of range, please select one of the above"
                 )
-        
-            else:
-                clear_screen()
-                print_slow(column)
-                multiple_choice(uni)
-                break
+            clear_screen()
+            print_slow(column)
+            multiple_choice(uni)
 
         except ValueError as error:
             cprint(f"Invalid data: {error}, please try again.\n", 'red')
