@@ -130,7 +130,7 @@ def multiple_choice(uni):
         if choice == "1":
             print("General info loading.")
             clear_screen()
-            display_info()
+            display_info(uni)
         elif choice == "2":
             clear_screen()
             main()
@@ -681,11 +681,12 @@ def life_stage_factor_one(LIFE_STAGE):
     return LIFE_STAGE
 
 
-def display_info():
+def display_info(uni):
     """
     gave the user a choice of which info would like to be displayed
     info from external sheet file
-    after a choice loop through the element of info chosen to show the right column
+    for each row than print all column
+    after a choice loop through the element of info chosen to show the right col
     validate input
     call choice_calc_end to calculate calories or end the program
     """
@@ -699,46 +700,36 @@ def display_info():
         i += 1
     while True:
         choice_topic = input("")
-        chosen_topic = str(choice_topic)
-        column_vals = gen_info.col_values(chosen_topic)
+        try:
+            int(choice_topic)
+            test(choice_topic, uni)
+        except:
+            cprint('Sorry, that is not a number, please try again\n', 'red')
+            continue
+
+
+def test(choice_topic, uni):
+    """
+    test
+    """
+    while True:
+        column_vals = gen_info.col_values(choice_topic)
         column = '\n\n'.join(column_vals)
-        if validate_topic(chosen_topic, column):
-            clear_screen()
-            print_slow(column)
-            break
-
-
-def validate_topic(chosen_topic, column):
-    """
-    validate user input from display_info and gave an error if the wrong input
-    """
-    #test = True
-    try:
-        if not chosen_topic:
-            raise ValueError(
-                "Field cannot be left blank"
-            )
-        if chosen_topic > column:
-            raise ValueError(
-                "Number selected out of range, please select one of the above"
-            )
-        #if chosen_topic.isalpha():
-        for i in chosen_topic:
-            if i.isalpha():
-                #test = False
+        try:
+            if choice_topic > column:
                 raise ValueError(
-                    "Please insert a number"
+                    "Number selected out of range, please select one of the above"
                 )
-        if int not in column:
-            raise ValueError(
-                "Please insert a number"
-            )
+        
+            else:
+                clear_screen()
+                print_slow(column)
+                multiple_choice(uni)
+                break
 
-    except ValueError as error:
-        cprint(f"Invalid data: {error}, please try again.\n", 'red')
-        return False
-
-    return True
+        except ValueError as error:
+            cprint(f"Invalid data: {error}, please try again.\n", 'red')
+            return False
 
 
 def update_worksheet(info_dog):
