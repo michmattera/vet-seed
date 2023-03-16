@@ -238,7 +238,7 @@ The developer found different issues and bugs during the creation of the applica
 2.  -  *Issue*: When saving and calculating two dogs, instead of showing in the table in different lines, all info was appended to the same line,     
     modifying all data and final tabulate.
     -  *Solution*: Developer searched for a way of clearing the global variables where saving the list of information, each time the user wanted to calculate a new dog.
-    Used [StackOverflow](https://stackoverflow.com/questions/850795/different-ways-of-clearing-lists) : del INFO[:] 
+    Used [StackOverflow](https://stackoverflow.com/questions/850795/different-ways-of-clearing-lists "Link for stackoverflow specific article") : del INFO[:] 
     Empty the list before starting to calculate a new dog.
 3.  -  *Issue*: When calculating mer the calculation would have always returned that the dog was underweight also if it shouldn't.
     -  *Solution*: Typing mistakes of the developer was using the wrong index from saved data that return wrong calculations. Change for the right index to fix minor issues.
@@ -301,6 +301,54 @@ General information are displayed in get general information and were taken from
 #### Formulas
 
 The following formulas were find by the developer in order to calcolate ideal weight, and which value to use based on life stage of the dog:
+
+- *Energy requirements calculation* : [Aaha](https://www.aaha.org/globalassets/02-guidelines/2021-nutrition-and-weight-management/resourcepdfs/nutritiongl_box1.pdf "Link for aaha.org pdf")
+- *Calculate dog healthy weight* : [Petmd](https://www.petmd.com/dog/care/how-calculate-your-dogs-healthy-weight "Link for petmd specific article")
+- *Life stage factors* : [Vet osu](https://vet.osu.edu/vmc/companion/our-services/nutrition-support-service/basic-calorie-calculator "Link for vet specific article") 
+- *Working dogs factor* : [Wilmotveterinaryclinic](https://wilmotveterinaryclinic.com/wp-content/uploads/2016/10/Resting-Energy-Requirements.pdf "Link for wilmotveterinaryclinic specific article")
+
+<details>
+<summary>Energy requirements</summary>
+        
+![Formulas](assets/images/energy-req.PNG)
+
+</details>
+
+<details>
+<summary>Healthy weight</summary>
+        
+![Formulas](assets/images)
+
+</details>
+
+<details>
+<summary>Life stage factors</summary>
+        
+![Formulas](assets/images/life-stage-factors.png)
+
+</details>
+
+<details>
+<summary>Working dog factor</summary>
+        
+![Formulas](assets/images/working-dog.PNG)
+
+</details>
+
+
+### Code
+
+Different website were checked during the duration of the project. Mostly the developer checked [Stackoverflow](https://stackoverflow.com/ "Link to stackoverflow homepage") to resolve issues and for general knowledge.
+
+Many times the developer checked online to resolve and check for information , below are a few links where developer found the answers:
+
+- The developer checked this [Link](https://stackoverflow.com/questions/59036109/python-how-to-check-if-input-is-a-letter-or-character "Link to stackoverflow specific article") to check for if input inserted was a letter or int .
+- The developer checked this [Link](https://www.freecodecamp.org/news/python-sleep-time-sleep-in-python/ "Link to freecodecamp specific article") to check how to stop and wait for a specific time before running next function.
+- The developer checked this [Link](https://stackoverflow.com/questions/23623288/print-full-ascii-art "Link to stack overflow specific article") to check how to print ASCII art.
+- The developer used his previous project, [Newline Alebrije](https://github.com/michmattera/newline-alebrije "Link to newline repository"), as a source for looking up the code for README purposes mainly.
+
+
+
 
 
 
