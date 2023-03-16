@@ -3,7 +3,7 @@
 
 ![vet Seed Mockup Images](/assets/images/read-me-images/)
 
-[View the live project here](https://michmattera.github.io/)
+[View the live project here](https://vet-seed.herokuapp.com/)
      
 
 ## **Table of contents**
@@ -24,6 +24,7 @@
 8. [Testing](#testing)
 9. [Deployment](#deployment)
 10. [Credits](#credits)
+    1. [Content](#content)
     1. [Code](#code)
 11. [Acknowledgements](#acknowledgements)
 
@@ -278,6 +279,29 @@ Below are all the external programs used :
 ## Testing
 
 Testing information can be found in a different Testing [file](TESTING.md "Link to testing file")
+
+## Credits
+
+### Content
+
+All knowledge on which formulas to use for all calculation in the project, and all general information were token by the developer from the following:
+
+#### General information
+
+General information are displayed in get general information and were taken from the following articles:
+
+- *Dangerous food for dogs* : [Pets](https://pets.webmd.com/dogs/ss/slideshow-foods-your-dog-should-never-eat "Link to pets specific article")
+- *Human food good for dogs* : [Cosmicpet](https://www.cosmicpet.com/blogs/news/12-healthiest-human-foods-for-dogs "Link to Cosmicpet specific article") and [MarieClaire blog](https://www.marieclaire.it/lifestyle/coolmix/a19428033/cosa-dare-da-mangiare-al-cane/ "link to Marieclaire specific article")
+- *Four healthy habits for dogs* : [Daisybeet](https://www.daisybeet.com/4-healthy-habits-to-establish-for-your-dog/#:~:text=Dogs%20thrive%20with%20a%20daily,expected%20of%20them%20and%20when "Link to Daisybeet specific article")
+- *BCS = Body condition score* : [Petmd](https://www.petmd.com/dog/nutrition/how-find-your-dogs-body-condition-score "Link to Petmd specific article")
+- *When a dog become a senior* : [Thehealthypets](https://www.thehealthypetclub.co.uk/when-will-my-dog-become-a-senior/ "Link to Thehealthypets specific article")
+- *6 signs your dog is healthy* : [Petinsurance](https://www.petinsurance.com/healthzone/pet-health/health-conditions/6-signs-your-dog-is-healthy/ "Link to petinsurance specific article")
+- *Why and when contact the vet* : [Vetmd](https://vetmed.tamu.edu/news/pet-talk/when-to-call-a-veterinarian/ "Link to Vetmd specific article")
+
+#### Formulas
+
+The following formulas were find by the developer in order to calcolate ideal weight, and which value to use based on life stage of the dog:
+
 
 
 
