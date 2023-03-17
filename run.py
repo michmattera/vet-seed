@@ -619,7 +619,12 @@ def calcolate_rer():
     taking saved weight to calculate rer from info_dog
     calling function to see if the dog is a working dog
     """
-    if WEIGHT == "overweight" or "underweight":
+    if WEIGHT == "underweight":
+        rer_part_one = float(INFO[4])**0.75
+        rer_part_two = rer_part_one * 70
+        rer = format(rer_part_two, '.2f')
+        cprint(f"RER calculated : {rer} based on his ideal weight\n", 'yellow')
+    if WEIGHT == "overweight":
         rer_part_one = float(INFO[4])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
