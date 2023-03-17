@@ -245,6 +245,10 @@ The developer found different issues and bugs during the creation of the applica
 4.  -  *Issue* : Big issue found when printing the tabulate in show_dogs function. When the user login it would have worked perfectly, while when creating the 
     account, it was displaying an empty tabulate.
     -  *Solution*: To find the solution the developer first prints out all the data to see if not correct data were arriving in the final function. When checked that all data were correct, the developer try to understand the difference in the path between login and creating an account. The only difference was the Unicode. But the Unicode was arriving in the final function perfectly when printed out in the final function Unicode was correct. At that point, the developer thought that the path for the Unicode to arrive was different. From login, it would have arrived from the external sheet, while creating the account from another function. So that is how the developer arrive at to understand that the *Type* of Unicode was different. Printing out the Unicode developer saw that one was an INT and the other a STR. To fix the error finally developer just implemented in last function str(Unicode).
+5.  - *Issue* : When testing the application , developer found an error that would stop all application, when user select 0 in get general information would have given the following 
+    error: gspreaad.xxceptions.IncorrectCellLabel : (1, 0).
+    The developer tried to check if the value inserted was equal to 0 or minor than the printed options, but it would have still give the error.
+    - *Solution* : To solve the issue, developer add a new if statement to check if the number was in the possible option list, and it fixed the issue.
 
 
 ## Technology Used

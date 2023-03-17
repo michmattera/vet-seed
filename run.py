@@ -77,10 +77,10 @@ def menu():
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
-    print_slow_art(art.TITLE)
+    #print_slow_art(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
-    print_slow(art.INTRO)
-    time.sleep(4)
+    #print_slow(art.INTRO)
+    #time.sleep(4)
     clear_screen()
     while True:
         print(" Please select one of the following before continue\n")
@@ -514,7 +514,6 @@ def calcolate_target_weight(INFO):
     if not underweight and not overweight:
         cprint("Congratulation! Your dog is in the ideal weight \n", 'green')
         wei = "ideal"
-        # Calling next function just when the dog is in the ideal weight
     global WEIGHT
     WEIGHT = wei
     calcolate_rer()
@@ -702,11 +701,14 @@ def display_arguments(uni):
         choice_topic = input("")
         try:
             int(choice_topic)
-            #test(choice_topic, uni)
         except:
             cprint('Sorry, that is not a number, please try again\n', 'red')
             continue
-        display_chosen_topic(choice_topic, uni)
+        if int(choice_topic) in [1, 2, 3, 4, 5, 6, 7, 8]:
+            display_chosen_topic(choice_topic, uni)
+        else:
+            print('not valid option')
+            continue
 
 
 def display_chosen_topic(choice_topic, uni):
@@ -726,6 +728,7 @@ def display_chosen_topic(choice_topic, uni):
                 raise ValueError(
                     "Number selected out of range, please select one of the above"
                 )
+            time.sleep(3)
             clear_screen()
             print_slow(column)
             multiple_choice(uni)
