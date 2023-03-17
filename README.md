@@ -214,6 +214,7 @@ The map structure was changed slightly, adding the multiple-choice possibility f
 Due to limited resources (time constraints, skills of the developer at the moment, and other reasons), some features were not implemented.
 
 1. Be able to access old dog's data with login and be able to update already saved data with new values. Having updated data showed as well in the final summary.
+2. Be able to access in get general information automatically the correct options, without printig all the list manually. Developer in authomatic was checking if the input inserted from user was in the list until *N 5 error (explained in issues and bugs)* was found.
 
 ## Design
 
@@ -245,8 +246,8 @@ The developer found different issues and bugs during the creation of the applica
 4.  -  *Issue* : Big issue found when printing the tabulate in show_dogs function. When the user login it would have worked perfectly, while when creating the 
     account, it was displaying an empty tabulate.
     -  *Solution*: To find the solution the developer first prints out all the data to see if not correct data were arriving in the final function. When checked that all data were correct, the developer try to understand the difference in the path between login and creating an account. The only difference was the Unicode. But the Unicode was arriving in the final function perfectly when printed out in the final function Unicode was correct. At that point, the developer thought that the path for the Unicode to arrive was different. From login, it would have arrived from the external sheet, while creating the account from another function. So that is how the developer arrive at to understand that the *Type* of Unicode was different. Printing out the Unicode developer saw that one was an INT and the other a STR. To fix the error finally developer just implemented in last function str(Unicode).
-5.  - *Issue* : When testing the application , developer found an error that would stop all application, when user select 0 in get general information would have given the following 
-    error: gspreaad.xxceptions.IncorrectCellLabel : (1, 0).
+5.  - *Issue* : When testing the application , developer found an error that would stop all application, when user select 0 in get general information. It would have given the 
+    following error: gspreaad.xxceptions.IncorrectCellLabel : (1, 0).
     The developer tried to check if the value inserted was equal to 0 or minor than the printed options, but it would have still give the error.
     - *Solution* : To solve the issue, developer add a new if statement to check if the number was in the possible option list, and it fixed the issue.
 
@@ -283,6 +284,25 @@ Below are all the external programs used :
 ## Testing
 
 Testing information can be found in a different Testing [file](TESTING.md "Link to testing file")
+
+## Deployment
+
+The project was written with GitPod, and pushed to [GitHub](https://github.com/ "Link for github homapage"). It was then deployed on [Heroku](https://heroku.com "Link for Heroku homapage").
+
+To deploy everything to Heroku the following steps were taken:
+
+1. Add dependencies in GitPod to requirements.txt file with command "pip3 freeze > requirements.txt"
+2. Commit and push to GitHub
+3. Go to the Heroku Dashboard
+4. Click "Create new app"
+5. Name app and select location
+6. Add Config Vars for Creds and Port in Settings tab
+7. Add the buildbacks to Python and NodeJS in that order
+8. Select appropriate deployment method, GitHub
+9. Connect to Github and link to repository
+10. Enable automatic deployment
+11. Click on Deploy
+
 
 ## Credits
 
@@ -350,6 +370,9 @@ Many times the developer checked online to resolve and check for information , b
 - The developer checked this [Link](https://www.freecodecamp.org/news/python-sleep-time-sleep-in-python/ "Link to freecodecamp specific article") to check how to stop and wait for a specific time before running next function.
 - The developer checked this [Link](https://stackoverflow.com/questions/23623288/print-full-ascii-art "Link to stack overflow specific article") to check how to print ASCII art.
 - The developer used his previous project, [Newline Alebrije](https://github.com/michmattera/newline-alebrije "Link to newline repository"), as a source for looking up the code for README purposes mainly.
+- The developer used his previous project, [Star Wars Quiz]( "Link to star wars quiz repository"), as a source for looking up the code for TESTING purposes mainly.
+
+
 
 
 
