@@ -522,11 +522,11 @@ def is_work_dog():
     Multiple choice for user and error if the value is not correct
     if the dog is a working dog
     """
+    print_slow("To calculate precise calories per day")
+    print_slow("please answer the following:\n")
+    print("Is the dog a work dog?\n")
+    print("Example: police dog, therapy dogs, assistance dogs\n")
     while True:
-        print_slow("To calculate precise calories per day")
-        print_slow("please answer the following:\n")
-        print("Is the dog a work dog?\n")
-        print("Example: police dog, therapy dogs, assistance dogs\n")
         print("Select one of the following:")
         print("1) Yes\n2) No\n")
         choice = input("\n")
@@ -543,7 +543,7 @@ def is_work_dog():
             life_stage_factor_one(LIFE_STAGE)
             break
         else:
-            print('ERROR, Please choose one of the above')
+            cprint('ERROR, Please choose one of the above\n', 'red')
             continue
 
 
@@ -552,33 +552,36 @@ def calcolate_work_dog(LIFE_STAGE):
     which kind of work the dog does
     based on choice calculate final calories to provide the dog
     """
+    clear_screen()
     print("Work dog selected")
     print("Kind of exercise that dog has daily")
     while True:
         print("Select one of the following:")
         print("1) Light\n2) Moderate\n3) Heavy\n")
         choice = input("\n")
-        clear_screen()
         if choice == "1":
             x = 2
+            clear_screen()
             cprint("You selected Light", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         if choice == "2":
             x = 3
+            clear_screen()
             cprint("You selected Moderate", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         if choice == "3":
             x = 6
+            clear_screen()
             cprint("You selected Heavy", 'blue')
             LIFE_STAGE = int(x)
             calcolate_mer(LIFE_STAGE)
             break
         else:
-            print('ERROR, Please choose one of the above')
+            cprint('ERROR, Please choose one of the above\n', 'red')
             continue
     return LIFE_STAGE
 
@@ -590,21 +593,24 @@ def calcolate_mer(LIFE_STAGE):
     if ideal weight x per weight
     Calculate mer , using life stage factor and rer
     """
-    if WEIGHT == "overweight":  # if overweight
+    if WEIGHT == "overweight":
         overweight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = overweight_mer
         cprint("Calcolating calories to help dog lose weight...\n", 'blue')
-        cprint(f"Kcal {mer}", 'yellow')
+        time.sleep(1)
+        cprint(f"Final Kcal calculated {mer}", 'yellow')
     if WEIGHT == "underweight":
         underweight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = underweight_mer
         cprint("Calcolating calories to help dog get weight...\n", 'blue')
-        cprint(f"Kcal {mer}", 'yellow')
+        time.sleep(1)
+        cprint(f"Final Kcal calculated {mer}", 'yellow')
     if WEIGHT == "ideal":
         ideal_weight_mer = float(LIFE_STAGE) * float(INFO[5])
         mer = ideal_weight_mer
         cprint("Please continue to give dog daily...\n")
         cprint(f"Kcal {mer}", 'green')
+    time.sleep(3)
     final_mer = format(mer, '.2f')
     INFO.append(final_mer)
 
@@ -633,7 +639,7 @@ def calcolate_rer():
         rer_part_one = float(INFO[2])**0.75
         rer_part_two = rer_part_one * 70
         rer = format(rer_part_two, '.2f')
-        cprint(f"RER calcolated : {rer} based on his weight\n", 'green')
+        cprint(f"RER calculated : {rer} based on his weight\n", 'green')
     INFO.append(rer)
     time.sleep(2)
     is_work_dog()
@@ -648,23 +654,23 @@ def life_stage_factor_one(LIFE_STAGE):
     intact or neutered dog
     return value to store in a global variable
     """
+    print("Please answer the following based on life stage of dog:\n")
+    cprint("Press d for definition\n", 'blue')
     while True:
-        print("Please answer the following based on life stage of dog:\n")
-        cprint("Press d for definition\n", 'blue')
         choice = input("1) Neutered\n2) Intact\n\n")
         if choice == "1":
             x = float(1.6)
-            clear_screen()
             cprint("You selected Neutered", 'blue')
             time.sleep(2)
+            clear_screen()
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
         if choice == "2":
             x = float(1.8)
-            clear_screen()
             cprint("You selected Intact", 'blue')
             time.sleep(2)
+            clear_screen()
             LIFE_STAGE = x
             calcolate_mer(LIFE_STAGE)
             break
@@ -672,11 +678,10 @@ def life_stage_factor_one(LIFE_STAGE):
             print("\nDefinition: \n")
             print_slow("Neutered = Infertile dog ,no ability to reproduce.\n")
             print_slow("Intact = dog means a dog with intact sexual organs.\n")
-            clear_screen()
             continue
         else:
             cprint(
-                "Please select one of the above", 'red'
+                "Please select one of the above\n", 'red'
             )
             continue
     return LIFE_STAGE
