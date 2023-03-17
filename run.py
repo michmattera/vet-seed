@@ -321,12 +321,11 @@ def dogs_name():
     """
     uni = INFO[0]
     print("Please answer the following questions.\n")
+
+    print("Please insert first name of dog")
+    print("Example: Bob\n")
+    print("max characters accepted are 10\n")
     while True:
-        print("Please insert first name of dog")
-        print("Example: Bob\n")
-
-        print("max characters accepted are 10")
-
         data_name = input("Name of dog: \n")
         saved_name = data_name
 
@@ -387,13 +386,19 @@ def dogs_weight():
         data_weight = input("Weight of dog: \n")
         saved_weight = data_weight
 
-        if validate_weight(saved_weight):
-            cprint("Valid weight", 'green')
-            cprint(f"Weight of dog provided is {saved_weight}\n", 'green')
-            time.sleep(2)
-            clear_screen()
-            INFO.append(saved_weight)
-            break
+        try:
+            float(saved_weight)
+            if validate_weight(saved_weight):
+                cprint("Valid weight", 'green')
+                cprint(f"Weight of dog provided is {saved_weight}\n", 'green')
+                time.sleep(2)
+                clear_screen()
+                INFO.append(saved_weight)
+                break
+
+        except Exception as ex:
+            cprint('ERROR, data inserted invalid, please try again\n', 'red')
+            continue
     return saved_weight
 
 
@@ -413,11 +418,6 @@ def validate_weight(saved_weight):
         if float(saved_weight) <= 0 or float(saved_weight) > 100:
             raise ValueError(
                 "Please insert a value between 0 and 100"
-            )
-
-        if saved_weight.isalpha():
-            raise ValueError(
-                "Please insert a number"
             )
 
     except ValueError as error:
@@ -441,13 +441,18 @@ def dogs_bcs():
         data_bcs = input("Bcs of dog: \n")
         saved_bcs = data_bcs
 
-        if validate_bcs(saved_bcs):
-            cprint("Valid Bcs", 'green')
-            cprint(f"Bcs of dog provided is {saved_bcs}\n", 'green')
-            time.sleep(2)
-            clear_screen()
-            INFO.append(saved_bcs)
-            break
+        try:
+            int(saved_bcs)
+            if validate_bcs(saved_bcs):
+                cprint("Valid Bcs", 'green')
+                cprint(f"Bcs of dog provided is {saved_bcs}\n", 'green')
+                time.sleep(2)
+                clear_screen()
+                INFO.append(saved_bcs)
+        except Exception as ex:
+            cprint('Sorry, that is not a whole number, please try again\n', 'red')
+            continue
+            #break
     return saved_bcs
 
 
@@ -465,11 +470,6 @@ def validate_bcs(saved_bcs):
         if int(saved_bcs) <= 0 or int(saved_bcs) >= 10:
             raise ValueError(
                 "Please insert a value between 1 and 9"
-            )
-
-        if saved_bcs.isalpha():
-            raise ValueError(
-                "Please insert a number"
             )
 
     except ValueError as error:
@@ -698,7 +698,7 @@ def display_arguments(uni):
         choice_topic = input("\n")
         try:
             int(choice_topic)
-        except:
+        except Exception as ex:
             cprint('Sorry, that is not a number, please try again\n', 'red')
             continue
         if int(choice_topic) in [1, 2, 3, 4, 5, 6, 7]:
