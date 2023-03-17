@@ -323,8 +323,8 @@ def dogs_name():
     print("Please answer the following questions.\n")
 
     print("Please insert first name of dog")
+    print("Max characters accepted are 10")
     print("Example: Bob\n")
-    print("max characters accepted are 10\n")
     while True:
         data_name = input("Name of dog: \n")
         saved_name = data_name
