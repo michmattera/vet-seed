@@ -325,6 +325,8 @@ def dogs_name():
         print("Please insert first name of dog")
         print("Example: Bob\n")
 
+        print("max characters accepted are 10")
+
         data_name = input("Name of dog: \n")
         saved_name = data_name
 
@@ -359,11 +361,6 @@ def validate_name(saved_name):
         if not saved_name:
             raise ValueError(
                 "Field cannot be left blank"
-            )
-
-        if saved_name.isdigit():
-            raise ValueError(
-                "Numbers are not accepted"
             )
 
         if " " in saved_name:
