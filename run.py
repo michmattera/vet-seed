@@ -77,10 +77,10 @@ def menu():
 
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
-    #print_slow_art(art.TITLE)
+    print_slow_art(art.TITLE)
     art.INTRO = colored(art.INTRO, 'green')
-    #print_slow(art.INTRO)
-    #time.sleep(4)
+    print_slow(art.INTRO)
+    time.sleep(4)
     clear_screen()
     while True:
         print(" Please select one of the following before continue\n")
