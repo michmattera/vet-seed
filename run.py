@@ -698,16 +698,16 @@ def display_arguments(uni):
         print(f" {i}) {row}")
         i += 1
     while True:
-        choice_topic = input("")
+        choice_topic = input("\n")
         try:
             int(choice_topic)
         except:
             cprint('Sorry, that is not a number, please try again\n', 'red')
             continue
-        if int(choice_topic) in [1, 2, 3, 4, 5, 6, 7, 8]:
+        if int(choice_topic) in [1, 2, 3, 4, 5, 6, 7]:
             display_chosen_topic(choice_topic, uni)
         else:
-            print('not valid option')
+            cprint("Number selected out of range, please try again", 'red')
             continue
 
 
@@ -720,22 +720,12 @@ def display_chosen_topic(choice_topic, uni):
     after printing right column gave user again multiple choice
     to decide what he would like to do
     """
-    while True:
-        column_vals = gen_info.col_values(choice_topic)
-        column = '\n\n'.join(column_vals)
-        try:
-            if choice_topic > column:
-                raise ValueError(
-                    "Number selected out of range, please select one of the above"
-                )
-            time.sleep(3)
-            clear_screen()
-            print_slow(column)
-            multiple_choice(uni)
-
-        except ValueError as error:
-            cprint(f"Invalid data: {error}, please try again.\n", 'red')
-            return False
+    column_vals = gen_info.col_values(choice_topic)
+    column = '\n\n'.join(column_vals)
+    time.sleep(3)
+    clear_screen()
+    print_slow(column)
+    multiple_choice(uni)
 
 
 def update_worksheet(info_dog):
