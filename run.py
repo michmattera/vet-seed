@@ -449,10 +449,10 @@ def dogs_bcs():
                 time.sleep(2)
                 clear_screen()
                 INFO.append(saved_bcs)
+                break
         except Exception as ex:
             cprint('Sorry, that is not a whole number, please try again\n', 'red')
             continue
-            #break
     return saved_bcs
 
 
