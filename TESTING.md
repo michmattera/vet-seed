@@ -13,8 +13,10 @@
     1. [User Inputs](#user-inputs)
         - [Incorrect Inputs](#incorrect-inputs)
         - [Correct Inputs](#correct-inputs)
-    2. [General information](#general-information)
-    3. [Getting datas](#getting-datas)
+    2. [Getting datas](#getting-datas)
+        - [Introduction](#introduction)
+        - [General information](#general-information)
+        - [Show saved dogs](#show-saved-dogs)
 2. [Code validation](#code-validation)
 3. [Bugs](#bugs)
 
@@ -203,10 +205,24 @@ Correct inputs were all tested and checked.
 
 </details>
 
-### General information
+### Getting datas
+
 
 All general information are generated thanks to gspread, with an external sheet created by the developer.
 All general information were tested to check they were displayed following the time , the space and to check that the right information were taken from the external sheet.
+
+#### Introduction
+
+<details>
+<summary> Introduction</summary>
+
+![Introduction](assets/images/testing-files/intro.gif)
+
+</details>
+
+
+
+#### General information
 
 | General information | Checked |
 | --- | --- |
@@ -263,9 +279,39 @@ All general information were tested to check they were displayed following the t
 <details>
 <summary>Why and when contact vet </summary>
 
-![Why and when contact vet](assets/images/testing-files/gen-info-seven.giff)
+![Why and when contact vet](assets/images/testing-files/gen-info-seven.gif)
 
 </details>
+
+
+
+#### Show saved dogs
+
+To check that the information inserted from the user, and then displayed the developer show that in the account logged no dogs were saved , than calculated one and then display dogs again to show that all the information saves correctly.
+In the meanwhile all correct input to calcolate dog are shown as well.
+
+<details>
+<summary>Show saved dogs</summary>
+
+![Show saved dogs](assets/images/testing-files/show-dogs.gif)
+
+</details>
+
+
+### Code validation 
+
+To validate the code the developer used the following program Pyhton [linter](https://pep8ci.herokuapp.com/ "Link for python linter") provided by code institute , where no errors were found.
+
+<details>
+<summary>Python linter</summary>
+
+![Python linter](assets/images/testing-files/python-linter.gif)
+
+</details>
+
+
+
+
 
 
 

@@ -229,7 +229,8 @@ def create_account(saved_password, saved_user):
 
 def are_you_ready(uni):
     """
-    The choice of the user after assigning Unicode before going to the main menu
+    The choice of the user after assigning Unicode
+    before going to the main menu
     be sure that user saved Unicode before going on
     """
     while True:
@@ -453,7 +454,7 @@ def dogs_bcs():
                 INFO.append(saved_bcs)
                 break
         except Exception as ex:
-            cprint('Sorry, that is not a whole number, please try again\n', 'red')
+            cprint('Sorry, not a whole number, please try again\n', 'red')
             continue
     return saved_bcs
 
@@ -824,3 +825,4 @@ def main():
 
 menu()
 main()
+
