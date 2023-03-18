@@ -210,9 +210,62 @@ All general information were tested to check they were displayed following the t
 
 | General information | Checked |
 | --- | --- |
-| Login - end program| :heavy_check_mark: |
-| Create account | :heavy_check_mark: |
-| Overweight|  :heavy_check_mark: |
-| Ideal weight | :heavy_check_mark: |
-| Underweight | :heavy_check_mark:|
+| Dangerous food for dogs | :heavy_check_mark: |
+| Human food good for dogs | :heavy_check_mark: |
+| Four healthy habits for dogs |  :heavy_check_mark: |
+| Bcs | :heavy_check_mark: |
+| When a dog became a senior | :heavy_check_mark:|
+| 6 Signs Your Dog is Healthy | :heavy_check_mark:|
+| Why and when contact vet | :heavy_check_mark:|
+
+<details>
+<summary> Dangerous food for dogs </summary>
+
+![Dangerous food for dogs](assets/images/testing-files/gen-info-one.gif)
+
+</details>
+
+<details>
+<summary> Human food good for dogs </summary>
+
+![Human food good for dogs](assets/images/testing-files/gen-info-three.gif)
+
+</details>
+
+<details>
+<summary> Four healthy habits for dogs </summary>
+
+![Four healthy habits for dogs](assets/images/testing-files/gen-info-four.gif)
+
+</details>
+
+<details>
+<summary> Bcs </summary>
+
+![Bcs](assets/images/testing-files/gen-info-two.gif)
+
+</details>
+
+<details>
+<summary> When a dog became a senior </summary>
+
+![When a dog became a senior](assets/images/testing-files/gen-info-five.gif)
+
+</details>
+
+<details>
+<summary> 6 Signs Your Dog is Healthy </summary>
+
+![6 Signs Your Dog is Healthy ](assets/images/testing-files/gen-info-six.gif)
+
+</details>
+
+<details>
+<summary>Why and when contact vet </summary>
+
+![Why and when contact vet](assets/images/testing-files/gen-info-seven.giff)
+
+</details>
+
+
 
