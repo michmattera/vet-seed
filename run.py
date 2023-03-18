@@ -36,7 +36,7 @@ WEIGHT = ""  # stores saved_weight
 LIFE_STAGE = float()  # depending on the life stage different values stored
 MER = []  # stores calculated mer
 LOG_DET = []  # stores username, password, and Unicode
-unicode_list = credent.col_values(3)  # get unicode from 3 columns of credent
+unicode_list = credent.col_values(3)  # get uni from third column of credent
 
 
 def clear_screen():
@@ -149,6 +149,8 @@ def multiple_choice(uni):
             cprint('ERROR, Please choose one of the above', 'red')
             continue
 
+
+# Functions to create account and validate inputs
 
 def create_username():
     """
@@ -315,6 +317,8 @@ def validate_password(password):
         return False
     return True
 
+
+# Functions to calcolate calories of dog
 
 def dogs_name():
     """
@@ -689,6 +693,8 @@ def life_stage_factor_one(LIFE_STAGE):
             continue
     return LIFE_STAGE
 
+
+# Functions to display general info, update worksheet and show dogs
 
 def display_arguments(uni):
     """
