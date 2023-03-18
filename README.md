@@ -1,7 +1,7 @@
 # **Vet Seed**
 
 
-![vet Seed Mockup Images](/assets/images/read-me-images/)
+![vet Seed Mockup Images](/assets/images/read-me-images/title.PNG)
 
 [View the live project here](https://vet-seed.herokuapp.com/)
      
@@ -353,18 +353,12 @@ The following formulas were find by the developer in order to calcolate ideal we
 - *Working dogs factor* : [Wilmotveterinaryclinic](https://wilmotveterinaryclinic.com/wp-content/uploads/2016/10/Resting-Energy-Requirements.pdf "Link for wilmotveterinaryclinic specific article")
 
 <details>
-<summary>Energy requirements</summary>
+<summary>Energy requirements and healthy weight</summary>
         
 ![Formulas](assets/images/read-me-images/energy-req.PNG)
 
 </details>
 
-<details>
-<summary>Healthy weight</summary>
-        
-![Formulas](assets/images)
-
-</details>
 
 <details>
 <summary>Life stage factors</summary>
@@ -391,7 +385,7 @@ Many times the developer checked online to resolve and check for information , b
 - The developer checked this [Link](https://www.freecodecamp.org/news/python-sleep-time-sleep-in-python/ "Link to freecodecamp specific article") to check how to stop and wait for a specific time before running next function.
 - The developer checked this [Link](https://stackoverflow.com/questions/23623288/print-full-ascii-art "Link to stack overflow specific article") to check how to print ASCII art.
 - The developer used his previous project, [Newline Alebrije](https://github.com/michmattera/newline-alebrije "Link to newline repository"), as a source for looking up the code for README purposes mainly.
-- The developer used his previous project, [Star Wars Quiz]( "Link to star wars quiz repository"), as a source for looking up the code for TESTING purposes mainly.
+- The developer used his previous project, [Star Wars Quiz](https://github.com/michmattera/star-wars-quiz "Link to star wars quiz repository"), as a source for looking up the code for TESTING purposes mainly.
 
 [Back to top ⇧](#Veet-Seed)
 

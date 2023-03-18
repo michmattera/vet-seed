@@ -4,7 +4,7 @@
 
 [View Github repository](https://github.com/michmattera/vet-seed)
 
-[View the live project here]()
+[View the live project here](https://vet-seed.herokuapp.com/)
 
 
 ## **Table of contents**
@@ -173,7 +173,7 @@ Correct inputs were all tested and checked.
 <details>
 <summary> Login - End program</summary>
 
-![Login - End program](assets/images/testing-files/)
+![Login - End program](assets/images/testing-files/correct-login-end-program.gif)
 
 </details>
 
