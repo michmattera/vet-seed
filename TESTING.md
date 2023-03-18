@@ -13,7 +13,7 @@
     1. [User Inputs](#user-inputs)
         - [Incorrect Inputs](#incorrect-inputs)
         - [Correct Inputs](#correct-inputs)
-    2. [Multiple choice path](#multiple-choice-path)
+    2. [General information](#general-information)
     3. [Getting datas](#getting-datas)
 2. [Code validation](#code-validation)
 3. [Bugs](#bugs)
@@ -150,4 +150,69 @@ The following files shows all **incorrect input** of the user in the specific se
 
 </details>
 
+
+#### Correct Inputs
+
+
+All correct inputs should display a message to user for better UX.
+Correct inputs were all tested and checked.
+
+
+| Input | Checked |
+| --- | --- |
+| Login - end program| :heavy_check_mark: |
+| Create account | :heavy_check_mark: |
+| Overweight|  :heavy_check_mark: |
+| Ideal weight | :heavy_check_mark: |
+| Underweight | :heavy_check_mark:|
+
+
+
+<details>
+<summary> Login - End program</summary>
+
+![Login - End program](assets/images/testing-files/)
+
+</details>
+
+<details>
+<summary> Create account</summary>
+
+![Create account](assets/images/testing-files/create-account.gif)
+
+</details>
+
+<details>
+<summary> Overweight</summary>
+
+![Overweight](assets/images/testing-files/overweight.gif)
+
+</details>
+
+<details>
+<summary> Ideal weight</summary>
+
+![Ideal weight](assets/images/testing-files/ideal-weight.gif)
+
+</details>
+
+<details>
+<summary> Underweight</summary>
+
+![Underweight](assets/images/testing-files/underweight.gif)
+
+</details>
+
+### General information
+
+All general information are generated thanks to gspread, with an external sheet created by the developer.
+All general information were tested to check they were displayed following the time , the space and to check that the right information were taken from the external sheet.
+
+| General information | Checked |
+| --- | --- |
+| Login - end program| :heavy_check_mark: |
+| Create account | :heavy_check_mark: |
+| Overweight|  :heavy_check_mark: |
+| Ideal weight | :heavy_check_mark: |
+| Underweight | :heavy_check_mark:|
 
