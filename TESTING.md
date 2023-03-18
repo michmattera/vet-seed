@@ -310,6 +310,38 @@ To validate the code the developer used the following program Pyhton [linter](ht
 </details>
 
 
+### Bugs
+
+Following bug was found by the developer but for limited time , could not be able to fix it.
+
+Each time the user press enter the text goes 
+The bug occurs when a keyboard press from user during slow_type.
+
+- Each time he presses enter the text wraps.
+- Each time he press a letter or number it is pressed into the text.
+- Each time he presses something,  when the text ends , an error is given as if he had pressed when an option is presented and failing to give one of the correct options he is presented with the specific error. As it should happen when user insert incorrect input.
+
+
+Developer tried to fix the bug trying the following:
+
+-  installed getch
+- tried to inport keyboard and msvcr but with no positive result
+
+Ending with the bug unsolved.
+
+Following file on unsolved bug:
+
+<details>
+<summary>Bug</summary>
+
+![Bug](assets/images/testing-files/known-bug-keyboard.gif)
+
+</details>
+
+
+
+
+
 
 
 
