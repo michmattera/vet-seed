@@ -78,6 +78,8 @@ def menu():
     """
     art.TITLE = colored(art.TITLE, 'green', attrs=['bold'])
     print_slow_art(art.TITLE)
+    time.sleep(2)
+    clear_screen()
     art.INTRO = colored(art.INTRO, 'green')
     print_slow(art.INTRO)
     time.sleep(4)
