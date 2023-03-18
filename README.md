@@ -234,9 +234,8 @@ The design of a command line application is usually very simple. The developer t
 - **Tabulate** = Fancy tabulate in blue, to give a better user experience when showing saved information to the user.
 
 
-[Back to top ⇧](#Veet-Seed)
+[Back to top ⇧](#Vet-Seed)
 
-***
 
 ## Issues and bugs
 
@@ -260,9 +259,8 @@ The developer found different issues and bugs during the creation of the applica
     The developer tried to check if the value inserted was equal to 0 or minor than the printed options, but it would have still give the error.
     - *Solution* : To solve the issue, developer add a new if statement to check if the number was in the possible option list, and it fixed the issue.
 
-[Back to top ⇧](#Veet-Seed)
 
-***
+[Back to top ⇧](#Vet-Seed)
 
 
 ## Technology Used
@@ -293,9 +291,9 @@ Below are all the external programs used :
 - [Free screen recorder](https://screencast-o-matic.com/screen-recorder?from=app&installed=true "Link to go to Free screen recorder homepage")
     - Free screen recorder was used to screen record all videos for the testing files.
 
-[Back to top ⇧](#Veet-Seed)
 
-***
+[Back to top ⇧](#Vet-Seed)
+
 
 
 ## Testing
@@ -320,9 +318,9 @@ To deploy everything to Heroku the following steps were taken:
 10. Enable automatic deployment
 11. Click on Deploy
 
-[Back to top ⇧](#Veet-Seed)
 
-***
+[Back to top ⇧](#Vet-Seed)
+
 
 
 ## Credits
@@ -387,9 +385,9 @@ Many times the developer checked online to resolve and check for information , b
 - The developer used his previous project, [Newline Alebrije](https://github.com/michmattera/newline-alebrije "Link to newline repository"), as a source for looking up the code for README purposes mainly.
 - The developer used his previous project, [Star Wars Quiz](https://github.com/michmattera/star-wars-quiz "Link to star wars quiz repository"), as a source for looking up the code for TESTING purposes mainly.
 
-[Back to top ⇧](#Veet-Seed)
 
-***
+[Back to top ⇧](#Vet-Seed)
+
 
 
 ### Acknowledgements
@@ -406,9 +404,10 @@ Without support I got from other people, this project would never be realized. I
 - Koko, my mentor, thank you for being an incredible source of solutions and good advice.
 - Stack Overflow. Thank you for existing.
 
-[Back to top ⇧](#Veet-Seed)
 
-***
+[Back to top ⇧](#Vet-Seed)
+
+
 
 
 
